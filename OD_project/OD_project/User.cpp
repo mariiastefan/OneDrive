@@ -71,3 +71,12 @@ bool User::verify_password()
 		return false;
 	}
 }
+bool User::verify_username() {
+	std::regex verify(R"([a-zA-Z]+\d*$)");
+	if (std::regex_match(m_username, verify))
+		return true;
+	else {
+		throw std::overflow_error{ "Username-ul contine caractere nepermise !" };
+		return false;
+	}
+}
