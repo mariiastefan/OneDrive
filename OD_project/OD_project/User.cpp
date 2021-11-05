@@ -40,3 +40,17 @@ User::User(const User& obj)
 	m_username = obj.m_username;
 	m_password = obj.m_password;
 }
+std::string User::GetUsername() const
+{
+	return m_username;
+}
+std::string User::GetPassword() const
+{
+	return m_password;
+}
+void User::SetUsername(const std::string& username2) {
+	m_username = username2;
+}
+void User::SetPassword(const std::string& password2) {
+	m_password = password2;
+}
