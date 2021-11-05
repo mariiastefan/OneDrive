@@ -54,3 +54,20 @@ void User::SetUsername(const std::string& username2) {
 void User::SetPassword(const std::string& password2) {
 	m_password = password2;
 }
+bool User::verify_password()
+{
+	std::regex reg(R"([a-zA-Z0-9]+$)");
+	if (m_password.size() >= 6)
+	{
+		if (std::regex_match(m_password, reg))
+			return true;
+		else {
+			throw std::overflow_error{ "Nu contine toate caracterele !" };
+			return false;
+		}
+	}
+	else {
+		throw std::overflow_error{ "Nu e buna lungimea !" };
+		return false;
+	}
+}
