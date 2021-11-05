@@ -26,3 +26,17 @@ std::ostream& operator<<(std::ostream& out, const User& obj)
 	out << '\n';
 	return out;
 }
+User::User() {
+	m_username = "";
+	m_password = "";
+}
+
+User::User(const std::string& other_username, const std::string& other_password) :
+	m_username{ other_username }, m_password{ other_password }
+{}
+
+User::User(const User& obj)
+{
+	m_username = obj.m_username;
+	m_password = obj.m_password;
+}
