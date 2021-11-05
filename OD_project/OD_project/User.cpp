@@ -80,3 +80,23 @@ bool User::verify_username() {
 		return false;
 	}
 }
+
+void delete_account(std::ifstream& file, const User& obj) {
+	file.open("conturi.txt");
+	std::ofstream out;
+	out.open("temp.txt");
+	std::string line;
+	std::string deleteline = obj.GetUsername();
+	deleteline += " ";
+	deleteline += obj.GetPassword();
+	while (std::getline(file, line))
+	{
+		std::cout << line << "\n";
+		if (line != deleteline)
+			out << line << std::endl;
+	}
+	out.close();
+	file.close();
+	remove("conturi.txt");
+	rename("temp.txt", "conturi.txt");
+}
