@@ -81,8 +81,15 @@ bool User::verify_username() {
 	}
 }
 
-void delete_account(std::ifstream& file, const User& obj) {
-	file.open("conturi.txt");
+
+
+bool verify_if_user_exists(std::ifstream& file, const User& obj)
+{
+	std::string filename("conturi.txt");
+	if (!file.is_open()) {
+		std::cerr << "Could not open the file - " << filename << "'" << std::endl;
+		return EXIT_FAILURE;
+	}
 	std::ofstream out;
 	out.open("temp.txt");
 	std::string line;
@@ -91,7 +98,32 @@ void delete_account(std::ifstream& file, const User& obj) {
 	deleteline += obj.GetPassword();
 	while (std::getline(file, line))
 	{
-		std::cout << line << "\n";
+		std::cout << "verify : "<<line << "\n";
+		out << line << std::endl;
+		if (line == deleteline)
+		{
+			out.close();
+			file.close();
+			return 1;
+		}
+	}
+	
+	return 0;
+}
+
+void delete_account(std::ifstream& file, const User& obj) 
+{
+	std::string filename("conturi.txt");
+	std::ofstream out;
+	file.open(filename);
+	out.open("temp.txt");
+	std::string line;
+	std::string deleteline = obj.GetUsername();
+	deleteline += " ";
+	deleteline += obj.GetPassword();
+	while (std::getline(file, line))
+	{
+		std::cout <<"delete: "<< line << "\n";
 		if (line != deleteline)
 			out << line << std::endl;
 	}
@@ -101,23 +133,3 @@ void delete_account(std::ifstream& file, const User& obj) {
 	rename("temp.txt", "conturi.txt");
 }
 
-bool verify_if_user_exists(std::ifstream& file, const User& obj)
-{
-	file.open("conturi.txt");
-	std::ofstream out;
-	out.open("temp.txt");
-	std::string line;
-	std::string deleteline = obj.GetUsername();
-	deleteline += " ";
-	deleteline += obj.GetPassword();
-	while (std::getline(file, line))
-	{
-		std::cout << line << "\n";
-		out << line << std::endl;
-		if (line == deleteline)
-			return 1;
-	}
-	out.close();
-	file.close();
-	return 0;
-}

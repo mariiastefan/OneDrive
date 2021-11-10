@@ -19,6 +19,7 @@ public:
 	std::string GetPassword() const;
 	void SetUsername(const std::string & username2) ;
 	void SetPassword(const std::string & password2) ;
-	friend void delete_account(std::ifstream &file, const User & obj);
 	friend bool verify_if_user_exists(std::ifstream& file, const User& obj);
+	friend void delete_account(std::ifstream &file, const User & obj);
+	
 };
