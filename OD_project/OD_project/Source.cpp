@@ -15,7 +15,7 @@ int main()
 	/*fs::path path_obj(fs::temp_directory_path());
 	fs::create_directory("test_filesystem");
 	fs::permissions("test_filesystem", fs::perms::others_all, fs::perm_options::remove);*/
-	User a("maria123","mmJ1");
+	User a("aaaaa12","mmJ1");
 	if(verify_if_user_exists(g, a)) 
 		delete_account(g, a);
 	return 0;

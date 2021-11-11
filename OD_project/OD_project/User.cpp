@@ -98,7 +98,6 @@ bool verify_if_user_exists(std::ifstream& file, const User& obj)
 	deleteline += obj.GetPassword();
 	while (std::getline(file, line))
 	{
-		std::cout << "verify : "<<line << "\n";
 		out << line << std::endl;
 		if (line == deleteline)
 		{
@@ -123,7 +122,6 @@ void delete_account(std::ifstream& file, const User& obj)
 	deleteline += obj.GetPassword();
 	while (std::getline(file, line))
 	{
-		std::cout <<"delete: "<< line << "\n";
 		if (line != deleteline)
 			out << line << std::endl;
 	}
