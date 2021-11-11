@@ -11,7 +11,8 @@ public:
     Interface(QWidget *parent = Q_NULLPTR);
 
 private slots:
-    void on_closeBtn_clicked();
+    void on_signIn_clicked();
+    void on_signUp_clicked();
 
 private:
     Ui::InterfaceClass ui;

@@ -6,23 +6,54 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1920</width>
-    <height>1080</height>
+    <width>1453</width>
+    <height>770</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Microsoft Tai Le</family>
+    <pointsize>10</pointsize>
+    <weight>75</weight>
+    <bold>true</bold>
+   </font>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
   <property name="windowTitle">
-   <string>Interface</string>
+   <string>OneDriveWannaBE</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QPushButton" name="closeBtn">
-      <property name="text">
-       <string>close</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <widget class="QPushButton" name="signIn">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>500</y>
+      <width>211</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sign In</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="signUp">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>500</y>
+      <width>211</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>Sign Up</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -30,4 +61,7 @@
   <include location="Interface.qrc"/>
  </resources>
  <connections/>
+ <buttongroups>
+  <buttongroup name="options"/>
+ </buttongroups>
 </ui>

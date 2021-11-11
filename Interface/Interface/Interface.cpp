@@ -1,5 +1,7 @@
 #include "Interface.h"
-
+#include <qstackedwidget.h>
+#include <QVBoxLayout>
+#include <qcombobox.h>
 Interface::Interface(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -10,10 +12,33 @@ Interface::Interface(QWidget *parent)
     QPalette palette;
     palette.setBrush(QPalette::Background, bg);
     this->setPalette(palette);
+    QWidget* firstPageWidget = new QWidget;
+    QWidget* secondPageWidget = new QWidget;
+    QWidget* thirdPageWidget = new QWidget;
+
+    QStackedWidget *stackedWidget = new QStackedWidget;
+    stackedWidget->addWidget(firstPageWidget);
+    stackedWidget->addWidget(secondPageWidget);
+    stackedWidget->addWidget(thirdPageWidget);
+
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->addWidget(stackedWidget);
+    setLayout(layout);
+    QComboBox *pageComboBox = new QComboBox;
+    pageComboBox->addItem(tr("Page 1"));
+    pageComboBox->addItem(tr("Page 2"));
+    pageComboBox->addItem(tr("Page 3"));
+    connect(pageComboBox, QOverload<int>::of(&QComboBox::activated),
+    stackedWidget, &QStackedWidget::setCurrentIndex);
 }
 
 
-void Interface::on_closeBtn_clicked()
+void Interface::on_signIn_clicked()
 {
-    close();
+
+}
+
+void Interface::on_signUp_clicked()
+{
+
 }
