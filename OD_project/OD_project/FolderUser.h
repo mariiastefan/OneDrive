@@ -8,5 +8,7 @@ private:
 	std::string m_FolderName;
 	int m_nrItems;
 public:
+	FolderUser();
 	FolderUser(std::string userName);
+	void DeleteFolder(std::string userName);
 };

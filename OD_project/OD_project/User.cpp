@@ -17,8 +17,8 @@ std::istream& operator>>(std::istream& in, User& obj)
 		std::cout << "Intoruceti o alta parola care sa aiba lungimea mai mare ca 6 si sa contina doar litere mici, mari si cifre !";
 		in >> obj.m_password;
 	}
-	FolderUser newF(obj.m_username);
 
+	FolderUser newF(obj.m_username);
 	return in;
 }
 
@@ -30,6 +30,7 @@ std::ostream& operator<<(std::ostream& out, const User& obj)
 	out << '\n';
 	return out;
 }
+
 User::User() {
 	m_username = "";
 	m_password = "";
@@ -114,14 +115,14 @@ bool verify_if_user_exists(std::ifstream& file, const User& obj)
 	return 0;
 }
 
-void delete_account(std::ifstream& file, const User& obj) 
+void delete_account(std::fstream& file, const User& obj) 
 {
 	std::string filename("conturi.txt");
 	std::ofstream out;
 	file.open(filename);
 	out.open("temp.txt");
 	std::string line;
-	std::string deleteline = obj.GetUsername();
+	std::string deleteline = obj.GetUsername();	
 	deleteline += " ";
 	deleteline += obj.GetPassword();
 	while (std::getline(file, line))
@@ -133,5 +134,8 @@ void delete_account(std::ifstream& file, const User& obj)
 	file.close();
 	remove("conturi.txt");
 	rename("temp.txt", "conturi.txt");
-}
 
+	FolderUser aux;
+	aux.DeleteFolder(obj.GetUsername());
+
+}
