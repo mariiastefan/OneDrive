@@ -35,10 +35,12 @@ Interface::Interface(QWidget *parent)
 
 void Interface::on_signIn_clicked()
 {
-
+    on_signIn = true;
+    
 }
 
 void Interface::on_signUp_clicked()
 {
-
+    on_signUp = false;
+ 
 }

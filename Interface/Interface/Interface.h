@@ -5,15 +5,18 @@
 
 class Interface : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    Interface(QWidget *parent = Q_NULLPTR);
+	Interface(QWidget* parent = Q_NULLPTR);
 
 private slots:
-    void on_signIn_clicked();
-    void on_signUp_clicked();
+	void on_signIn_clicked();
+	void on_signUp_clicked();
 
 private:
-    Ui::InterfaceClass ui;
+	Ui::InterfaceClass ui;
+	bool on_signIn = false;
+	bool on_signUp = false;
+
 };
