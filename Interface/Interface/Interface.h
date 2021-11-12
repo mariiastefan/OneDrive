@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_Interface.h"
+#include <QPushButton>
 
 class Interface : public QMainWindow
 {
@@ -18,5 +19,6 @@ private:
 	Ui::InterfaceClass ui;
 	bool on_signIn = false;
 	bool on_signUp = false;
+	QPushButton* newButton;
 
 };

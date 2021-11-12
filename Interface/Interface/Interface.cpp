@@ -2,6 +2,8 @@
 #include <qstackedwidget.h>
 #include <QVBoxLayout>
 #include <qcombobox.h>
+#include <QWidget>
+#include <QLabel>
 Interface::Interface(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -36,11 +38,29 @@ Interface::Interface(QWidget *parent)
 void Interface::on_signIn_clicked()
 {
     on_signIn = true;
-    
+    QString username;
+    QString password;
 }
 
 void Interface::on_signUp_clicked()
 {
-    on_signUp = false;
+    on_signUp = true;
+    QWidget* wdg = new QWidget;
+    QPalette palette;
+    //palette.setBrush(wdg->backgroundRole(), QBrush(QImage("logo1.jpg")));
+    palette.setBrush(wdg->backgroundRole(), QBrush(QColor(65, 105, 225)));
+    wdg->setWindowTitle("Create OneDrive Account");
+    wdg->setWindowIcon(QIcon("logo1.jpg"));
+    wdg->setPalette(palette);
+    /*QLabel* label = new QLabel(wdg);
+    label->setText("username");
+    label->setAlignment(Qt::AlignBottom | Qt::AlignRight);
+    label->setGeometry(QRect(10, 10, 30, 80));
+    */
+    
+   
+    wdg->show();
+   
+    hide();
  
 }
