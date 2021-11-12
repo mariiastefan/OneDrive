@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <regex>
+#include "FolderUser.h"
 class User {
 private:
 	std::string m_username;

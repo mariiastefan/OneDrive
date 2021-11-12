@@ -1,8 +1,10 @@
 #include"user.h"
+
 std::istream& operator>>(std::istream& in, User& obj)
 {
 	std::cout << "Introduceti username: ";
 	in >> obj.m_username;
+
 	while (!obj.verify_username())
 	{
 		std::cout << "Intoruceti un alt username care sa contina caractere doar mici, mari si cifre !";
@@ -15,6 +17,8 @@ std::istream& operator>>(std::istream& in, User& obj)
 		std::cout << "Intoruceti o alta parola care sa aiba lungimea mai mare ca 6 si sa contina doar litere mici, mari si cifre !";
 		in >> obj.m_password;
 	}
+	FolderUser newF(obj.m_username);
+
 	return in;
 }
 
