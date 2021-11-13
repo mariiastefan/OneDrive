@@ -14,5 +14,6 @@ public:
 	std::string GetFolderName()const;
 	int GetNrItems()const;
 	void SetFolderName(const std::string& foldername2);
-	
+	void SetNrItems(const int& nrItems2);
+	void AddFile(std::string userName);
 };

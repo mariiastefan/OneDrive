@@ -20,7 +20,8 @@ int main()
 	User a;
 	std::cin >> a;
 	g << a;
+	FolderUser b;
+	b.AddFile(a.GetUsername());
 
-	delete_account(g, a);
 	return 0;
 }
