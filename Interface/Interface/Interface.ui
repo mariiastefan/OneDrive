@@ -28,11 +28,14 @@
    <widget class="QPushButton" name="signIn">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>500</y>
-      <width>211</width>
-      <height>101</height>
+      <x>630</x>
+      <y>520</y>
+      <width>181</width>
+      <height>71</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(21, 71, 255);</string>
     </property>
     <property name="text">
      <string>Sign In</string>
@@ -41,14 +44,17 @@
    <widget class="QPushButton" name="signUp">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>500</y>
-      <width>211</width>
-      <height>101</height>
+      <x>420</x>
+      <y>520</y>
+      <width>181</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="mouseTracking">
      <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(21, 71, 255);</string>
     </property>
     <property name="text">
      <string>Sign Up</string>
@@ -67,7 +73,7 @@
      <item>
       <widget class="QLabel" name="label_password">
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#058a14;&quot;&gt;PASSWORD&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;PASSWORD&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
@@ -93,7 +99,7 @@
      <item>
       <widget class="QLabel" name="label_username">
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#058a14;&quot;&gt;USERNAME&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;USERNAME&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>

@@ -10,11 +10,13 @@ Interface::Interface(QWidget *parent)
 {
 
     ui.setupUi(this);
-    QPixmap bg("background.jpg");
+    QPixmap bg("login_bg.jpg");
     bg = bg.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Background, bg);
     this->setPalette(palette);
+    this->setWindowIcon(QIcon("logo1.jpg"));
+    this->setWindowTitle("OneDrive");
     QWidget* firstPageWidget = new QWidget;
     QWidget* secondPageWidget = new QWidget;
     QWidget* thirdPageWidget = new QWidget;
@@ -45,7 +47,9 @@ void Interface::on_signIn_clicked()
  if (check(username, password) == false)
  {
      QMessageBox msgBox;
-     msgBox.setText("sunt niste probleme");
+     msgBox.setText("Sign In Failed");
+     msgBox.setInformativeText("Bad Username/Password Combo!!!!");
+     msgBox.setStandardButtons(QMessageBox::Ok);
      msgBox.exec();
     
  }
