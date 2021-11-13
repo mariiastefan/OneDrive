@@ -4,6 +4,7 @@
 #include <qcombobox.h>
 #include <QWidget>
 #include <QLabel>
+#include <QMessageBox>
 Interface::Interface(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -38,8 +39,16 @@ Interface::Interface(QWidget *parent)
 void Interface::on_signIn_clicked()
 {
     on_signIn = true;
-    QString username;
-    QString password;
+ QString username = ui.lineEdit_username->text();
+ QString password = ui.lineEdit_password->text();
+
+ if (check(username, password) == false)
+ {
+     QMessageBox msgBox;
+     msgBox.setText("sunt niste probleme");
+     msgBox.exec();
+    
+ }
 }
 
 void Interface::on_signUp_clicked()
@@ -57,10 +66,14 @@ void Interface::on_signUp_clicked()
     label->setAlignment(Qt::AlignBottom | Qt::AlignRight);
     label->setGeometry(QRect(10, 10, 30, 80));
     */
-    
    
     wdg->show();
    
     hide();
  
+}
+
+bool Interface::check(QString username, QString password)
+{
+    return false;
 }

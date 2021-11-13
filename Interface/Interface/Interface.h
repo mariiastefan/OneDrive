@@ -20,5 +20,6 @@ private:
 	bool on_signIn = false;
 	bool on_signUp = false;
 	QPushButton* newButton;
+	bool check(QString username, QString password);
 
 };
