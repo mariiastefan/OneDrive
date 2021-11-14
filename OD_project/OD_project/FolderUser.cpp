@@ -68,3 +68,9 @@ void FolderUser::AddFile(std::string userName)
     fs1:copy((old_place), fs1::current_path());
     fs1::current_path(pathOrigin);
 }
+bool FolderUser::verify_FolderName(FolderUser folder, std::string name)
+{
+    if (folder.GetFolderName() == name)
+        return 1;
+    return 0;
+}

@@ -16,4 +16,5 @@ public:
 	void SetFolderName(const std::string& foldername2);
 	void SetNrItems(const int& nrItems2);
 	void AddFile(std::string userName);
+	bool verify_FolderName(FolderUser folder, std::string name);
 };
