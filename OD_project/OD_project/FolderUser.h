@@ -2,9 +2,11 @@
 #include <string>
 #include <filesystem>
 #include"User.h"
+#include "file.h"
 
 class FolderUser {
 private:
+	std::vector<File>itemUser;
 	std::string m_FolderName;
 	int m_nrItems;
 public:

@@ -6,16 +6,19 @@
 
 FolderUser::FolderUser()
 {
+    m_nrItems = 0;
 }
 
 FolderUser::FolderUser(std::string userName)
 {
+    m_nrItems = 0;
     namespace fs1 = std::filesystem;
     std::string path = "../../UserFolder";
     std::wstring pathOrigin = fs1::current_path();
     fs1::current_path(path);
     fs1::create_directory(userName);
     fs1::current_path(pathOrigin);
+
 }
 
 void FolderUser::DeleteFolder(std::string userName)
@@ -65,8 +68,11 @@ void FolderUser::AddFile(std::string userName)
     fs1::current_path(path);
     path += "/";
     path += ItemName;
-    fs1:copy((old_place), fs1::current_path());
+    fs1::copy((old_place), fs1::current_path());
     fs1::current_path(pathOrigin);
+     m_nrItems++;
+     File aux(ItemName, "data");
+     itemUser.push_back(aux);
 }
 bool FolderUser::verify_FolderName(FolderUser folder, std::string name)
 {
