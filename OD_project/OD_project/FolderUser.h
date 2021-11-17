@@ -19,4 +19,5 @@ public:
 	void SetNrItems(const int& nrItems2);
 	void AddFile(std::string userName);
 	bool verify_FolderName(FolderUser folder, std::string name);
+	bool verify_existItem(std::string filename);
 };
