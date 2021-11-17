@@ -39,3 +39,8 @@ void File::ActualizareData(std::string new_name, std::string date)
 	if (m_filename == new_name)
 		m_updated_date = date;
 }
+
+int File::GetSize()
+{
+	return m_file_size;
+}

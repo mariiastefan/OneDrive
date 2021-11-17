@@ -54,8 +54,13 @@ void FolderUser::AddFile(std::string userName)
     std::cin >> old_place;
 
     std::string ItemName;
+    do {
     std::cout << "cititi numele fisierului";
     std::cin >> ItemName;
+    } while (verify_existItem(ItemName) == true);
+
+
+
 
     old_place += "/";
     old_place += ItemName;
@@ -74,9 +79,19 @@ void FolderUser::AddFile(std::string userName)
      File aux(ItemName, "data");
      itemUser.push_back(aux);
 }
+
 bool FolderUser::verify_FolderName(FolderUser folder, std::string name)
 {
     if (folder.GetFolderName() == name)
         return 1;
     return 0;
+}
+
+bool FolderUser::verify_existItem(std::string filename)
+{
+    for (int i = 0; i < itemUser.size(); i++)
+    {
+        if (filename == itemUser[i].GetFilename()) return true;
+    }
+    return false;
 }
