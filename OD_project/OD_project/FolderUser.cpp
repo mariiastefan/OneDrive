@@ -11,6 +11,7 @@ FolderUser::FolderUser()
 
 FolderUser::FolderUser(std::string userName)
 {
+    m_FolderName = userName;
     m_nrItems = 0;
     namespace fs1 = std::filesystem;
     std::string path = "../../UserFolder";
@@ -42,9 +43,19 @@ void FolderUser::SetFolderName(const std::string& foldername2)
 {
     m_FolderName = foldername2;
 }
-void FolderUser::SetNrItems(const int& nrItems2)
+
+
+void FolderUser::SetNrItems()
 {
-    m_nrItems = nrItems2;
+    namespace fs1 = std::filesystem;
+    std::string path1 = "../../UserFolder";
+    std::wstring pathOrigin = fs1::current_path();
+    path1 += "/";
+    path1 += m_FolderName;
+    fs1::current_path(path1);
+    for (auto const& dir_entry : std::filesystem::directory_iterator{ fs1::current_path() })
+        m_nrItems++;
+    fs1::current_path(pathOrigin);
 }
 
 void FolderUser::AddFile(std::string userName)
@@ -58,10 +69,6 @@ void FolderUser::AddFile(std::string userName)
     std::cout << "cititi numele fisierului";
     std::cin >> ItemName;
     } while (verify_existItem(ItemName) == true);
-
-
-
-
     old_place += "/";
     old_place += ItemName;
 

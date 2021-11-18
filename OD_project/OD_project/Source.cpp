@@ -17,11 +17,11 @@ int main()
 	/*fs::path path_obj(fs::temp_directory_path());
 	fs::create_directory("test_filesystem");
 	fs::permissions("test_filesystem", fs::perms::others_all, fs::perm_options::remove);*/
-	/*User a;
-	std::cin >> a;
-	g << a;*/
-	FolderUser b;
-	b.AddFile("ana ");
-
+	//User a;
+	//std::cin >> a;
+	//g << a;
+	FolderUser b("ana");
+	b.SetNrItems();
+	std::cout<<b.GetNrItems();
 	return 0;
 }
