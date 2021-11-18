@@ -64,13 +64,7 @@ void Interface::on_signUp_clicked()
     palette.setBrush(wdg->backgroundRole(), QBrush(QColor(65, 105, 225)));
     wdg->setWindowTitle("Create OneDrive Account");
     wdg->setWindowIcon(QIcon("logo1.jpg"));
-    wdg->setPalette(palette);
-    /*QLabel* label = new QLabel(wdg);
-    label->setText("username");
-    label->setAlignment(Qt::AlignBottom | Qt::AlignRight);
-    label->setGeometry(QRect(10, 10, 30, 80));
-    */
-   
+    wdg->setPalette(palette);  
     wdg->show();
    
     hide();

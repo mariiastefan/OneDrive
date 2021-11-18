@@ -31,11 +31,16 @@
       <x>630</x>
       <y>520</y>
       <width>181</width>
-      <height>71</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(21, 71, 255);</string>
+     <string notr="true">background-color: rgb(193, 193, 193);
+border-style: outset;
+border-width:2px;
+border-radius:20px;
+border-color:black;
+font: bold 15x;</string>
     </property>
     <property name="text">
      <string>Sign In</string>
@@ -44,17 +49,22 @@
    <widget class="QPushButton" name="signUp">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>390</x>
       <y>520</y>
       <width>181</width>
-      <height>71</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="mouseTracking">
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(21, 71, 255);</string>
+     <string notr="true">background-color: rgb(193, 193, 193);
+border-style: outset;
+border-width:2px;
+border-radius:20px;
+border-color:black;
+font: bold 15x;</string>
     </property>
     <property name="text">
      <string>Sign Up</string>
