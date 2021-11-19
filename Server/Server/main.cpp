@@ -58,10 +58,38 @@ void main()
 	}
 	else {
 		inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
-		std::cout << host << " connected on port " << ntohs(client.sin_port) << std::endl;
+		std::cout<<host<<" connected on port "<<ntohs(client.sin_port)<<std::endl;
 	}
-	
+	// close listening socket
+	closesocket(listening);
 
+	//while loop : accept and echo message back to client
+	char buf[4096];
 
+	while (true) {
+		ZeroMemory(buf, 4096);
+
+		//Wait for client to send data
+		int bytesRecieved = recv(clientSocket, buf, 4096, 0);
+		if (bytesRecieved == SOCKET_ERROR)
+		{
+			std::cerr << "Error in recv() !  Quitting !";
+			break;
+		}
+
+		if (bytesRecieved == 0)
+		{
+			std::cout << "Client Disconnected !";
+			break;
+		}
+		//echo message back to client
+		send(clientSocket, buf, bytesRecieved + 1, 0);
+
+	}
+	//close socket
+	closesocket(clientSocket);
+
+	//CleanUp winsock
+	WSACleanup();
 
 }
