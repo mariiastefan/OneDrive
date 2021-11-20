@@ -84,7 +84,7 @@ void FolderUser::AddFile(std::string userName)
     fs1::current_path(pathOrigin);
      m_nrItems++;
      File aux(ItemName, "data");
-     itemUser.push_back(aux);
+     m_itemUser.push_back(aux);
 }
 
 bool FolderUser::verify_FolderName(FolderUser folder, std::string name)
@@ -96,9 +96,9 @@ bool FolderUser::verify_FolderName(FolderUser folder, std::string name)
 
 bool FolderUser::verify_existItem(std::string filename)
 {
-    for (int i = 0; i < itemUser.size(); i++)
+    for (int i = 0; i < m_itemUser.size(); i++)
     {
-        if (filename == itemUser[i].GetFilename()) return true;
+        if (filename == m_itemUser[i].GetFilename()) return true;
     }
     return false;
 }

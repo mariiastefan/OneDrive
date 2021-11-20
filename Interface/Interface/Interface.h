@@ -19,6 +19,7 @@ private:
 	Ui::InterfaceClass ui;
 	bool on_signIn = false;
 	bool on_signUp = false;
+	void changeTheme(int which);
 	QPushButton* newButton;
 	bool check(QString username, QString password);
 

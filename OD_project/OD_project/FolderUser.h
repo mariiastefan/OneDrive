@@ -7,8 +7,8 @@
 
 class FolderUser {
 private:
-	std::vector<File>itemUser;
-	std::vector<std::string>FilesName;
+	std::vector<File>m_itemUser;
+	std::vector<std::string>m_fileName;
 	std::string m_FolderName;
 	int m_nrItems;
 public:

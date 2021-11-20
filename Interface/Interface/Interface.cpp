@@ -2,8 +2,10 @@
 #include <qstackedwidget.h>
 #include <QVBoxLayout>
 #include <qcombobox.h>
+#include <QCombobox>
 #include <QWidget>
 #include <QLabel>
+#include <QDebug>
 #include <QMessageBox>
 Interface::Interface(QWidget *parent)
     : QMainWindow(parent)
@@ -19,6 +21,7 @@ Interface::Interface(QWidget *parent)
     this->setWindowTitle("OneDrive");
     ui.label_confirmpass->setHidden(true);
     ui.lineEdit_confirmpass->setHidden(true);
+    //connect(ui.theme, QOverload<int>(&QComboBox::activated), this, &Interface::changeTheme);
    /* QWidget* firstPageWidget = new QWidget;
     QWidget* secondPageWidget = new QWidget;
     QWidget* thirdPageWidget = new QWidget;
@@ -68,6 +71,7 @@ void Interface::on_signUp_clicked()
     palette.setBrush(QPalette::Background, bg);
     ui.label_confirmpass->setHidden(false);
     ui.lineEdit_confirmpass->setHidden(false);
+ 
 }
 
 bool Interface::check(QString username, QString password)
