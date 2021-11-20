@@ -46,17 +46,35 @@ Interface::Interface(QWidget *parent)
 void Interface::on_signIn_clicked()
 {
     on_signIn = true;
+    bool flag = true;
+    bool flag2 = true;
+    bool flag3 = true;
  QString username = ui.lineEdit_username->text();
  QString password = ui.lineEdit_password->text();
-
- if (check(username, password) == false)
+ if (flag == false)
  {
      QMessageBox msgBox;
      msgBox.setText("Sign In Failed");
-     msgBox.setInformativeText("Bad Username/Password Combo!!!!");
+     msgBox.setInformativeText("Wrong Password");
      msgBox.setStandardButtons(QMessageBox::Ok);
      msgBox.exec();
-    
+ }
+ if (flag2 == false)
+ {
+     QMessageBox msgBox;
+     msgBox.setText("Sign In Failed");
+     msgBox.setInformativeText("This username does not exist");
+     msgBox.setStandardButtons(QMessageBox::Ok);
+     msgBox.exec();
+ }
+ if (flag3 == true)
+ {
+     QMessageBox msgBox;
+     msgBox.setText("Sign In Failed");
+     msgBox.setBaseSize(QSize(800, 300));
+     msgBox.setInformativeText("Passwords don't coincide");
+     msgBox.setStandardButtons(QMessageBox::Ok);
+     msgBox.exec();
  }
 }
 
@@ -71,10 +89,6 @@ void Interface::on_signUp_clicked()
     palette.setBrush(QPalette::Background, bg);
     ui.label_confirmpass->setHidden(false);
     ui.lineEdit_confirmpass->setHidden(false);
- 
+    
 }
 
-bool Interface::check(QString username, QString password)
-{
-    return false;
-}

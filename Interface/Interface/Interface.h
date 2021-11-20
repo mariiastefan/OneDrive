@@ -21,6 +21,6 @@ private:
 	bool on_signUp = false;
 	void changeTheme(int which);
 	QPushButton* newButton;
-	bool check(QString username, QString password);
+
 
 };
