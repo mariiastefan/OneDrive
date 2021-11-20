@@ -17,16 +17,18 @@ Interface::Interface(QWidget *parent)
     this->setPalette(palette);
     this->setWindowIcon(QIcon("logo1.jpg"));
     this->setWindowTitle("OneDrive");
-    QWidget* firstPageWidget = new QWidget;
+    ui.label_confirmpass->setHidden(true);
+    ui.lineEdit_confirmpass->setHidden(true);
+   /* QWidget* firstPageWidget = new QWidget;
     QWidget* secondPageWidget = new QWidget;
     QWidget* thirdPageWidget = new QWidget;
 
     QStackedWidget *stackedWidget = new QStackedWidget;
     stackedWidget->addWidget(firstPageWidget);
     stackedWidget->addWidget(secondPageWidget);
-    stackedWidget->addWidget(thirdPageWidget);
+    stackedWidget->addWidget(thirdPageWidget);*/
 
-    QVBoxLayout* layout = new QVBoxLayout;
+  /*  QVBoxLayout* layout = new QVBoxLayout;
     layout->addWidget(stackedWidget);
     setLayout(layout);
     QComboBox *pageComboBox = new QComboBox;
@@ -34,7 +36,7 @@ Interface::Interface(QWidget *parent)
     pageComboBox->addItem(tr("Page 2"));
     pageComboBox->addItem(tr("Page 3"));
     connect(pageComboBox, QOverload<int>::of(&QComboBox::activated),
-    stackedWidget, &QStackedWidget::setCurrentIndex);
+    stackedWidget, &QStackedWidget::setCurrentIndex);*/
 }
 
 
@@ -58,17 +60,14 @@ void Interface::on_signIn_clicked()
 void Interface::on_signUp_clicked()
 {
     on_signUp = true;
-    QWidget* wdg = new QWidget;
+    QPixmap bg("login_bg.jpg");
     QPalette palette;
+    QLabel confirm_pass;
     //palette.setBrush(wdg->backgroundRole(), QBrush(QImage("logo1.jpg")));
-    palette.setBrush(wdg->backgroundRole(), QBrush(QColor(65, 105, 225)));
-    wdg->setWindowTitle("Create OneDrive Account");
-    wdg->setWindowIcon(QIcon("logo1.jpg"));
-    wdg->setPalette(palette);  
-    wdg->show();
-   
-    hide();
- 
+    this->setWindowTitle("Create OneDrive Account");
+    palette.setBrush(QPalette::Background, bg);
+    ui.label_confirmpass->setHidden(false);
+    ui.lineEdit_confirmpass->setHidden(false);
 }
 
 bool Interface::check(QString username, QString password)
