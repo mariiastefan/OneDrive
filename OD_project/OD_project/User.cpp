@@ -139,3 +139,13 @@ void delete_account(std::fstream& file, const User& obj)
 	aux.DeleteFolder(obj.GetUsername());
 
 }
+bool User::findUser(std::string name)
+{
+	for (auto& us : m_user)
+	{
+		if (us == name)
+			return true;
+	}
+	return false;
+
+}
