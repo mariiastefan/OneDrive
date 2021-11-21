@@ -90,15 +90,16 @@ void FolderUser::AddFile(std::string userName)
 bool FolderUser::verify_FolderName(FolderUser folder, std::string name)
 {
     if (folder.GetFolderName() == name)
-        return 1;
-    return 0;
+        return true;
+    return false;
 }
 
 bool FolderUser::verify_existItem(std::string filename)
 {
-    for (int i = 0; i < m_itemUser.size(); i++)
+    for(auto & index : m_itemUser)
     {
-        if (filename == m_itemUser[i].GetFilename()) return true;
+        if (index.GetFilename()==filename)
+            return true;
     }
     return false;
 }
