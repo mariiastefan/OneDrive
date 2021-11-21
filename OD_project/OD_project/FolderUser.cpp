@@ -103,3 +103,12 @@ bool FolderUser::verify_existItem(std::string filename)
     }
     return false;
 }
+bool FolderUser :: FindInFolder(std::string file)
+{
+    for (auto & fil: m_fileName)
+    {
+        if (fil == file)
+            return true;
+    }
+    return false;
+}
