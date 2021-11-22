@@ -112,3 +112,15 @@ bool FolderUser :: FindInFolder(std::string file)
     }
     return false;
 }
+
+std::string FolderUser::SplitFilename(const std::string str)
+{
+    std::size_t found = str.find_last_of("/\\");
+    return str.substr(found + 1);
+}
+
+void FolderUser::DisplayUserFiles()
+{
+    for (auto index : m_fileName)
+        std::cout << index << std::endl;
+}

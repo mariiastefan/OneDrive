@@ -23,4 +23,6 @@ public:
 	bool verify_FolderName(FolderUser folder, std::string name);
 	bool verify_existItem(std::string filename);
 	bool FindInFolder(std::string file);
+	std::string SplitFilename(const std::string str);
+	void DisplayUserFiles();
 };
