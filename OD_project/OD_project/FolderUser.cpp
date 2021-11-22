@@ -124,3 +124,25 @@ void FolderUser::DisplayUserFiles()
     for (auto index : m_fileName)
         std::cout << index << std::endl;
 }
+
+void FolderUser::SetItemUser()
+{
+    namespace fs1 = std::filesystem;
+    std::string path1 = "../../UserFolder";
+    std::wstring pathOrigin = fs1::current_path();
+    path1 += "/";
+    path1 += m_FolderName;
+    fs1::current_path(path1);
+
+    for (auto const& dir_entry : fs1::directory_iterator{ fs1::current_path() })
+    {
+        std::string aux = fs1::absolute(dir_entry.path()).string();
+        aux = SplitFilename(aux);
+        m_fileName.push_back(aux);
+    }
+
+    fs1::current_path(pathOrigin);
+
+    DisplayUserFiles();
+
+}

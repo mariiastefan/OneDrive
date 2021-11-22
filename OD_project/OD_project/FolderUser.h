@@ -25,4 +25,5 @@ public:
 	bool FindInFolder(std::string file);
 	std::string SplitFilename(const std::string str);
 	void DisplayUserFiles();
+	void SetItemUser();
 };
