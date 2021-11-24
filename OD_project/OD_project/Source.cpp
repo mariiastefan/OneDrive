@@ -22,6 +22,7 @@ int main()
 	//g << a;
 	FolderUser b("ana");
 	b.SetNrItems();
+	b.AddFile("ana");
 	std::cout<<b.GetNrItems();
 	return 0;
 }
