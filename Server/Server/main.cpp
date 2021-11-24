@@ -9,6 +9,8 @@ using namespace std;
 
 void main()
 {
+	string ipAdress = "192.168.221.96";
+
 	// Initialze winsock
 	WSADATA wsData;
 	WORD ver = MAKEWORD(2, 2);
@@ -77,6 +79,7 @@ void main()
 				// Send a welcome message to the connected client
 				string welcomeMsg = "Welcome to the Awesome Chat Server!\r\n";
 				send(client, welcomeMsg.c_str(), welcomeMsg.size() + 1, 0);
+
 			}
 			else // It's an inbound message
 			{
@@ -93,20 +96,21 @@ void main()
 				}
 				else
 				{
-					// Check to see if it's a command. \quit kills the server
-					if (buf[0] == '\\')
-					{
-						// Is the command quit? 
-						string cmd = string(buf, bytesIn);
-						if (cmd == "\\quit")
-						{
-							running = false;
-							break;
-						}
 
-						// Unknown command
-						continue;
-					}
+					//// Check to see if it's a command. \quit kills the server
+					//if (buf[0] == '\\')
+					//{
+					//	// Is the command quit? 
+					//	string cmd = string(buf, bytesIn);
+					//	if (cmd == "\\quit")
+					//	{
+					//		running = false;
+					//		break;
+					//	}
+
+					//	// Unknown command
+					//	continue;
+					//}
 
 					// Send message to other clients, and definiately NOT the listening socket
 
@@ -144,6 +148,8 @@ void main()
 
 						// Echo message back to client
 						send(sock, buf, bytesReceived + 1, 0);
+
+					}
 				}
 			}
 		}

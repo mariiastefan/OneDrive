@@ -102,9 +102,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\background.jpg" />
-    <Image Include="backgr.jpg" />
-    <Image Include="bg2jpg.jpg" />
     <Image Include="login_bg.jpg" />
     <Image Include="logo1.jpg" />
   </ItemGroup>

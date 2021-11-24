@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>774</width>
-    <height>474</height>
+    <width>734</width>
+    <height>522</height>
    </rect>
   </property>
   <property name="font">
@@ -29,7 +29,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>300</y>
+      <y>320</y>
       <width>171</width>
       <height>51</height>
      </rect>
@@ -50,7 +50,7 @@ font: bold 15x;</string>
     <property name="geometry">
      <rect>
       <x>420</x>
-      <y>300</y>
+      <y>320</y>
       <width>181</width>
       <height>51</height>
      </rect>
@@ -74,7 +74,7 @@ font: bold 15x;</string>
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>180</y>
+      <y>170</y>
       <width>275</width>
       <height>30</height>
      </rect>
@@ -100,7 +100,7 @@ font: bold 15x;</string>
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>140</y>
+      <y>130</y>
       <width>275</width>
       <height>30</height>
      </rect>
@@ -121,8 +121,8 @@ font: bold 15x;</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>280</y>
+      <x>410</x>
+      <y>300</y>
       <width>241</width>
       <height>16</height>
      </rect>
@@ -140,7 +140,7 @@ color: rgb(12, 2, 94);</string>
     <property name="geometry">
      <rect>
       <x>84</x>
-      <y>230</y>
+      <y>220</y>
       <width>361</width>
       <height>30</height>
      </rect>
@@ -158,46 +158,6 @@ color: rgb(12, 2, 94);</string>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
        </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>40</y>
-      <width>209</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="styleSheet">
-        <string notr="true">color: rgb(248, 248, 248);</string>
-       </property>
-       <property name="text">
-        <string>Choose theme</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="theme">
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(97, 97, 97);</string>
-       </property>
-       <item>
-        <property name="text">
-         <string>normal</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>dark</string>
-        </property>
-       </item>
       </widget>
      </item>
     </layout>

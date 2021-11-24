@@ -42,19 +42,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\background.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="logo1.jpg">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="login_bg.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="bg2jpg.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="backgr.jpg">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
