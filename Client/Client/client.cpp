@@ -48,5 +48,32 @@ void main()
 	// Do-while loop to send and receive data
 	char buf[4096];
 	string userInput;
+	do
+	{
+		// Prompt the user for some text
+		cout << "> ";
+		getline(cin, userInput);
 
+		if (userInput.size() > 0)		// Make sure the user has typed in something
+		{
+			// Send the text
+			int sendResult = send(sock, userInput.c_str(), userInput.size() + 1, 0);
+			if (sendResult != SOCKET_ERROR)
+			{
+				// Wait for response
+				ZeroMemory(buf, 4096);
+				int bytesReceived = recv(sock, buf, 4096, 0);
+				if (bytesReceived > 0)
+				{
+					// Echo response to console
+					cout << "SERVER> " << string(buf, 0, bytesReceived) << endl;
+				}
+			}
+		}
+
+	} while (userInput.size() > 0);
+
+	// Gracefully close down everything
+	closesocket(sock);
+	WSACleanup();
 }
