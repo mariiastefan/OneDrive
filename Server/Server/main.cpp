@@ -122,6 +122,28 @@ void main()
 							send(outSock, strOut.c_str(), strOut.size() + 1, 0);
 						}
 					}
+					while (true)
+					{
+						ZeroMemory(buf, 4096);
+
+						// Wait for client to send data
+						int bytesReceived = recv(sock, buf, 4096, 0);
+						if (bytesReceived == SOCKET_ERROR)
+						{
+							cerr << "Error in recv(). Quitting" << endl;
+							break;
+						}
+
+						if (bytesReceived == 0)
+						{
+							cout << "Client disconnected " << endl;
+							break;
+						}
+
+						cout << string(buf, 0, bytesReceived) << endl;
+
+						// Echo message back to client
+						send(sock, buf, bytesReceived + 1, 0);
 				}
 			}
 		}
