@@ -96,16 +96,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="Interface.qrc" />
+    <QtRcc Include="Interface_search.qrc" />
     <QtUic Include="Interface.ui" />
     <QtMoc Include="Interface.h" />
     <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="Interface_search.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="Interface_search.ui" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\background.jpg" />
     <Image Include="login_bg.jpg" />
     <Image Include="logo1.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Interface_search.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
