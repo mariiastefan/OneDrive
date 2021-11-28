@@ -26,4 +26,5 @@ public:
 	std::string SplitFilename(const std::string str);
 	void DisplayUserFiles();
 	void SetItemUser();
+	uintmax_t GetSizeOfASpecificFolder();
 };

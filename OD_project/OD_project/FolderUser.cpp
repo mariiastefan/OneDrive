@@ -146,3 +146,21 @@ void FolderUser::SetItemUser()
 	DisplayUserFiles();
 
 }
+std::uintmax_t FolderUser::GetSizeOfASpecificFolder()
+{
+	std::string name;
+	std::cout << "Scrieti numele username ului pt care doriti sa aflati dimensiunea fisierului: ";
+	std::cin >> name;
+	namespace fs1 = std::filesystem;
+	std::wstring pathOrigin = fs1::current_path();
+	std::string path = "../../UserFolder";
+	path += "/";
+	path += name;
+	uintmax_t size = 0;
+	for (auto const& dir_entry : fs1::directory_iterator{ path })
+	{
+		size += file_size(dir_entry);
+	}
+	return size;
+
+}
