@@ -101,3 +101,7 @@ void Interface::on_signUp_clicked()
 
 }
 
+void Interface::on_Register_clicked()
+{
+}
+

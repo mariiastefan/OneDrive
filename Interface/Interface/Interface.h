@@ -14,6 +14,7 @@ public:
 private slots:
 	void on_signIn_clicked();
 	void on_signUp_clicked();
+	void on_Register_clicked();
 
 private:
 	Ui::InterfaceClass ui;

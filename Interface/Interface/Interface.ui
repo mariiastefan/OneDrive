@@ -162,6 +162,30 @@ color: rgb(12, 2, 94);</string>
      </item>
     </layout>
    </widget>
+   <widget class="QPushButton" name="Register">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>380</y>
+      <width>181</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(193, 193, 193);
+border-style: outset;
+border-width:2px;
+border-radius:20px;
+border-color:black;
+font: bold 15x;</string>
+    </property>
+    <property name="text">
+     <string>Register</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
