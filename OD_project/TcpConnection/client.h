@@ -1,4 +1,9 @@
+#ifdef CLIENT_EXPORTS
+	#define CLIENT_API __declspec(dllexport)
+#else 
+	#define CLIENT_API __declspec(dllimport)
 
+#endif //CLIENT_EXPORTS 
 
 #pragma once
 #include <iostream>
@@ -7,7 +12,7 @@
 
 #pragma comment(lib, "ws2_32.lib")
 
-class  Client {
+class CLIENT_API Client {
 private:
 	std::string ipAddress;			// IP Address of the server
 	int port;

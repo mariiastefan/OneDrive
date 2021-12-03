@@ -1,3 +1,9 @@
+#ifdef SERVER_EXPORTS
+#define SERVER_API __declspec(dllexport)
+#else 
+#define SERVER_API __declspec(dllimport)
+
+#endif //CLIENT_EXPORTS 
 
 
 #pragma once
@@ -8,7 +14,7 @@
 
 #pragma comment (lib, "ws2_32.lib")
 
-class  Server {
+class SERVER_API Server {
 private:
 	std::string ipAddress;
 public:
