@@ -106,5 +106,19 @@ void Interface::on_signUp_clicked()
 
 void Interface::on_Register_clicked()
 {
+	QString username = ui.lineEdit_username->text();
+	QString password = ui.lineEdit_password->text();
+	QString confirm_password = ui.lineEdit_confirmpass->text();
+	if (password == confirm_password) {
+		User newU(username.toStdString(), password.toStdString());
+		std::cout << newU;
+	}
+	else {
+		QMessageBox msgBox;
+		msgBox.setText("Sign In Failed");
+		msgBox.setInformativeText("This username does not exist");
+		msgBox.setStandardButtons(QMessageBox::Ok);
+		msgBox.exec();
+	}
 }
 
