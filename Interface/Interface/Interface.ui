@@ -121,9 +121,9 @@ font: bold 15x;</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>370</x>
       <y>300</y>
-      <width>241</width>
+      <width>281</width>
       <height>16</height>
      </rect>
     </property>
@@ -133,7 +133,7 @@ text-decoration: underline;
 color: rgb(12, 2, 94);</string>
     </property>
     <property name="text">
-     <string>Don't you have an account?</string>
+     <string>Don't you have an account? Press Sign Up</string>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget_2">
@@ -166,7 +166,7 @@ color: rgb(12, 2, 94);</string>
     <property name="geometry">
      <rect>
       <x>420</x>
-      <y>380</y>
+      <y>320</y>
       <width>181</width>
       <height>51</height>
      </rect>
