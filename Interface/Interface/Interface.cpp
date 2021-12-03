@@ -57,11 +57,9 @@ void Interface::on_signIn_clicked()
 	QString password = ui.lineEdit_password->text();
 	std::string x = username.toStdString();
 	std::string y = password.toStdString();
-	User a(x, y);
 	
-	std::cout << a;
 	
-	if (flag == false)
+	/*if (flag == false)
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Sign In Failed");
@@ -85,7 +83,7 @@ void Interface::on_signIn_clicked()
 		msgBox.setInformativeText("Passwords don't coincide");
 		msgBox.setStandardButtons(QMessageBox::Ok);
 		msgBox.exec();
-	}
+	}*/
 }
 
 void Interface::on_signUp_clicked()
@@ -109,7 +107,18 @@ void Interface::on_Register_clicked()
 	QString username = ui.lineEdit_username->text();
 	QString password = ui.lineEdit_password->text();
 	QString confirm_password = ui.lineEdit_confirmpass->text();
-	if (password == confirm_password) {
+	User user(username.toStdString(), password.toStdString());
+	if (verify_pass(password.toStdString()) == false)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Sign Up Failed");
+		msgBox.setInformativeText("Password does not contain all the characters");
+		msgBox.setStandardButtons(QMessageBox::Ok);
+		msgBox.exec();
+
+	}
+	// de facut ce e comentat
+	/*if (password == confirm_password) {
 		User newU(username.toStdString(), password.toStdString());
 		std::cout << newU;
 	}
@@ -119,6 +128,6 @@ void Interface::on_Register_clicked()
 		msgBox.setInformativeText("This username does not exist");
 		msgBox.setStandardButtons(QMessageBox::Ok);
 		msgBox.exec();
-	}
+	}*/
 }
 

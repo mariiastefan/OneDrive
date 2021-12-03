@@ -76,6 +76,22 @@ bool User::verify_password()
 		return false;
 	}
 }
+bool verify_pass(std::string pass)
+{
+	std::regex reg(R"([a-zA-Z0-9]+$)");
+	if (pass.size() >= 6)
+	{
+		if (std::regex_match(pass, reg))
+			return true;
+		else {
+			return false;
+		}
+	}
+	else {
+	
+		return false;
+	}
+}
 bool User::verify_username() {
 	std::regex verify(R"([a-zA-Z]+\d*$)");
 	if (std::regex_match(m_username, verify))

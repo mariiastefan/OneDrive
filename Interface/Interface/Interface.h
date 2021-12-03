@@ -21,7 +21,7 @@ private:
 	bool on_signIn = false;
 	bool on_signUp = false;
 	void changeTheme(int which);
-	QPushButton* newButton;
+	
 
 
 };

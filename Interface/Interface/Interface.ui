@@ -121,10 +121,10 @@ font: bold 15x;</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>350</x>
       <y>300</y>
-      <width>281</width>
-      <height>16</height>
+      <width>351</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
