@@ -117,6 +117,14 @@ void Interface::on_Register_clicked()
 		msgBox.exec();
 
 	}
+	if (verify_user(username.toStdString()) == false)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Sign Up Failed");
+		msgBox.setInformativeText("Username contains unauthorized characters");
+		msgBox.setStandardButtons(QMessageBox::Ok);
+		msgBox.exec();
+	}
 	// de facut ce e comentat
 	/*if (password == confirm_password) {
 		User newU(username.toStdString(), password.toStdString());
