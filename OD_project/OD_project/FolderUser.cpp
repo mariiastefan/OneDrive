@@ -19,7 +19,14 @@ FolderUser::FolderUser(std::string userName)
 	fs1::current_path(path);
 	fs1::create_directory(userName);
 	fs1::current_path(pathOrigin);
-
+	std::string path1 = "../../Client/UserFolder";
+	fs1::current_path(path1);
+	fs1::create_directory(userName);
+	fs1::current_path(pathOrigin);
+	std::string path2 = "../../Server/UserFolder";
+	fs1::current_path(path2);
+	fs1::create_directory(userName);
+	fs1::current_path(pathOrigin);
 }
 
 void FolderUser::DeleteFolder(std::string userName)
