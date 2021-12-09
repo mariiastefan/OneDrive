@@ -38,6 +38,29 @@ void FolderUser::DeleteFolder(std::string userName)
 	std::uintmax_t n = fs1::remove_all(userName);
 	fs1::current_path(pathOrigin);
 }
+void FolderUser::DeleteFile(std::string username, std::string file)
+{
+	namespace fs1 = std::filesystem;
+	std::string pathClient = "../../Client/UserFolder";
+	std::string pathServer = "../../Server/UserFolder";
+	std::string path = "../../UserFolder";
+	path += '/';
+	path += username;
+	path += '/';
+	path += file;
+	std::uintmax_t n = fs1::remove(path);
+	pathClient += '/';
+	pathClient += username;
+	pathClient += '/';
+	pathClient += file;
+	std::uintmax_t n1 = fs1::remove(pathClient);
+	pathServer += '/';
+	pathServer += username;
+	pathServer += '/';
+	pathServer += file;
+	std::uintmax_t n2= fs1::remove(pathServer);
+
+}
 std::string FolderUser::GetFolderName() const
 {
 	return m_FolderName;

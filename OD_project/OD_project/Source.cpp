@@ -25,7 +25,8 @@ int main()
 	//g << a;
 	FolderUser b("ana");
 	b.SetNrItems();
-	b.AddFile("ana");
+	//b.AddFile("ana");
+	b.DeleteFile("ana", "poza_bd.jpeg");
 	std::cout<<b.GetNrItems();
 	return 0;
 }

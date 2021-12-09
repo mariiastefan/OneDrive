@@ -15,6 +15,7 @@ public:
 	FolderUser();
 	FolderUser(std::string userName);
 	void DeleteFolder(std::string userName);
+	void DeleteFile(std::string username,std::string file);
 	std::string GetFolderName()const;
 	int GetNrItems()const;
 	void SetFolderName(const std::string& foldername2);
