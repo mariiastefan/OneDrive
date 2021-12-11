@@ -6,6 +6,13 @@ AppWindow::AppWindow(QWidget *parent)
 {
 	ui = new Ui::AppWindow();
 	ui->setupUi(this);
+	QPixmap bg("login_bg.jpg");
+	bg = bg.scaled(this->size(), Qt::IgnoreAspectRatio);
+	QPalette palette;
+	palette.setBrush(QPalette::Background, bg);
+	this->setPalette(palette);
+	this->setWindowIcon(QIcon("logo1.jpg"));
+	this->setWindowTitle("OneDrive");
 }
 
 AppWindow::~AppWindow()

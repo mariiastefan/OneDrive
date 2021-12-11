@@ -96,9 +96,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="User.cpp" />
     <QtRcc Include="Interface.qrc" />
     <QtUic Include="App.ui" />
+    <QtUic Include="AppWindow.ui" />
     <QtUic Include="Interface.ui" />
     <QtMoc Include="Interface.h" />
     <ClCompile Include="App.cpp" />
@@ -111,9 +113,13 @@
     <Image Include="logo1.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App.h" />
+    <QtMoc Include="App.h" />
+    <QtMoc Include="AppWindow.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="User.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="conturi.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

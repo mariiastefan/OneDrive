@@ -9,7 +9,12 @@
 #include <QMessageBox>
 #include <iostream>
 #include "User.h"
-
+#include "App.h"
+#include "ui_App.h"
+#include "AppWindow.h"
+#include "ui_AppWindow.h"
+#include <fstream>
+std::fstream g("conturi.txt");
 Interface::Interface(QWidget* parent)
 	: QMainWindow(parent)
 {
@@ -57,33 +62,9 @@ void Interface::on_signIn_clicked()
 	QString password = ui.lineEdit_password->text();
 	std::string x = username.toStdString();
 	std::string y = password.toStdString();
-	
-	
-	/*if (flag == false)
-	{
-		QMessageBox msgBox;
-		msgBox.setText("Sign In Failed");
-		msgBox.setInformativeText("Wrong Password");
-		msgBox.setStandardButtons(QMessageBox::Ok);
-		msgBox.exec();
-	}
-	if (flag2 == false)
-	{
-		QMessageBox msgBox;
-		msgBox.setText("Sign In Failed");
-		msgBox.setInformativeText("This username does not exist");
-		msgBox.setStandardButtons(QMessageBox::Ok);
-		msgBox.exec();
-	}
-	if (flag3 == false)
-	{
-		QMessageBox msgBox;
-		msgBox.setText("Sign In Failed");
-		msgBox.setBaseSize(QSize(800, 300));
-		msgBox.setInformativeText("Passwords don't coincide");
-		msgBox.setStandardButtons(QMessageBox::Ok);
-		msgBox.exec();
-	}*/
+	/*AppWindow app;
+	app.show();*/
+	//this->setHidden(true);
 }
 
 void Interface::on_signUp_clicked()
@@ -104,17 +85,19 @@ void Interface::on_signUp_clicked()
 
 void Interface::on_Register_clicked()
 {
+	bool verif_pass=true, verif_user = true;
 	QString username = ui.lineEdit_username->text();
 	QString password = ui.lineEdit_password->text();
 	QString confirm_password = ui.lineEdit_confirmpass->text();
 	User user(username.toStdString(), password.toStdString());
-	if (verify_pass(password.toStdString()) == false)
+	/*if (verify_pass(password.toStdString()) == false)
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Sign Up Failed");
 		msgBox.setInformativeText("Password does not contain all the characters");
 		msgBox.setStandardButtons(QMessageBox::Ok);
 		msgBox.exec();
+		verif_pass = false;
 
 	}
 	if (verify_user(username.toStdString()) == false)
@@ -124,6 +107,12 @@ void Interface::on_Register_clicked()
 		msgBox.setInformativeText("Username contains unauthorized characters");
 		msgBox.setStandardButtons(QMessageBox::Ok);
 		msgBox.exec();
+		verif_user = false;
+	}*/
+	if (verif_user == true && verif_pass == true)
+	{
+		User newUser(username.toStdString(), password.toStdString());
+		g << newUser;
 	}
 	// de facut ce e comentat
 	/*if (password == confirm_password) {

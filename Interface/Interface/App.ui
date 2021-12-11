@@ -18,12 +18,12 @@
     <rect>
      <x>30</x>
      <y>30</y>
-     <width>91</width>
-     <height>16</height>
+     <width>31</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>SEARCH BAR</string>
+    <string/>
    </property>
   </widget>
  </widget>
