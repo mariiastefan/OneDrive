@@ -101,16 +101,28 @@ void FolderUser::AddFile(std::string userName)
 	} while (verify_existItem(ItemName) == true);
 	old_place += "/";
 	old_place += ItemName;
+	std::string old_place2= old_place;
 
 	namespace fs1 = std::filesystem;
+	std::string pathClient = "../../Client/UserFolder";
+	std::string pathServer = "../../Server/UserFolder";
 	std::wstring pathOrigin = fs1::current_path();
-	std::string path = "../../UserFolder";
-	path += "/";
-	path += userName;
-	fs1::current_path(path);
-	path += "/";
-	path += ItemName;
+
+	pathClient += "/";
+	pathClient += userName;
+	fs1::current_path(pathClient);
+	pathClient += "/";
+	pathClient += ItemName;
 	fs1::copy((old_place), fs1::current_path());
+	fs1::current_path(pathOrigin);
+
+	pathServer += "/";
+	pathServer += userName;
+	fs1::current_path(pathServer);
+	pathServer += "/";
+	pathServer += ItemName;
+	fs1::copy((old_place2), fs1::current_path());
+
 	fs1::current_path(pathOrigin);
 	m_nrItems++;
 	File aux(ItemName, "data");
