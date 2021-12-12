@@ -3,8 +3,8 @@
 #include <cstdlib>
 #include "user.h";
 #include "FolderUser.h";
-//#include "../TcpConnection/server.h"
-//#include "../TcpConnection/client.h"
+#include "../TcpConnection/server.h"
+#include "../TcpConnection/client.h"
 
 namespace fs = std::filesystem;
 

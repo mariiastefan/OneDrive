@@ -156,6 +156,11 @@
   <ItemGroup>
     <Text Include="conturi.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TcpConnection\TcpConnection.vcxproj">
+      <Project>{997032e2-1f71-4d9c-affd-45af61ba2d7d}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
