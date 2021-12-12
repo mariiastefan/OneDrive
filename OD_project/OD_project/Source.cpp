@@ -24,9 +24,10 @@ int main()
 	//std::cin >> a;
 	//g << a;
 	FolderUser b("Ela");
+	b.DeleteFolder("Ela");
 	//b.SetNrItems();
-	b.AddFile("Ela");
+	//b.AddFile("Ela");
 	//b.DeleteFile("ana", "poza_bd.jpeg");
-	std::cout<<b.GetNrItems();
+	//std::cout<<b.GetNrItems();
 	return 0;
 }
