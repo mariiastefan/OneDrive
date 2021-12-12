@@ -1,8 +1,4 @@
-#ifdef TCPCONNECTION_EXPORTS
-#define CLIENT_API __declspec(dllexport)
-#else
-#define CLIENT_API __declspec(dllimport)
-#endif // TCPCONNECTION_EXPORTS
+
 
 #pragma once
 #include <iostream>
@@ -11,7 +7,7 @@
 
 #pragma comment(lib, "ws2_32.lib")
 
-class CLIENT_API Client {
+class Client {
 private:
 	std::string ipAddress;			// IP Address of the server
 	int port;

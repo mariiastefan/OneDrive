@@ -1,19 +1,17 @@
-#ifdef TCPCONNECTION_EXPORTS
-	#define SERVER_API __declspec(dllexport)
-#else
-	#define SERVER_API __declspec(dllimport)
-#endif // TCPCONNECTION_EXPORTS
-
-
 #pragma once
 #include <iostream>
 #include <WS2tcpip.h>
 #include <string>
 #include <sstream>
+#include <filesystem>
 
 #pragma comment (lib, "ws2_32.lib")
+//namespace fs = std::filesystem;
 
-class SERVER_API Server {
+
+std::string default_path = "C:/Users/Andrei/Desktop/OneDrive/proiect/Server/Server";
+
+class Server {
 private:
 	std::string ipAddress;
 public:
@@ -55,6 +53,7 @@ public:
 		// Create the master file descriptor set and zero it
 		fd_set master;
 		FD_ZERO(&master);
+		
 
 		// Add our first socket that we're interested in interacting with; the listening socket!
 		// It's important that this socket is added for our server or else we won't 'hear' incoming
@@ -87,7 +86,7 @@ public:
 					FD_SET(client, &master);
 
 					// Send a welcome message to the connected client
-					std::string welcomeMsg = "Welcome to the Awesome Chat Server!\r\n";
+					std::string welcomeMsg = "What file do you want to download ?\r\n";
 					send(client, welcomeMsg.c_str(), welcomeMsg.size() + 1, 0);
 
 				}
@@ -107,21 +106,38 @@ public:
 					}
 					else
 					{
+						int bytesReceived = recv(sock, buf, 4096, 0);
+						if (bytesReceived == SOCKET_ERROR)
+						{
+								std::cerr << "Error in recv(). Quitting" << std::endl;
+								break;
+						}
 
+						if (bytesReceived == 0)
+						{
+								std::cout << "Client disconnected " << std::endl;
+							break;
+						}
+
+						
+						std::cout << std::string(buf, 0, bytesReceived) << std::endl;
+
+						//	 Echo message back to client
+							send(sock, buf, bytesReceived + 1, 0);
 						// Send message to other clients, and definiately NOT the listening socket
 
-						for (int i = 0; i < master.fd_count; i++)
-						{
-							SOCKET outSock = master.fd_array[i];
-							/*if (outSock != listening && outSock != sock)
-							{*/
-							std::ostringstream ss;
-							ss << "SOCKET #" << sock << ": " << buf << "\r\n";
-							std::string strOut = ss.str();
+						//for (int i = 0; i < master.fd_count; i++)
+						//{
+						//	SOCKET outSock = master.fd_array[i];
+						//	/*if (outSock != listening && outSock != sock)
+						//	{*/
+						//	std::ostringstream ss;
+						//	ss << "SOCKET #" << sock << ": " << buf << "\r\n";
+						//	std::string strOut = ss.str();
 
-							send(outSock, strOut.c_str(), strOut.size() + 1, 0);
-							//}
-						}
+						//	send(outSock, strOut.c_str(), strOut.size() + 1, 0);
+						//	//}
+						//}
 						//while (true)
 						//{
 						//	ZeroMemory(buf, 4096);
