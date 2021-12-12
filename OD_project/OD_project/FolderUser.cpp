@@ -43,12 +43,6 @@ void FolderUser::DeleteFile(std::string username, std::string file)
 	namespace fs1 = std::filesystem;
 	std::string pathClient = "../../Client/UserFolder";
 	std::string pathServer = "../../Server/UserFolder";
-	std::string path = "../../UserFolder";
-	path += '/';
-	path += username;
-	path += '/';
-	path += file;
-	std::uintmax_t n = fs1::remove(path);
 	pathClient += '/';
 	pathClient += username;
 	pathClient += '/';
@@ -188,7 +182,7 @@ void FolderUser::DisplayUserFiles()
 void FolderUser::SetItemUser()
 {
 	namespace fs1 = std::filesystem;
-	std::string path1 = "../../UserFolder";
+	std::string path1 = "../../Client/UserFolder";
 	std::wstring pathOrigin = fs1::current_path();
 	path1 += "/";
 	path1 += m_FolderName;
@@ -213,7 +207,7 @@ std::uintmax_t FolderUser::GetSizeOfASpecificFolder()
 	std::cin >> name;
 	namespace fs1 = std::filesystem;
 	std::wstring pathOrigin = fs1::current_path();
-	std::string path = "../../UserFolder";
+	std::string path = "../../Client/UserFolder";
 	path += "/";
 	path += name;
 	uintmax_t size = 0;
