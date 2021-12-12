@@ -78,14 +78,32 @@ void FolderUser::SetFolderName(const std::string& foldername2)
 void FolderUser::SetNrItems()
 {
 	namespace fs1 = std::filesystem;
-	std::string path1 = "../../UserFolder";
+	std::string pathClient = "../../Client/UserFolder";
+	std::string pathServer = "../../Server/UserFolder";
 	std::wstring pathOrigin = fs1::current_path();
-	path1 += "/";
-	path1 += m_FolderName;
-	fs1::current_path(path1);
+
+	pathClient += "/";
+	pathClient += m_FolderName;
+	fs1::current_path(pathClient);
+
+	int m_nrItems_local = 0;
 	for (auto const& dir_entry : std::filesystem::directory_iterator{ fs1::current_path() })
-		m_nrItems++;
+		m_nrItems_local++;
 	fs1::current_path(pathOrigin);
+
+	pathServer += "/";
+	pathServer += m_FolderName;
+	fs1::current_path(pathServer);
+
+	int m_nrItems_server = 0;
+	for (auto const& dir_entry : std::filesystem::directory_iterator{ fs1::current_path() })
+		m_nrItems_server++;
+	fs1::current_path(pathOrigin);
+
+	m_nrItems = m_nrItems_server;
+
+	if (m_nrItems_server == m_nrItems_local) std::cout << std::endl << "Fisiere sincronizate" << std::endl;
+	else std::cout << std::endl << "Fisierele nu sunt sincronizate cu serverul"<<std::endl;
 }
 
 void FolderUser::AddFile(std::string userName)
