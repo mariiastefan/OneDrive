@@ -149,17 +149,14 @@
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="client.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="FolderUser.h" />
+    <ClInclude Include="server.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="conturi.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TcpConnection\TcpConnection.vcxproj">
-      <Project>{997032e2-1f71-4d9c-affd-45af61ba2d7d}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OD_project", "OD_project\OD_project.vcxproj", "{0B34BD8A-6982-4E33-BFE0-FAFE4AEA2AA9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TcpConnection", "TcpConnection\TcpConnection.vcxproj", "{997032E2-1F71-4D9C-AFFD-45AF61BA2D7D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -23,14 +21,6 @@ Global
 		{0B34BD8A-6982-4E33-BFE0-FAFE4AEA2AA9}.Release|x64.Build.0 = Release|x64
 		{0B34BD8A-6982-4E33-BFE0-FAFE4AEA2AA9}.Release|x86.ActiveCfg = Release|Win32
 		{0B34BD8A-6982-4E33-BFE0-FAFE4AEA2AA9}.Release|x86.Build.0 = Release|Win32
-		{997032E2-1F71-4D9C-AFFD-45AF61BA2D7D}.Debug|x64.ActiveCfg = Debug|x64
-		{997032E2-1F71-4D9C-AFFD-45AF61BA2D7D}.Debug|x64.Build.0 = Debug|x64
-		{997032E2-1F71-4D9C-AFFD-45AF61BA2D7D}.Debug|x86.ActiveCfg = Debug|Win32
-		{997032E2-1F71-4D9C-AFFD-45AF61BA2D7D}.Debug|x86.Build.0 = Debug|Win32
-		{997032E2-1F71-4D9C-AFFD-45AF61BA2D7D}.Release|x64.ActiveCfg = Release|x64
-		{997032E2-1F71-4D9C-AFFD-45AF61BA2D7D}.Release|x64.Build.0 = Release|x64
-		{997032E2-1F71-4D9C-AFFD-45AF61BA2D7D}.Release|x86.ActiveCfg = Release|Win32
-		{997032E2-1F71-4D9C-AFFD-45AF61BA2D7D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

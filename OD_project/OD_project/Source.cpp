@@ -3,13 +3,19 @@
 #include <cstdlib>
 #include "user.h";
 #include "FolderUser.h";
-#include "../TcpConnection/server.h"
-#include "../TcpConnection/client.h"
+#include "server.h";
+#include "client.h";
+//#include "../TcpConnection/server.h"
+//#include "../TcpConnection/client.h"
 
 namespace fs = std::filesystem;
 
 int main()
 {
+	Server s("192.168.2.99");
+	Client c("192.168.2.99", 54000);
+	s.Start();
+	/*c.Start();*/
 	std::fstream g("conturi.txt");
 	/*for (int index = 0; index < 2; index++)
 	{
@@ -23,8 +29,8 @@ int main()
 	//User a;
 	//std::cin >> a;
 	//g << a;
-	FolderUser b("ana");
-	b.SetNrItems();
+	/*FolderUser b("ana");
+	b.SetNrItems();*/
 	//b.AddFile("Ela");
 	//b.DeleteFile("ana", "poza_bd.jpeg");
 	//std::cout<<b.GetNrItems();

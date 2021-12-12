@@ -1,10 +1,3 @@
-#ifdef TCPCONNECTION_EXPORTS
-	#define SERVER_API __declspec(dllexport)
-#else
-	#define SERVER_API __declspec(dllimport)
-#endif // TCPCONNECTION_EXPORTS
-
-
 #pragma once
 #include <iostream>
 #include <WS2tcpip.h>
@@ -13,7 +6,7 @@
 
 #pragma comment (lib, "ws2_32.lib")
 
-class SERVER_API Server {
+class  Server {
 private:
 	std::string ipAddress;
 public:
