@@ -149,3 +149,7 @@ bool User::findUser(std::string name)
 	return false;
 
 }
+int User::GetSizeOfFileUser()const
+{
+	return m_file.size();
+}

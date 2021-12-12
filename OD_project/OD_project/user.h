@@ -4,11 +4,13 @@
 #include <fstream>
 #include <regex>
 #include "FolderUser.h"
+#include "file.h"
 class User {
 private:
 	std::string m_username;
 	std::string m_password;
 	std::vector<std::string>m_user;
+	std::vector<File>m_file;
 	friend std::istream& operator >> (std::istream& in, User& obj);
 	friend std::ostream& operator <<(std::ostream& out, const User& obj);
 public:
@@ -24,4 +26,6 @@ public:
 	friend bool verify_if_user_exists(std::ifstream& file, const User& obj);
 	friend void delete_account(std::fstream &file, const User & obj);
 	bool findUser(std::string name);
+	int GetSizeOfFileUser()const;
+	
 };
