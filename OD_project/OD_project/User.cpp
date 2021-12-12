@@ -159,3 +159,16 @@ bool user_file(User user)
 		return 0;
 	return 1;
 }
+void User::update(User user,std::string namedate) 
+{
+	for (int index = 0; index < user.m_file.size(); index++)
+		if (m_file[index].GetFilename() == namedate)
+		{
+			std::string new_name;
+			std::string date;
+			std::cin >> new_name >> date;
+			m_file[index].ActualizareData(new_name, date);
+
+		}
+			
+}

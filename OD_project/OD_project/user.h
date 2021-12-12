@@ -28,4 +28,5 @@ public:
 	bool findUser(std::string name);
 	int GetSizeOfFileUser()const;
 	friend bool user_file(User user);
+	void update(User user,std::string namedate);
 };
