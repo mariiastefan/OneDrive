@@ -153,3 +153,9 @@ int User::GetSizeOfFileUser()const
 {
 	return m_file.size();
 }
+bool user_file(User user)
+{
+	if (user.GetSizeOfFileUser() == 0)
+		return 0;
+	return 1;
+}

@@ -27,5 +27,5 @@ public:
 	friend void delete_account(std::fstream &file, const User & obj);
 	bool findUser(std::string name);
 	int GetSizeOfFileUser()const;
-	
+	friend bool user_file(User user);
 };
