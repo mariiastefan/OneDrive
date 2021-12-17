@@ -106,4 +106,16 @@ public:
 			return "get";
 		}
 	}
+	std::string ItemPlace()
+	{
+		std::string Place;
+		std::cout << "Enter path to source file:\n";
+		std::getline(std::cin, Place);
+		std::string ItemName;
+		std::cout << "Enter file name:\n";
+		std::getline(std::cin, ItemName);
+		Place += "/";
+		Place += ItemName;
+		return Place;
+	}
 };
