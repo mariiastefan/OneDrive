@@ -4,13 +4,16 @@
 #include <iostream>
 #include <string>
 #include <WS2tcpip.h>
+#include<filesystem>
 
+//namespace fs = std::filesystem;
 #pragma comment(lib, "ws2_32.lib")
 
 class Client {
 private:
 	std::string ipAddress;			// IP Address of the server
 	int port;
+
 public:
 	Client(std::string ipAddress, int port)
 	{
@@ -88,4 +91,19 @@ public:
 		WSACleanup();
 	}
 
+	std::string userOptions()
+	{
+		std::cerr << "1-receive \n 2-send \n";
+		int option;
+		std::cin >> option;
+		std::cin.get();
+		if (option == 1)
+		{
+			return "receive";
+		}
+		else
+		{
+			return "get";
+		}
+	}
 };
