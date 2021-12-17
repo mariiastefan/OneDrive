@@ -27,8 +27,7 @@ Interface::Interface(QWidget* parent)
 	this->setPalette(palette);
 	this->setWindowIcon(QIcon("logo1.jpg"));
 	this->setWindowTitle("OneDrive");
-	ui.label_confirmpass->setHidden(true);
-	ui.lineEdit_confirmpass->setHidden(true);
+
 	ui.Register->setHidden(true);
 	//connect(ui.theme, QOverload<int>(&QComboBox::activated), this, &Interface::changeTheme);
    /* QWidget* firstPageWidget = new QWidget;
@@ -59,9 +58,9 @@ void Interface::on_signIn_clicked()
 	bool flag2 = true;
 	bool flag3 = true;
 	QString username = ui.lineEdit_username->text();
-	QString password = ui.lineEdit_password->text();
+	
 	std::string x = username.toStdString();
-	std::string y = password.toStdString();
+	
 	/*AppWindow app;
 	app.show();*/
 	//this->setHidden(true);
@@ -76,8 +75,7 @@ void Interface::on_signUp_clicked()
 	//palette.setBrush(wdg->backgroundRole(), QBrush(QImage("logo1.jpg")));
 	this->setWindowTitle("Create OneDrive Account");
 	palette.setBrush(QPalette::Background, bg);
-	ui.label_confirmpass->setHidden(false);
-	ui.lineEdit_confirmpass->setHidden(false);
+
 	ui.signIn->setHidden(true);
 	ui.label->setHidden(true);
 	ui.Register->setHidden(false);
@@ -87,9 +85,7 @@ void Interface::on_Register_clicked()
 {
 	bool verif_pass=true, verif_user = true;
 	QString username = ui.lineEdit_username->text();
-	QString password = ui.lineEdit_password->text();
-	QString confirm_password = ui.lineEdit_confirmpass->text();
-	User user(username.toStdString(), password.toStdString());
+	User user(username.toStdString(), "alabala");
 	/*if (verify_pass(password.toStdString()) == false)
 	{
 		QMessageBox msgBox;
@@ -111,7 +107,7 @@ void Interface::on_Register_clicked()
 	}*/
 	if (verif_user == true && verif_pass == true)
 	{
-		User newUser(username.toStdString(), password.toStdString());
+		User newUser(username.toStdString(), "alabala");
 		g << newUser;
 	}
 	// de facut ce e comentat
