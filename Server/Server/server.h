@@ -1,222 +1,86 @@
-#pragma once
-#include <iostream>
+#include<iostream>
+#include<fstream>
+#include <stdlib.h>
 #include <WS2tcpip.h>
-#include <string>
-#include <sstream>
-#include <filesystem>
+#pragma comment(lib, "ws2_32.lib")
 
-#pragma comment (lib, "ws2_32.lib")
-//namespace fs = std::filesystem;
+class Server_socket {
+    std::fstream file;
 
+    int PORT;
 
-std::string default_path = "C:/Users/Andrei/Desktop/OneDrive/proiect/Server/Server";
+    int general_socket_descriptor;
+    int new_socket_descriptor;
 
-class Server {
-private:
-	std::string ipAddress;
+    struct sockaddr_in address;
+    int address_length;
+
 public:
-	Server(std::string ipAddress)
-	{
-		this->ipAddress = ipAddress;
-	}
-	void Start() {
-		// Initialze winsock
-		WSADATA wsData;
-		WORD ver = MAKEWORD(2, 2);
+    Server_socket() {
+        create_socket();
+        PORT = 8050;
 
-		int wsOk = WSAStartup(ver, &wsData);
-		if (wsOk != 0)
-		{
-			std::cerr << "Can't Initialize winsock! Quitting" << std::endl;
-			return;
-		}
+        address.sin_family = AF_INET;
+        address.sin_addr.s_addr = INADDR_ANY;
+        address.sin_port = htons(PORT);
+        address_length = sizeof(address);
 
-		// Create a socket
-		SOCKET listening = socket(AF_INET, SOCK_STREAM, 0);
-		if (listening == INVALID_SOCKET)
-		{
-			std::cerr << "Can't create a socket! Quitting" << std::endl;
-			return;
-		}
+        bind_socket();
+        set_listen_set();
+        accept_connection();
 
-		// Bind the ip address and port to a socket
-		sockaddr_in hint;
-		hint.sin_family = AF_INET;
-		hint.sin_port = htons(54000);
-		hint.sin_addr.S_un.S_addr = INADDR_ANY; // Could also use inet_pton .... 
+        file.open("server_text.txt", std::ios::in | std::ios::binary);
+        if (file.is_open()) {
+            std::cout << "[LOG] : File is ready to Transmit.\n";
+        }
+        else {
+            std::cout << "[ERROR] : File loading failed, Exititng.\n";
+            exit(EXIT_FAILURE);
+        }
+    }
 
-		bind(listening, (sockaddr*)&hint, sizeof(hint));
+    void create_socket() {
+        if ((general_socket_descriptor = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
+            perror("[ERROR] : Socket failed");
+            exit(EXIT_FAILURE);
+        }
+        std::cout << "[LOG] : Socket Created Successfully.\n";
+    }
 
-		// Tell Winsock the socket is for listening 
-		listen(listening, SOMAXCONN);
+    void bind_socket() {
+        if (bind(general_socket_descriptor, (struct sockaddr*)&address, sizeof(address)) < 0) {
+            perror("[ERROR] : Bind failed");
+            exit(EXIT_FAILURE);
+        }
+        std::cout << "[LOG] : Bind Successful.\n";
+    }
 
-		// Create the master file descriptor set and zero it
-		fd_set master;
-		FD_ZERO(&master);
-		
+    void set_listen_set() {
+        if (listen(general_socket_descriptor, 3) < 0) {
+            perror("[ERROR] : Listen");
+            exit(EXIT_FAILURE);
+        }
+        std::cout << "[LOG] : Socket in Listen State (Max Connection Queue: 3)\n";
+    }
 
-		// Add our first socket that we're interested in interacting with; the listening socket!
-		// It's important that this socket is added for our server or else we won't 'hear' incoming
-		// connections 
-		FD_SET(listening, &master);
+    void accept_connection() {
+        if ((new_socket_descriptor = accept(general_socket_descriptor, (struct sockaddr*)&address, (socklen_t*)&address_length)) < 0) {
+            perror("[ERROR] : Accept");
+            exit(EXIT_FAILURE);
+        }
+        std::cout << "[LOG] : Connected to Client.\n";
+    }
 
-		// this will be changed by the \quit command (see below, bonus not in video!)
-		bool running = true;
+    void transmit_file() {
+        std::string contents((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+        std::cout << "[LOG] : Transmission Data Size " << contents.length() << " Bytes.\n";
 
-		while (running)
-		{
-			fd_set copy = master;
+        std::cout << "[LOG] : Sending...\n";
 
-			// See who's talking to us
-			int socketCount = select(0, &copy, nullptr, nullptr, nullptr);
+        int bytes_sent = send(new_socket_descriptor, contents.c_str(), contents.length(), 0);
+        std::cout << "[LOG] : Transmitted Data Size " << bytes_sent << " Bytes.\n";
 
-			// Loop through all the current connections / potential connect
-			for (int i = 0; i < socketCount; i++)
-			{
-				// Makes things easy for us doing this assignment
-				SOCKET sock = copy.fd_array[i];
-
-				// Is it an inbound communication?
-				if (sock == listening)
-				{
-					// Accept a new connection
-					SOCKET client = accept(listening, nullptr, nullptr);
-
-					// Add the new connection to the list of connected clients
-					FD_SET(client, &master);
-
-					// Send a welcome message to the connected client
-					std::string welcomeMsg = "What file do you want to download ?\r\n";
-					send(client, welcomeMsg.c_str(), welcomeMsg.size() + 1, 0);
-
-				}
-				else // It's an inbound message
-				{
-					char buf[4096];
-					ZeroMemory(buf, 4096);
-
-					// Receive message
-					int bytesIn = recv(sock, buf, 4096, 0);
-					if (bytesIn <= 0)
-					{
-						// Drop the client
-						std::cout << "Client disconnected because no message was sent !";
-						closesocket(sock);
-						FD_CLR(sock, &master);
-					}
-					else
-					{
-						int bytesReceived = recv(sock, buf, 4096, 0);
-						if (bytesReceived == SOCKET_ERROR)
-						{
-								std::cerr << "Error in recv(). Quitting" << std::endl;
-								break;
-						}
-
-						if (bytesReceived == 0)
-						{
-								std::cout << "Client disconnected " << std::endl;
-							break;
-						}
-
-						
-						std::cout << std::string(buf, 0, bytesReceived) << std::endl;
-
-						//	 Echo message back to client
-							send(sock, buf, bytesReceived + 1, 0);
-						// Send message to other clients, and definiately NOT the listening socket
-
-						//for (int i = 0; i < master.fd_count; i++)
-						//{
-						//	SOCKET outSock = master.fd_array[i];
-						//	/*if (outSock != listening && outSock != sock)
-						//	{*/
-						//	std::ostringstream ss;
-						//	ss << "SOCKET #" << sock << ": " << buf << "\r\n";
-						//	std::string strOut = ss.str();
-
-						//	send(outSock, strOut.c_str(), strOut.size() + 1, 0);
-						//	//}
-						//}
-						//while (true)
-						//{
-						//	ZeroMemory(buf, 4096);
-
-						//	// Wait for client to send data
-						//	int bytesReceived = recv(sock, buf, 4096, 0);
-						//	if (bytesReceived == SOCKET_ERROR)
-						//	{
-						//		cerr << "Error in recv(). Quitting" << endl;
-						//		break;
-						//	}
-
-						//	if (bytesReceived == 0)
-						//	{
-						//		cout << "Client disconnected " << endl;
-						//		break;
-						//	}
-
-						//	cout << string(buf, 0, bytesReceived) << endl;
-
-						//	// Echo message back to client
-						//	send(sock, buf, bytesReceived + 1, 0);
-
-						//}
-					}
-				}
-			}
-			//else {
-			//	while (true)
-			//		{
-			//			ZeroMemory(buf, 4096);
-
-			//		Wait for client to send data
-			//		int bytesReceived = recv(sock, buf, 4096, 0);
-			//		//	if (bytesReceived == SOCKET_ERROR)
-			//		//	{
-			//		//		cerr << "Error in recv(). Quitting" << endl;
-			//		//		break;
-			//		//	}
-
-			//		//	if (bytesReceived == 0)
-			//		//	{
-			//		//		cout << "Client disconnected " << endl;
-			//		//		break;
-			//		//	}
-
-			//		//	cout << string(buf, 0, bytesReceived) << endl;
-
-			//		//	// Echo message back to client
-			//		//	send(sock, buf, bytesReceived + 1, 0);
-
-			//		//}
-		}
-
-		// Remove the listening socket from the master file descriptor set and close it
-		// to prevent anyone else trying to connect.
-		FD_CLR(listening, &master);
-		closesocket(listening);
-
-		// Message to let users know what's happening.
-		std::string msg = "Server is shutting down. Goodbye\r\n";
-
-		while (master.fd_count > 0)
-		{
-			// Get the socket number
-			SOCKET sock = master.fd_array[0];
-
-			// Send the goodbye message
-			send(sock, msg.c_str(), msg.size() + 1, 0);
-
-			// Remove it from the master file list and close the socket
-			FD_CLR(sock, &master);
-			closesocket(sock);
-		}
-
-		// Cleanup winsock
-		WSACleanup();
-
-		system("pause");
-	}
-
+        std::cout << "[LOG] : File Transfer Complete.\n";
+    }
 };
+
