@@ -1,121 +1,68 @@
-
-
-#pragma once
-#include <iostream>
-#include <string>
+#include<iostream>
+#include<fstream>
+#include<stdio.h>
+#include<stdlib.h>
 #include <WS2tcpip.h>
-#include<filesystem>
-
-//namespace fs = std::filesystem;
 #pragma comment(lib, "ws2_32.lib")
 
-class Client {
-private:
-	std::string ipAddress;			// IP Address of the server
-	int port;
+class Client_socket {
+    std::fstream file;
+
+    int PORT;
+
+    int general_socket_descriptor;
+
+    struct sockaddr_in address;
+    int address_length;
 
 public:
-	Client(std::string ipAddress, int port)
-	{
-		this->ipAddress = ipAddress;
-		this->port = port;
-	}
+    Client_socket() {
+        create_socket();
+        PORT = 8050;
 
-	void Start()
-	{
-		// Initialize WinSock
-		WSAData data;
-		WORD ver = MAKEWORD(2, 2);
-		int wsResult = WSAStartup(ver, &data);
-		if (wsResult != 0)
-		{
-			std::cerr << "Can't start Winsock, Err #" << wsResult << std::endl;
-			return;
-		}
+        address.sin_family = AF_INET;
+        address.sin_port = htons(PORT);
+        address_length = sizeof(address);
+        if (inet_pton(AF_INET, "127.0.0.1", &address.sin_addr) <= 0) {
+            std::cout << "[ERROR] : Invalid address\n";
+        }
 
-		// Create socket
-		SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
-		if (sock == INVALID_SOCKET)
-		{
-			std::cerr << "Can't create socket, Err #" << WSAGetLastError() << std::endl;
-			WSACleanup();
-			return;
-		}
+        create_connection();
 
-		// Fill in a hint structure
-		sockaddr_in hint;
-		hint.sin_family = AF_INET;
-		hint.sin_port = htons(port);
-		inet_pton(AF_INET, ipAddress.c_str(), &hint.sin_addr);
+        file.open("client_text.txt", std::ios::out | std::ios::trunc | std::ios::binary);
+        if (file.is_open()) {
+            std::cout << "[LOG] : File Creted.\n";
+        }
+        else {
+            std::cout << "[ERROR] : File creation failed, Exititng.\n";
+            exit(EXIT_FAILURE);
+        }
+    }
 
-		// Connect to server
-		int connResult = connect(sock, (sockaddr*)&hint, sizeof(hint));
-		if (connResult == SOCKET_ERROR)
-		{
-			std::cerr << "Can't connect to server, Err #" << WSAGetLastError() << std::endl;
-			closesocket(sock);
-			WSACleanup();
-			return;
-		}
+    void create_socket() {
+        if ((general_socket_descriptor = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+            perror("[ERROR] : Socket failed.\n");
+            exit(EXIT_FAILURE);
+        }
+        std::cout << "[LOG] : Socket Created Successfully.\n";
+    }
 
-		// Do-while loop to send and receive data
-		char buf[4096];
-		std::string userInput;
-		do
-		{
-			// Prompt the user for some text
-			std::cout << "> ";
-			std::getline(std::cin, userInput);
+    void create_connection() {
+        if (connect(general_socket_descriptor, (struct sockaddr*)&address, sizeof(address)) < 0) {
+            perror("[ERROR] : connection attempt failed.\n");
+            exit(EXIT_FAILURE);
+        }
+        std::cout << "[LOG] : Connection Successfull.\n";
+    }
 
-			if (userInput.size() > 0)		// Make sure the user has typed in something
-			{
-				// Send the text
-				int sendResult = send(sock, userInput.c_str(), userInput.size() + 1, 0);
-				if (sendResult != SOCKET_ERROR)
-				{
-					// Wait for response
-					ZeroMemory(buf, 4096);
-					int bytesReceived = recv(sock, buf, 4096, 0);
-					if (bytesReceived > 0)
-					{
-						// Echo response to console
-						std::cout << "SERVER> " << std::string(buf, 0, bytesReceived) << std::endl;
-					}
-				}
-			}
+    void receive_file() {
+        char buffer[1024] = {};
+        int valread = recv(general_socket_descriptor, buffer, 1024, 0);
+        std::cout << "[LOG] : Data received " << valread << " bytes\n";
+        std::cout << "[LOG] : Saving data to file.\n";
 
-		} while (userInput.size() > 0);
-
-		// Gracefully close down everything
-		closesocket(sock);
-		WSACleanup();
-	}
-
-	std::string userOptions()
-	{
-		std::cerr << "1-receive \n 2-send \n";
-		int option;
-		std::cin >> option;
-		std::cin.get();
-		if (option == 1)
-		{
-			return "receive";
-		}
-		else
-		{
-			return "get";
-		}
-	}
-	std::string ItemPlace()
-	{
-		std::string Place;
-		std::cout << "Enter path to source file:\n";
-		std::getline(std::cin, Place);
-		std::string ItemName;
-		std::cout << "Enter file name:\n";
-		std::getline(std::cin, ItemName);
-		Place += "/";
-		Place += ItemName;
-		return Place;
-	}
+        file << buffer;
+        std::cout << "[LOG] : File Saved.\n";
+    }
 };
+
