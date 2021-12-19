@@ -13,16 +13,17 @@ FolderUser::FolderUser(std::string userName)
 {
 	m_FolderName = userName;
 	m_nrItems = 0;
-	namespace fs1 = std::filesystem;
-	std::wstring pathOrigin = fs1::current_path();
+	std::wstring pathOrigin = fs::current_path();
 	std::string path1 = "../../Client/UserFolder";
-	fs1::current_path(path1);
-	fs1::create_directory(userName);
-	fs1::current_path(pathOrigin);
+	fs::current_path(path1);
+	fs::create_directory(userName);
+	path1 += "/";
+	m_path = path1 + m_FolderName;
+	fs::current_path(pathOrigin);
 	std::string path2 = "../../Server/UserFolder";
-	fs1::current_path(path2);
-	fs1::create_directory(userName);
-	fs1::current_path(pathOrigin);
+	fs::current_path(path2);
+	fs::create_directory(userName);
+	fs::current_path(pathOrigin);
 }
 
 void FolderUser::DeleteFolder(std::string userName)
@@ -200,18 +201,10 @@ void FolderUser::SetItemUser()
 	DisplayUserFiles();
 
 }
-std::uintmax_t FolderUser::GetSizeOfASpecificFolder()
+std::uintmax_t FolderUser::GetFolderSize()
 {
-	std::string name;
-	std::cout << "Scrieti numele username ului pt care doriti sa aflati dimensiunea fisierului: ";
-	std::cin >> name;
-	namespace fs1 = std::filesystem;
-	std::wstring pathOrigin = fs1::current_path();
-	std::string path = "../../Client/UserFolder";
-	path += "/";
-	path += name;
 	uintmax_t size = 0;
-	for (auto const& dir_entry : fs1::directory_iterator{ path })
+	for (auto const& dir_entry : fs::directory_iterator{ m_path })
 	{
 		size += file_size(dir_entry);
 	}

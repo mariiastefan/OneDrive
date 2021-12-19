@@ -12,10 +12,10 @@ namespace fs = std::filesystem;
 
 int main()
 {
-	Server s("192.168.2.99");
+	/*Server s("192.168.2.99");
 	Client c("192.168.2.99", 54000);
 	s.Start();
-	c.Start();
+	c.Start();*/
 	std::fstream g("conturi.txt");
 	/*for (int index = 0; index < 2; index++)
 	{
@@ -33,6 +33,16 @@ int main()
 	b.SetNrItems();*/
 	//b.AddFile("Ela");
 	//b.DeleteFile("ana", "poza_bd.jpeg");
+	//std::cout<<b.GetNrItems();
+	std::cout << "s";
+	FolderUser b("ana");
+	b.AddFile("ana");
+	b.SetNrItems();
+	//std::cout << b.GetPath() << '\n';
+	std::cout << b.GetFolderSize();
+	std::cout << '\n';
+
+
 	//std::cout<<b.GetNrItems();
 	return 0;
 }
