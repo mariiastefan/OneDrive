@@ -83,17 +83,6 @@ bool User::verify_username() {
 		return false;
 	}
 }
-bool verify_user(std::string unsername)
-{
-	std::regex verify(R"([a-zA-Z]+\d*$)");
-	if (std::regex_match(unsername, verify))
-		return true;
-	else {
-		throw std::overflow_error{ "Username contains unauthorized characters" };
-		return false;
-	}
-}
-
 
 
 bool verify_if_user_exists(std::ifstream& file, const User& obj)

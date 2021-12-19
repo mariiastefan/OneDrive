@@ -16,7 +16,6 @@ public:
 	User(const std::string& other_username);
 	User(const User& other);
 	bool verify_username();
-	friend bool verify_user(std::string user);
 	std::string GetUsername() const;
 	std::string GetPassword() const;
 	void SetUsername(const std::string& username2);

@@ -65,10 +65,11 @@ void Interface::on_signUp_clicked()
 
 void Interface::on_Register_clicked()
 {
-	bool verif_pass=true, verif_user = true;
+	bool verif_user = true;
 	QString username = ui.lineEdit_username->text();
 	User user(username.toStdString());
-	if (verif_user == true && verif_pass == true)
+	verif_user = verify_if_user_exists(g, user);
+	if (verif_user == true)
 	{
 		User newUser(username.toStdString());
 		g << newUser;
