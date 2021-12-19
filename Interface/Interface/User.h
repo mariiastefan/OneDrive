@@ -13,11 +13,9 @@ private:
 	friend std::ostream& operator <<(std::ostream& out, const User& obj);
 public:
 	User();
-	User(const std::string& other_username, const std::string& other_password);
+	User(const std::string& other_username);
 	User(const User& other);
 	bool verify_username();
-	bool verify_password();
-	friend bool verify_pass(std::string pass);
 	friend bool verify_user(std::string user);
 	std::string GetUsername() const;
 	std::string GetPassword() const;

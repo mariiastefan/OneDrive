@@ -25,8 +25,6 @@
 std::ostream& operator<<(std::ostream& out, const User& obj)
 {
 	out << obj.m_username;
-	out << " ";
-	out << obj.m_password;
 	out << '\n';
 	return out;
 }
@@ -36,8 +34,8 @@ User::User() {
 	m_password = "";
 }
 
-User::User(const std::string& other_username, const std::string& other_password) :
-	m_username{ other_username }, m_password{ other_password }
+User::User(const std::string& other_username) :
+	m_username{ other_username }
 {}
 
 User::User(const User& obj)
@@ -59,23 +57,7 @@ void User::SetUsername(const std::string& username2) {
 void User::SetPassword(const std::string& password2) {
 	m_password = password2;
 }
-bool User::verify_password()
-{
-	std::regex reg(R"([a-zA-Z0-9]+$)");
-	if (m_password.size() >= 6)
-	{
-		if (std::regex_match(m_password, reg))
-			return true;
-		else {
-			throw std::overflow_error{ "Nu contine toate caracterele !" };
-			return false;
-		}
-	}
-	else {
-		throw std::overflow_error{ "Nu e buna lungimea !" };
-		return false;
-	}
-}
+
 bool verify_pass(std::string pass)
 {
 	std::regex reg(R"([a-zA-Z0-9]+$)");

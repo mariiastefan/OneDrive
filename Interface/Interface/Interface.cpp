@@ -29,25 +29,7 @@ Interface::Interface(QWidget* parent)
 	this->setWindowTitle("OneDrive");
 
 	ui.Register->setHidden(true);
-	//connect(ui.theme, QOverload<int>(&QComboBox::activated), this, &Interface::changeTheme);
-   /* QWidget* firstPageWidget = new QWidget;
-	QWidget* secondPageWidget = new QWidget;
-	QWidget* thirdPageWidget = new QWidget;
 
-	QStackedWidget *stackedWidget = new QStackedWidget;
-	stackedWidget->addWidget(firstPageWidget);
-	stackedWidget->addWidget(secondPageWidget);
-	stackedWidget->addWidget(thirdPageWidget);*/
-
-	/*  QVBoxLayout* layout = new QVBoxLayout;
-	  layout->addWidget(stackedWidget);
-	  setLayout(layout);
-	  QComboBox *pageComboBox = new QComboBox;
-	  pageComboBox->addItem(tr("Page 1"));
-	  pageComboBox->addItem(tr("Page 2"));
-	  pageComboBox->addItem(tr("Page 3"));
-	  connect(pageComboBox, QOverload<int>::of(&QComboBox::activated),
-	  stackedWidget, &QStackedWidget::setCurrentIndex);*/
 }
 
 
@@ -85,42 +67,12 @@ void Interface::on_Register_clicked()
 {
 	bool verif_pass=true, verif_user = true;
 	QString username = ui.lineEdit_username->text();
-	User user(username.toStdString(), "alabala");
-	/*if (verify_pass(password.toStdString()) == false)
-	{
-		QMessageBox msgBox;
-		msgBox.setText("Sign Up Failed");
-		msgBox.setInformativeText("Password does not contain all the characters");
-		msgBox.setStandardButtons(QMessageBox::Ok);
-		msgBox.exec();
-		verif_pass = false;
-
-	}
-	if (verify_user(username.toStdString()) == false)
-	{
-		QMessageBox msgBox;
-		msgBox.setText("Sign Up Failed");
-		msgBox.setInformativeText("Username contains unauthorized characters");
-		msgBox.setStandardButtons(QMessageBox::Ok);
-		msgBox.exec();
-		verif_user = false;
-	}*/
+	User user(username.toStdString());
 	if (verif_user == true && verif_pass == true)
 	{
-		User newUser(username.toStdString(), "alabala");
+		User newUser(username.toStdString());
 		g << newUser;
 	}
-	// de facut ce e comentat
-	/*if (password == confirm_password) {
-		User newU(username.toStdString(), password.toStdString());
-		std::cout << newU;
-	}
-	else {
-		QMessageBox msgBox;
-		msgBox.setText("Sign In Failed");
-		msgBox.setInformativeText("This username does not exist");
-		msgBox.setStandardButtons(QMessageBox::Ok);
-		msgBox.exec();
-	}*/
+	
 }
 
