@@ -149,3 +149,12 @@ void User::safe_date(User user)
 		g << "file size:" << m_file[index].GetFile_size() << std::endl;
 	}
 }
+void User::safe_users()
+{
+	std::ofstream fil("user.txt");
+	for (int index = 0; index < m_user.size(); index++)
+	{
+		fil << "users:" << m_user[index];
+		fil << std::endl;
+	}
+}

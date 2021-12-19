@@ -8,7 +8,6 @@
 class User {
 private:
 	std::string m_username;
-
 	std::vector<std::string>m_user;
 	std::vector<File>m_file;
 	friend std::istream& operator >> (std::istream& in, User& obj);
@@ -20,7 +19,6 @@ public:
 	bool verify_username();
 	bool verify_password();
 	std::string GetUsername() const;
-
 	void SetUsername(const std::string & username2) ;
 
 	friend bool verify_if_user_exists(std::ifstream& file, const User& obj);
@@ -30,4 +28,5 @@ public:
 	friend bool user_file(User user);
 	void update(User user,std::string namedate);
 	void safe_date(User user);
+	void safe_users();
 };
