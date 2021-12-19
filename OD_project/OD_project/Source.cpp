@@ -15,7 +15,7 @@ int main()
 	Server s("192.168.2.99");
 	Client c("192.168.2.99", 54000);
 	s.Start();
-	/*c.Start();*/
+	c.Start();
 	std::fstream g("conturi.txt");
 	/*for (int index = 0; index < 2; index++)
 	{
