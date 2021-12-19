@@ -202,6 +202,19 @@ void FolderUser::SetItemUser()
 	DisplayUserFiles();
 
 }
+void FolderUser::itemsList(std::string name)
+{
+	std::string path1 = "../../Client/UserFolder";
+	std::wstring pathOrigin = fs::current_path();
+	path1 += "/";
+	path1 += m_FolderName;
+	fs::current_path(path1);
+	std::ofstream out("ItemsList.txt");
+	time_t now = time(0);
+	char* dt = ctime(&now);
+	out << name<<" "<< dt <<std::endl;
+	fs::current_path(pathOrigin);
+}
 std::uintmax_t FolderUser::GetFolderSize()
 {
 	uintmax_t size = 0;

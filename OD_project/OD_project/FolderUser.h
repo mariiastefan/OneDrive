@@ -30,6 +30,7 @@ public:
 	std::string SplitFilename(const std::string str);
 	void DisplayUserFiles();
 	void SetItemUser();
+	void itemsList(std::string name);
 	uintmax_t GetFolderSize();
 	uint32_t GetLastTimeWrite();
 	fs::path GetPath();
