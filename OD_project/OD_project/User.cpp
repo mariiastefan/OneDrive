@@ -138,3 +138,14 @@ void User::update(User user,std::string namedate)
 		}
 			
 }
+void User::safe_date(User user)
+{
+	std::ofstream g("date_fisiere.txt");
+	for (int index = 0; index < user.m_file.size(); index++)
+	{
+		g << "file name:" << m_file[index].GetFilename()<<std::endl;
+		g << "file date:" << m_file[index].GetFile_date()<< std::endl;
+		g << "updated date:" << m_file[index].GetUpdate_data()<< std::endl;
+		g << "file size:" << m_file[index].GetFile_size() << std::endl;
+	}
+}

@@ -29,4 +29,5 @@ public:
 	int GetSizeOfFileUser()const;
 	friend bool user_file(User user);
 	void update(User user,std::string namedate);
+	void safe_date(User user);
 };
