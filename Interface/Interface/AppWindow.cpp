@@ -19,3 +19,10 @@ AppWindow::~AppWindow()
 {
 	delete ui;
 }
+void AppWindow::on_search_clicked()
+{
+	
+	QString search = ui.line_search->text();
+
+	
+}
