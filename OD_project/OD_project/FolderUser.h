@@ -33,5 +33,5 @@ public:
 	uintmax_t GetFolderSize();
 	uint32_t GetLastTimeWrite();
 	fs::path GetPath();
-	//void GetLastWriteTime();
+	//uint32_t GetLastWriteTime2();
 };

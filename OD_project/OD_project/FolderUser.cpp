@@ -1,7 +1,11 @@
 #include "FolderUser.h"
+#include <iostream>
+#include <chrono>
+#include <iomanip>
+#include <fstream>
 #include <filesystem>
 #include <cstdio>
-#include<iostream>
+
 
 
 FolderUser::FolderUser()
@@ -28,32 +32,31 @@ FolderUser::FolderUser(std::string userName)
 
 void FolderUser::DeleteFolder(std::string userName)
 {
-	namespace fs1 = std::filesystem;
 	std::string pathClient = "../../Client/UserFolder";
 	std::string pathServer = "../../Server/UserFolder";
-	std::wstring pathOrigin = fs1::current_path();
-	fs1::current_path(pathClient);
-	std::uintmax_t n1 = fs1::remove_all(userName);
-	fs1::current_path(pathOrigin);
-	fs1::current_path(pathServer);
-	std::uintmax_t n2 = fs1::remove_all(userName);
-	fs1::current_path(pathOrigin);
+	std::wstring pathOrigin = fs::current_path();
+	fs::current_path(pathClient);
+	std::uintmax_t n1 = fs::remove_all(userName);
+	fs::current_path(pathOrigin);
+	fs::current_path(pathServer);
+	std::uintmax_t n2 = fs::remove_all(userName);
+	fs::current_path(pathOrigin);
 }
 void FolderUser::DeleteFile(std::string username, std::string file)
 {
-	namespace fs1 = std::filesystem;
+	namespace fs = std::filesystem;
 	std::string pathClient = "../../Client/UserFolder";
 	std::string pathServer = "../../Server/UserFolder";
 	pathClient += '/';
 	pathClient += username;
 	pathClient += '/';
 	pathClient += file;
-	std::uintmax_t n1 = fs1::remove(pathClient);
+	std::uintmax_t n1 = fs::remove(pathClient);
 	pathServer += '/';
 	pathServer += username;
 	pathServer += '/';
 	pathServer += file;
-	std::uintmax_t n2= fs1::remove(pathServer);
+	std::uintmax_t n2= fs::remove(pathServer);
 
 }
 std::string FolderUser::GetFolderName() const
@@ -72,28 +75,27 @@ void FolderUser::SetFolderName(const std::string& foldername2)
 
 void FolderUser::SetNrItems()
 {
-	namespace fs1 = std::filesystem;
 	std::string pathClient = "../../Client/UserFolder";
 	std::string pathServer = "../../Server/UserFolder";
-	std::wstring pathOrigin = fs1::current_path();
+	std::wstring pathOrigin = fs::current_path();
 
 	pathClient += "/";
 	pathClient += m_FolderName;
-	fs1::current_path(pathClient);
+	fs::current_path(pathClient);
 
 	int m_nrItems_local = 0;
-	for (auto const& dir_entry : std::filesystem::directory_iterator{ fs1::current_path() })
+	for (auto const& dir_entry : std::filesystem::directory_iterator{ fs::current_path() })
 		m_nrItems_local++;
-	fs1::current_path(pathOrigin);
+	fs::current_path(pathOrigin);
 
 	pathServer += "/";
 	pathServer += m_FolderName;
-	fs1::current_path(pathServer);
+	fs::current_path(pathServer);
 
 	int m_nrItems_server = 0;
-	for (auto const& dir_entry : std::filesystem::directory_iterator{ fs1::current_path() })
+	for (auto const& dir_entry : std::filesystem::directory_iterator{ fs::current_path() })
 		m_nrItems_server++;
-	fs1::current_path(pathOrigin);
+	fs::current_path(pathOrigin);
 
 	m_nrItems = m_nrItems_server;
 
@@ -116,27 +118,27 @@ void FolderUser::AddFile(std::string userName)
 	old_place += ItemName;
 	std::string old_place2= old_place;
 
-	namespace fs1 = std::filesystem;
+	namespace fs = std::filesystem;
 	std::string pathClient = "../../Client/UserFolder";
 	std::string pathServer = "../../Server/UserFolder";
-	std::wstring pathOrigin = fs1::current_path();
+	std::wstring pathOrigin = fs::current_path();
 
 	pathClient += "/";
 	pathClient += userName;
-	fs1::current_path(pathClient);
+	fs::current_path(pathClient);
 	pathClient += "/";
 	pathClient += ItemName;
-	fs1::copy((old_place), fs1::current_path());
-	fs1::current_path(pathOrigin);
+	fs::copy((old_place), fs::current_path());
+	fs::current_path(pathOrigin);
 
 	pathServer += "/";
 	pathServer += userName;
-	fs1::current_path(pathServer);
+	fs::current_path(pathServer);
 	pathServer += "/";
 	pathServer += ItemName;
-	fs1::copy((old_place2), fs1::current_path());
+	fs::copy((old_place2), fs::current_path());
 
-	fs1::current_path(pathOrigin);
+	fs::current_path(pathOrigin);
 	m_nrItems++;
 	File aux(ItemName, "data");
 	m_itemUser.push_back(aux);
@@ -182,21 +184,20 @@ void FolderUser::DisplayUserFiles()
 
 void FolderUser::SetItemUser()
 {
-	namespace fs1 = std::filesystem;
 	std::string path1 = "../../Client/UserFolder";
-	std::wstring pathOrigin = fs1::current_path();
+	std::wstring pathOrigin = fs::current_path();
 	path1 += "/";
 	path1 += m_FolderName;
-	fs1::current_path(path1);
+	fs::current_path(path1);
 
-	for (auto const& dir_entry : fs1::directory_iterator{ fs1::current_path() })
+	for (auto const& dir_entry : fs::directory_iterator{ fs::current_path() })
 	{
-		std::string aux = fs1::absolute(dir_entry.path()).string();
+		std::string aux = fs::absolute(dir_entry.path()).string();
 		aux = SplitFilename(aux);
 		m_fileName.push_back(aux);
 	}
 
-	fs1::current_path(pathOrigin);
+	fs::current_path(pathOrigin);
 
 	DisplayUserFiles();
 
@@ -211,3 +212,30 @@ std::uintmax_t FolderUser::GetFolderSize()
 	return size;
 
 }
+fs::path FolderUser::GetPath()
+{
+	return m_path;
+}
+
+//uint32_t FolderUser::GetLastTimeWrite()
+//{
+//
+//	using namespace std::chrono_literals;
+//	auto print_last_write_time = [](std::filesystem::file_time_type const& ftime) {
+//		std::time_t cftime = std::chrono::system_clock::to_time_t(std::chrono::file_clock::to_sys(ftime));
+//		std::cout << "File write time is " << std::asctime(std::localtime(&cftime));
+//	};
+//
+//	auto ftime = std::filesystem::last_write_time(p);
+//	print_last_write_time(ftime);
+//
+//}
+
+
+
+//uint_32t FolderUser::GetLastTimeWrite2()
+//{
+//	//system_clock::time_point today = system_clock::now();
+//	auto ftime = std::filesystem::last_write_time(m_path);
+//	return ftime;
+//}
