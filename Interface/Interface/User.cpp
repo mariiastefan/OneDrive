@@ -31,7 +31,6 @@ std::ostream& operator<<(std::ostream& out, const User& obj)
 
 User::User() {
 	m_username = "";
-	m_password = "";
 }
 
 User::User(const std::string& other_username) :
@@ -41,39 +40,17 @@ User::User(const std::string& other_username) :
 User::User(const User& obj)
 {
 	m_username = obj.m_username;
-	m_password = obj.m_password;
 }
 std::string User::GetUsername() const
 {
 	return m_username;
 }
-std::string User::GetPassword() const
-{
-	return m_password;
-}
+
 void User::SetUsername(const std::string& username2) {
 	m_username = username2;
 }
-void User::SetPassword(const std::string& password2) {
-	m_password = password2;
-}
 
-bool verify_pass(std::string pass)
-{
-	std::regex reg(R"([a-zA-Z0-9]+$)");
-	if (pass.size() >= 6)
-	{
-		if (std::regex_match(pass, reg))
-			return true;
-		else {
-			return false;
-		}
-	}
-	else {
-	
-		return false;
-	}
-}
+
 bool User::verify_username() {
 	std::regex verify(R"([a-zA-Z]+\d*$)");
 	if (std::regex_match(m_username, verify))
@@ -96,8 +73,6 @@ bool verify_if_user_exists(std::ifstream& file, const User& obj)
 	out.open("temp.txt");
 	std::string line;
 	std::string deleteline = obj.GetUsername();
-	deleteline += " ";
-	deleteline += obj.GetPassword();
 	while (std::getline(file, line))
 	{
 		out << line << std::endl;
@@ -120,8 +95,6 @@ void delete_account(std::fstream& file, const User& obj)
 	out.open("temp.txt");
 	std::string line;
 	std::string deleteline = obj.GetUsername();
-	deleteline += " ";
-	deleteline += obj.GetPassword();
 	while (std::getline(file, line))
 	{
 		if (line != deleteline)

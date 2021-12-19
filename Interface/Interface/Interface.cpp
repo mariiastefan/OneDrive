@@ -68,7 +68,7 @@ void Interface::on_Register_clicked()
 	bool verif_user = true;
 	QString username = ui.lineEdit_username->text();
 	User user(username.toStdString());
-	verif_user = verify_if_user_exists(g, user);
+	/*verif_user = verify_if_user_exists(g, user);*/
 	if (verif_user == true)
 	{
 		User newUser(username.toStdString());
