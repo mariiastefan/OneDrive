@@ -14,7 +14,7 @@
 #include "AppWindow.h"
 #include "ui_AppWindow.h"
 #include <fstream>
-std::fstream g("conturi.txt");
+std::fstream g("conturi.txt", std::ios::app);
 Interface::Interface(QWidget* parent)
 	: QMainWindow(parent)
 {
@@ -65,14 +65,23 @@ void Interface::on_signUp_clicked()
 
 void Interface::on_Register_clicked()
 {
+	g.open("conturi.txt");
+	g.close();
 	bool verif_user = true;
-	QString username = ui.lineEdit_username->text();
+	const QString username = ui.lineEdit_username->text();
 	User user(username.toStdString());
-	/*verif_user = verify_if_user_exists(g, user);*/
-	if (verif_user == true)
+	verif_user = user.verify_if_user_exists(g);
+	if (verif_user == false)
 	{
+		g.open("conturi.txt", std::ios::app);
 		User newUser(username.toStdString());
 		g << newUser;
+		g.close();
+	}
+	else {
+		QMessageBox msgBox;
+		msgBox.setText("Username already exists !");
+		msgBox.exec();
 	}
 	
 }

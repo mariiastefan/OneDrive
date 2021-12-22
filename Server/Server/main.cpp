@@ -26,7 +26,7 @@ int main()
 
     ZeroMemory(&Addr, sizeof(Addr));    // clear the struct
     Addr.sin_family = AF_INET;    // set the address family
-    Addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    Addr.sin_addr.s_addr = inet_addr("192.168.221.94");
     Addr.sin_port = htons(54000);    // set the port
 
     if (connect(Socket, (sockaddr*)&Addr, sizeof(Addr)) < 0)
@@ -73,7 +73,7 @@ int main()
     }
 
     FILE* File;
-    File = fopen("C://Users//Andrei//Desktop//salut.txt", "wb");
+    File = fopen("C:/Users/andre/Desktop/salut.txt", "wb");
     fwrite(Buffer, 1, Size, File);
     fclose(File);
 

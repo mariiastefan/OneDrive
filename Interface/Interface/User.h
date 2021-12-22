@@ -17,7 +17,7 @@ public:
 	bool verify_username();
 	std::string GetUsername() const;
 	void SetUsername(const std::string& username2);
-	friend bool verify_if_user_exists(std::ifstream& file, const User& obj);
+	bool verify_if_user_exists(std::fstream& file);
 	friend void delete_account(std::fstream& file, const User& obj);
 	bool findUser(std::string name);
 };

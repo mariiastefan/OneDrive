@@ -52,7 +52,7 @@ int main()
         char* Buffer;
         unsigned long Size;
 
-        File = fopen("C://Users//Andrei//Desktop//salut.txt", "rb");
+        File = fopen("C:/Users/andre/Desktop/salut.txt", "rb");
         if (!File)
         {
             printf("Error while readaing the file\n");
