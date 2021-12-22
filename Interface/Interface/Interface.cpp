@@ -36,16 +36,30 @@ Interface::Interface(QWidget* parent)
 void Interface::on_signIn_clicked()
 {
 	on_signIn = true;
-	bool flag = true;
-	bool flag2 = true;
-	bool flag3 = true;
+
 	QString username = ui.lineEdit_username->text();
-	
+
 	std::string x = username.toStdString();
-	
+	g.open("conturi.txt");
+	g.close();
+	bool verif_user = false;
+	User user(x);
+	verif_user = user.verify_if_user_exists(g);
+	if (verif_user == true)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("corect !");
+		msgBox.exec();
+	}
+	else {
+		QMessageBox msgBox;
+		msgBox.setText("Username does not exist !");
+		msgBox.exec();
+	}
+
 	/*AppWindow app;
-	app.show();*/
-	//this->setHidden(true);
+	app.show();
+	this->setHidden(true);*/
 }
 
 void Interface::on_signUp_clicked()

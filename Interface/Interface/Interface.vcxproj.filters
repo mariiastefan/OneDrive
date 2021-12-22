@@ -68,6 +68,9 @@
     <ClInclude Include="User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AppWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="App.ui">
@@ -84,9 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="AppWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
