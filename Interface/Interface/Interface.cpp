@@ -27,7 +27,7 @@ Interface::Interface(QWidget* parent)
 	this->setPalette(palette);
 	this->setWindowIcon(QIcon("logo1.jpg"));
 	this->setWindowTitle("OneDrive");
-
+	ui.Back->setHidden(true);
 	ui.Register->setHidden(true);
 
 }
@@ -72,6 +72,7 @@ void Interface::on_signUp_clicked()
 	this->setWindowTitle("Create OneDrive Account");
 	palette.setBrush(QPalette::Background, bg);
 
+	ui.Back->setHidden(false);
 	ui.signIn->setHidden(true);
 	ui.label->setHidden(true);
 	ui.Register->setHidden(false);
@@ -98,5 +99,13 @@ void Interface::on_Register_clicked()
 		msgBox.exec();
 	}
 	
+}
+
+void Interface::on_Back_clicked()
+{
+	ui.Back->setHidden(true);
+	ui.signIn->setHidden(false);
+	ui.label->setHidden(false);
+	ui.Register->setHidden(true);
 }
 
