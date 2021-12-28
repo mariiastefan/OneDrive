@@ -10,15 +10,12 @@
 App::App(QWidget* parent)
     : QMainWindow(parent)
 {
-
     ui.setupUi(this);
-    QPixmap bg("background.jpg");
-    bg = bg.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
-    palette.setBrush(QPalette::Background, bg);
+    palette.setBrush(QPalette::Background, Qt::white);
     this->setPalette(palette);
     this->setWindowIcon(QIcon("logo1.jpg"));
-    this->setWindowTitle("OneDrive Search");
+    this->setWindowTitle("OneDrive");
 }
 
 

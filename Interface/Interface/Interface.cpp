@@ -50,6 +50,9 @@ void Interface::on_signIn_clicked()
 		QMessageBox msgBox;
 		msgBox.setText("corect !");
 		msgBox.exec();
+		hide();
+		homePage = new App(this);
+		homePage->show();
 	}
 	else {
 		QMessageBox msgBox;
