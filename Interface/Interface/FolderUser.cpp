@@ -233,6 +233,7 @@ fs::path FolderUser::GetPath()
 fs::path FolderUser::SetPath(fs::path& path)
 {
 	m_path = path;
+	return m_path;
 }
 
 //uint32_t FolderUser::GetLastTimeWrite()

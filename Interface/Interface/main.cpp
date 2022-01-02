@@ -1,7 +1,7 @@
 #include "Interface.h"
 #include <fstream>
 #include <QtWidgets/QApplication>
-#include "AppWindow.h"
+//#include "AppWindow.h"
 
 
 int main(int argc, char *argv[])

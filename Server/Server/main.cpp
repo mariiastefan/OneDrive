@@ -53,8 +53,8 @@ int main()
 
     char* Buffer = new char[Size];
 
-    //int len = Size;
-    //char *data = Buffer;
+    int len = Size;
+    char *data = Buffer;
     int Offset = 0;
     while (Size > Offset)
     {

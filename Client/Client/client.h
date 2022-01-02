@@ -18,12 +18,12 @@ class Client_socket {
 public:
     Client_socket() {
         create_socket();
-        PORT = 8050;
+        PORT = 54000;
 
         address.sin_family = AF_INET;
         address.sin_port = htons(PORT);
         address_length = sizeof(address);
-        if (inet_pton(AF_INET, "127.0.0.1", &address.sin_addr) <= 0) {
+        if (inet_pton(AF_INET, "192.168.221.94", &address.sin_addr) <= 0) {
             std::cout << "[ERROR] : Invalid address\n";
         }
 

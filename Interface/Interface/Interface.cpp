@@ -11,7 +11,7 @@
 #include "User.h"
 #include "App.h"
 #include "ui_App.h"
-#include "AppWindow.h"
+//#include "AppWindow.h"
 #include "ui_AppWindow.h"
 #include <fstream>
 std::fstream g("conturi.txt", std::ios::app);

@@ -96,6 +96,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="FolderUser.cpp" />
     <ClCompile Include="User.cpp" />
     <QtRcc Include="Interface.qrc" />
@@ -113,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h" />
+    <ClInclude Include="File.h" />
     <ClInclude Include="FolderUser.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="User.h" />
