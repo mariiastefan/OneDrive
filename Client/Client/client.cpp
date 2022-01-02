@@ -1,8 +1,6 @@
 #include <WinSock2.h>
 #include <Windows.h>
-#include <stdio.h>
-//#include <iostream>
-using namespace std;
+#include <iostream>
 
 #pragma comment(lib, "Ws2_32.lib")
 #define Port 54000
@@ -19,6 +17,7 @@ int main()
 
 	if (LOBYTE(Winsock.wVersion) != 2 || HIBYTE(Winsock.wVersion) != 2)    // Check version
 	{
+		std::cerr << "[ERROR] Bad version !";
 		WSACleanup();
 		return 0;
 	}
@@ -32,21 +31,21 @@ int main()
 
 	if (listen(Socket, 1) == SOCKET_ERROR)
 	{
-		printf("listening error\n");
+		std::cerr<<"[ERROR] Listening error\n";
 	}
 	else
 	{
-		printf("listening ok\n");
+		std::cout<<"[INFO] Listening ok\n";
 	}
 
 	if (Sub = accept(Socket, (sockaddr*)&IncomingAddress, &AddressLen))
 	{
 		char* ClientIP = inet_ntoa(IncomingAddress.sin_addr);
 		int ClientPort = ntohs(IncomingAddress.sin_port);
-		printf("Client conncted!\n");
-		printf("IP: %s:%d\n", ClientIP, ClientPort);
+		std::cout << "[INFO] Client conncted!\n";
+		std::cout<<"IP: "<< ClientIP<< ClientPort<<"\n";
 
-		printf("Sending file .. \n");
+		std::cout<<"[INFO] Sending file ... \n";
 
 		FILE* File;
 		char* Buffer;
@@ -55,7 +54,7 @@ int main()
 		File = fopen("C:/Users/andre/Desktop/salut.txt", "rb");
 		if (!File)
 		{
-			printf("Error while readaing the file\n");
+			std::cerr<<"[ERROR] Error while readaing the file\n";
 			getchar();
 			return 0;
 		}
@@ -89,7 +88,7 @@ int main()
 			else
 			{
 				Offset += Amount;
-				printf("2\n");
+				std::cout<<"2\n";
 			}
 		}
 

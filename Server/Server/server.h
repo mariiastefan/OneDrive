@@ -13,10 +13,12 @@ int Addrlen = sizeof(Addr);
 
 int main()
 {
+
     WSAStartup(MAKEWORD(2, 2), &Winsock);    // Start Winsock
 
     if (LOBYTE(Winsock.wVersion) != 2 || HIBYTE(Winsock.wVersion) != 2)    // Check version
     {
+        std::cerr << "[ERROR] Bad version !";
         WSACleanup();
         return 0;
     }
