@@ -230,6 +230,11 @@ fs::path FolderUser::GetPath()
 	return m_path;
 }
 
+fs::path FolderUser::SetPath(fs::path& path)
+{
+	m_path = path;
+}
+
 //uint32_t FolderUser::GetLastTimeWrite()
 //{
 //
@@ -242,13 +247,4 @@ fs::path FolderUser::GetPath()
 //	auto ftime = std::filesystem::last_write_time(p);
 //	print_last_write_time(ftime);
 //
-//}
-
-
-
-//uint_32t FolderUser::GetLastTimeWrite2()
-//{
-//	//system_clock::time_point today = system_clock::now();
-//	auto ftime = std::filesystem::last_write_time(m_path);
-//	return ftime;
 //}
