@@ -103,7 +103,29 @@ void Interface::on_Register_clicked()
 	}
 	
 }
+void Interface::on_delete_acount_clicked()
+{
+	on_delete_acount = true;
+	QString username = ui.lineEdit_username->text();
 
+	std::string x = username.toStdString();
+	g.open("conturi.txt");
+	g.close();
+	bool verif_user = false;
+	User user(x);
+	verif_user = user.verify_if_user_exists(g);
+	if (verif_user == true)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("this account will be deleted");
+		delete_account(g, user);
+	}
+	else
+	{
+		QMessageBox msgBox;
+		msgBox.setText("this account does not exist");
+	}
+}
 void Interface::on_Back_clicked()
 {
 	ui.Back->setHidden(true);

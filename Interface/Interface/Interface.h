@@ -17,10 +17,12 @@ private slots:
 	void on_signUp_clicked();
 	void on_Register_clicked();
 	void on_Back_clicked();
+	void on_delete_acount_clicked();
 
 private:
 	Ui::InterfaceClass ui;
 	bool on_signIn = false;
 	bool on_signUp = false;
+	bool on_delete_acount = false;
 	App *homePage;
 };
