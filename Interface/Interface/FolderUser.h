@@ -1,20 +1,24 @@
 #pragma once
 #include <string>
-#include<vector>
+#include <vector>
 #include <filesystem>
-#include"User.h"
+#include "User.h"
 #include "file.h"
+
+namespace fs = std::filesystem;
 
 class FolderUser {
 private:
 	std::vector<File>m_itemUser;
 	std::vector<std::string>m_fileName;
+	fs::path m_path;
 	std::string m_FolderName;
 	int m_nrItems;
 public:
 	FolderUser();
 	FolderUser(std::string userName);
 	void DeleteFolder(std::string userName);
+	void DeleteFile(std::string username, std::string file);
 	std::string GetFolderName()const;
 	int GetNrItems()const;
 	void SetFolderName(const std::string& foldername2);
@@ -26,5 +30,9 @@ public:
 	std::string SplitFilename(const std::string str);
 	void DisplayUserFiles();
 	void SetItemUser();
-	uintmax_t GetSizeOfASpecificFolder();
+	void itemsList(std::string name);
+	uintmax_t GetFolderSize();
+	uint32_t GetLastTimeWrite();
+	fs::path GetPath();
+	fs::path SetPath(fs::path& path);
 };

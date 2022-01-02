@@ -46,7 +46,7 @@
     <ClCompile Include="User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AppWindow.cpp">
+    <ClCompile Include="FolderUser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,15 +68,12 @@
     <ClInclude Include="User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AppWindow.h">
+    <ClInclude Include="FolderUser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="App.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="AppWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
