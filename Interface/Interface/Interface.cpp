@@ -103,9 +103,9 @@ void Interface::on_Register_clicked()
 	}
 	
 }
-void Interface::on_delete_acount_clicked()
+void Interface::on_delete_account_clicked()
 {
-	on_delete_acount = true;
+	on_delete_account = true;
 	QString username = ui.lineEdit_username->text();
 
 	std::string x = username.toStdString();
@@ -117,13 +117,15 @@ void Interface::on_delete_acount_clicked()
 	if (verif_user == true)
 	{
 		QMessageBox msgBox;
-		msgBox.setText("this account will be deleted");
 		delete_account(g, user);
+		msgBox.setText("this account will be deleted");
+		msgBox.exec();
 	}
 	else
 	{
 		QMessageBox msgBox;
 		msgBox.setText("this account does not exist");
+		msgBox.exec();
 	}
 }
 void Interface::on_Back_clicked()

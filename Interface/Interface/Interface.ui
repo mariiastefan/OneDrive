@@ -147,20 +147,17 @@ font: bold 15x;</string>
      <string>&lt;-</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="delete_acount">
+   <widget class="QPushButton" name="delete_account">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>380</y>
-      <width>171</width>
-      <height>31</height>
+      <x>260</x>
+      <y>390</y>
+      <width>191</width>
+      <height>28</height>
      </rect>
     </property>
-    <property name="mouseTracking">
-     <bool>false</bool>
-    </property>
     <property name="text">
-     <string>Delete acount</string>
+     <string>Delete account</string>
     </property>
    </widget>
   </widget>
