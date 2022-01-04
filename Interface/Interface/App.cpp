@@ -43,16 +43,16 @@ void App::on_addNew_clicked()
     ui.pushButton->setHidden(true);
 
 }
-//void App::on_new_folder_clicked()
-//{
-//
-//    QString foldername = ui.lineEditaddnewfolder->text();
-//    std::string folder_name = foldername.toStdString();
-//    FolderUser folderuser(folder_name);
-//    QMessageBox msgBox;
-//    msgBox.setText("You have added a new folder");
-//    msgBox.exec();
-//}
+void App::on_new_folder_clicked()
+{
+
+    QString foldername = ui.lineEditaddnewfolder->text();
+    std::string folder_name = foldername.toStdString();
+    FolderUser folderuser(folder_name);
+    QMessageBox msgBox;
+    msgBox.setText("You have added a new folder");
+    msgBox.exec();
+}
 
 
 
