@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>802</width>
+    <width>729</width>
     <height>606</height>
    </rect>
   </property>
@@ -52,11 +52,11 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="upload">
    <property name="geometry">
     <rect>
      <x>-10</x>
-     <y>180</y>
+     <y>230</y>
      <width>181</width>
      <height>28</height>
     </rect>
@@ -65,11 +65,11 @@
     <string>Upload</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="rename">
    <property name="geometry">
     <rect>
      <x>-10</x>
-     <y>220</y>
+     <y>270</y>
      <width>181</width>
      <height>28</height>
     </rect>
@@ -279,7 +279,7 @@
     <string>Hello</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>180</x>
@@ -304,6 +304,52 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLineEdit" name="lineEditaddnewfolder">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>140</y>
+     <width>541</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="new_file">
+   <property name="geometry">
+    <rect>
+     <x>-10</x>
+     <y>180</y>
+     <width>181</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>+ New file</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="new_folder">
+   <property name="geometry">
+    <rect>
+     <x>-10</x>
+     <y>140</y>
+     <width>181</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>+ New folder</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEditaddnewfile">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>180</y>
+     <width>541</width>
+     <height>22</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

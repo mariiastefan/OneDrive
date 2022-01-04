@@ -1,4 +1,5 @@
 #include "App.h"
+#include "FolderUser.h"
 #include <qstackedwidget.h>
 #include <QVBoxLayout>
 #include <qcombobox.h>
@@ -16,7 +17,43 @@ App::App(QWidget* parent)
     this->setPalette(palette);
     this->setWindowIcon(QIcon("logo1.jpg"));
     this->setWindowTitle("OneDrive");
+    ui.new_folder->setHidden(true);
+    ui.new_file->setHidden(true);
+    ui.lineEditaddnewfolder->setHidden(true);
+    ui.lineEditaddnewfile->setHidden(true);
 }
+
+void App::on_addNew_clicked()
+{
+    on_addNew = true;
+    QPalette palette;
+    this->setWindowTitle("ADD");
+    palette.setBrush(QPalette::Background, Qt::white);
+
+    ui.new_folder->setHidden(false);
+    ui.new_file -> setHidden(false);
+    ui.lineEditaddnewfolder->setHidden(false);
+    ui.lineEditaddnewfile->setHidden(false);
+
+
+
+    ui.upload->setHidden(true);
+    ui.rename->setHidden(true);
+    ui.lineEdit->setHidden(true);
+    ui.pushButton->setHidden(true);
+
+}
+//void App::on_new_folder_clicked()
+//{
+//
+//    QString foldername = ui.lineEditaddnewfolder->text();
+//    std::string folder_name = foldername.toStdString();
+//    FolderUser folderuser(folder_name);
+//    QMessageBox msgBox;
+//    msgBox.setText("You have added a new folder");
+//    msgBox.exec();
+//}
+
 
 
 
