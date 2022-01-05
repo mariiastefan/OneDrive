@@ -1,7 +1,25 @@
 #include <iostream>
 #include <array>
-
+#include <experimental/filesystem>
 #include "../Network/TcpSocket.h"
+
+namespace fs = std::experimental::filesystem;
+
+bool ShowFiles(fs::path path)
+{
+	for (auto& p : fs::recursive_directory_iterator(path.parent_path()))
+	{
+		/*std::cout << p.path().filename() << '\n';
+		std::cout << path.parent_path() << "\n";
+		std::cout << p.path().parent_path() << "\n";*/
+		if (p.path()== path)
+		{
+			return 1;
+		}
+	}
+	return 0;
+}
+
 
 int main(int argc, char* argv[]) 
 {
@@ -17,16 +35,17 @@ int main(int argc, char* argv[])
 	std::cout << "Connecting to server at: " << argv[1] << std::endl;
 	socket.Connect("192.168.2.99", 54000);
 
-	std::string message = "this is a test :)";
-	std::cout << "Sending message: " << message << std::endl;
-	bool result = socket.Send(message.c_str(), message.size());
+	fs::path file_to_download = "C:\\Users\\Andrei\\Desktop\\salut\\salut2343.txt";
+
+	std::cout << "I want to download the file with the path: " << file_to_download << std::endl;
+	bool result = socket.Send(file_to_download.filename().c_str(), fs::file_size(file_to_download));
 	if (result)
 	{
 		std::array<char, 512> receiveBuffer;
-		int revieved;
-		socket.Receive(receiveBuffer.data(), receiveBuffer.size(), revieved);
+		int received;
+		socket.Receive(receiveBuffer.data(), receiveBuffer.size(), received);
 		std::cout << "Received: ";
-		std::copy(receiveBuffer.begin(), receiveBuffer.begin() + revieved, std::ostream_iterator<char>(std::cout, ""));
+		std::copy(receiveBuffer.begin(), receiveBuffer.begin() + received, std::ostream_iterator<char>(std::cout, ""));
 		std::cout << std::endl;
 	}
 
