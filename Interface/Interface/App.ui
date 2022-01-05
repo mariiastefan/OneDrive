@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>729</width>
+    <width>715</width>
     <height>606</height>
    </rect>
   </property>
@@ -56,7 +56,7 @@
    <property name="geometry">
     <rect>
      <x>-10</x>
-     <y>230</y>
+     <y>180</y>
      <width>181</width>
      <height>28</height>
     </rect>
@@ -69,7 +69,7 @@
    <property name="geometry">
     <rect>
      <x>-10</x>
-     <y>270</y>
+     <y>220</y>
      <width>181</width>
      <height>28</height>
     </rect>
@@ -305,27 +305,14 @@
     </item>
    </layout>
   </widget>
-  <widget class="QLineEdit" name="lineEditaddnewfolder">
+  <widget class="QLineEdit" name="lineEditaddnew">
    <property name="geometry">
     <rect>
      <x>180</x>
      <y>140</y>
-     <width>541</width>
+     <width>521</width>
      <height>21</height>
     </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="new_file">
-   <property name="geometry">
-    <rect>
-     <x>-10</x>
-     <y>180</y>
-     <width>181</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>+ New file</string>
    </property>
   </widget>
   <widget class="QPushButton" name="new_folder">
@@ -341,14 +328,30 @@
     <string>+ New folder</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEditaddnewfile">
+  <widget class="QLabel" name="foldername">
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>180</y>
-     <width>541</width>
-     <height>22</height>
+     <y>120</y>
+     <width>101</width>
+     <height>16</height>
     </rect>
+   </property>
+   <property name="text">
+    <string>Folder name:</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="add">
+   <property name="geometry">
+    <rect>
+     <x>-10</x>
+     <y>140</y>
+     <width>181</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Add</string>
    </property>
   </widget>
  </widget>

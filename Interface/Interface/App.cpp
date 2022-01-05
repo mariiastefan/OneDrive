@@ -18,9 +18,8 @@ App::App(QWidget* parent)
     this->setWindowIcon(QIcon("logo1.jpg"));
     this->setWindowTitle("OneDrive");
     ui.new_folder->setHidden(true);
-    ui.new_file->setHidden(true);
-    ui.lineEditaddnewfolder->setHidden(true);
-    ui.lineEditaddnewfile->setHidden(true);
+    ui.lineEditaddnew->setHidden(true);
+    
 }
 
 void App::on_addNew_clicked()
@@ -30,10 +29,10 @@ void App::on_addNew_clicked()
     this->setWindowTitle("ADD");
     palette.setBrush(QPalette::Background, Qt::white);
 
+    ui.add->setHidden(false);
     ui.new_folder->setHidden(false);
-    ui.new_file -> setHidden(false);
-    ui.lineEditaddnewfolder->setHidden(false);
-    ui.lineEditaddnewfile->setHidden(false);
+    ui.lineEditaddnew->setHidden(false);
+   
 
 
 
@@ -46,7 +45,7 @@ void App::on_addNew_clicked()
 void App::on_new_folder_clicked()
 {
 
-    QString foldername = ui.lineEditaddnewfolder->text();
+    QString foldername = ui.lineEditaddnew->text();
     std::string folder_name = foldername.toStdString();
     FolderUser folderuser(folder_name);
     QMessageBox msgBox;
