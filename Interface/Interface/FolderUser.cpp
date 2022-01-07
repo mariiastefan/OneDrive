@@ -17,17 +17,21 @@ FolderUser::FolderUser(std::string userName)
 {
 	m_FolderName = userName;
 	m_nrItems = 0;
+
 	std::wstring pathOrigin = fs::current_path();
 	std::string path1 = "../../Client/UserFolder";
 	fs::current_path(path1);
 	fs::create_directory(userName);
 	path1 += "/";
 	m_path = path1 + m_FolderName;
+
 	fs::current_path(pathOrigin);
 	std::string path2 = "../../Server/UserFolder";
 	fs::current_path(path2);
 	fs::create_directory(userName);
 	fs::current_path(pathOrigin);
+
+	m_date = fs::last_write_time(m_path);
 }
 
 void FolderUser::DeleteFolder(std::string userName)
@@ -41,6 +45,10 @@ void FolderUser::DeleteFolder(std::string userName)
 	fs::current_path(pathServer);
 	std::uintmax_t n2 = fs::remove_all(userName);
 	fs::current_path(pathOrigin);
+}
+void FolderUser::DeleteUsernameFolder()
+{
+	fs::remove_all(m_path);
 }
 void FolderUser::DeleteFile(std::string username, std::string file)
 {
@@ -113,7 +121,7 @@ void FolderUser::AddFile(std::string userName)
 	do {
 		std::cout << "cititi numele fisierului: ";
 		std::cin >> ItemName;
-	} while (verify_existItem(ItemName) == true);
+	} while (CheckIfTheUsernameExists(ItemName) == true);
 	old_place += "/";
 	old_place += ItemName;
 	std::string old_place2 = old_place;
@@ -144,14 +152,18 @@ void FolderUser::AddFile(std::string userName)
 	m_itemUser.push_back(aux);
 }
 
-bool FolderUser::verify_FolderName(FolderUser folder, std::string name)
+void FolderUser::AddFile()
+{
+}
+
+bool FolderUser::VerifyFolderName(FolderUser folder, std::string name)
 {
 	if (folder.GetFolderName() == name)
 		return true;
 	return false;
 }
 
-bool FolderUser::verify_existItem(std::string filename)
+bool FolderUser::CheckIfTheUsernameExists(std::string filename)
 {
 	for (auto& index : m_itemUser)
 	{
@@ -233,8 +245,9 @@ fs::path FolderUser::GetPath()
 fs::path FolderUser::SetPath(fs::path& path)
 {
 	m_path = path;
-	return m_path;
 }
+
+
 
 //uint32_t FolderUser::GetLastTimeWrite()
 //{

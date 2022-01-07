@@ -1,4 +1,4 @@
-#include"user.h"
+#include"User.h"
 
 std::istream& operator>>(std::istream& in, User& obj)
 {
@@ -58,7 +58,7 @@ bool User::verify_username() {
 
 
 
-bool verify_if_user_exists(std::ifstream& file, const User& obj)
+bool VerifyIsUsernameExists(std::ifstream& file, const User& obj)
 {
 	std::string filename("conturi.txt");
 	if (!file.is_open()) {
@@ -83,7 +83,7 @@ bool verify_if_user_exists(std::ifstream& file, const User& obj)
 	return 0;
 }
 
-void delete_account(std::fstream& file, const User& obj) 
+void DeleteAccount(std::fstream& file, const User& obj) 
 {
 	std::string filename("conturi.txt");
 	std::ofstream out;
@@ -119,13 +119,8 @@ int User::GetSizeOfFileUser()const
 {
 	return m_file.size();
 }
-bool user_file(User user)
-{
-	if (user.GetSizeOfFileUser() == 0)
-		return 0;
-	return 1;
-}
-void User::update(User user,std::string namedate) 
+
+void User::Update(User user,std::string namedate) 
 {
 	for (int index = 0; index < user.m_file.size(); index++)
 		if (m_file[index].GetFilename() == namedate)
