@@ -26,7 +26,7 @@ int main()
 	std::cout << "Starting server..." << std::endl;
 
 	TcpSocket listener;
-	listener.Listen(54000);
+	listener.Listen(8080);
 	
 	std::cout << "Waiting for client to connect..." << std::endl;
 	TcpSocket client = listener.Accept();
@@ -38,22 +38,29 @@ int main()
 	std::cout << "Received: ";
 	std::copy(receiveBuffer.begin(), receiveBuffer.begin() + received, std::ostream_iterator<char>(std::cout, ""));
 	std::cout << std::endl;
+	std::string filename;
+	
 
-	fs::path file_to_download = receiveBuffer.data();
-	if (ShowFiles(file_to_download) == 0)
+	for (int index = 0; index< received; index++)
+	{
+		filename += receiveBuffer[index];
+	}
+
+	fs::path fileToDownload = filename;
+	if (ShowFiles(fileToDownload) == 0)
 	{
 		std::cerr << "Couldn't find the file !" << std::endl;
+		std::string message = "Couldn't find the file !";
+		client.Send(message.c_str(), message.size());
 		return 1;
 	}
 
 	// send
 	std::stringstream stream;
-	stream << "Thank you, I received " << received << " bytes from you";
+	stream << "Thank you, I received " << received << " bytes from you and the size of the file you sent is : "<< fs::file_size(fileToDownload) << " bytes \n";
 	std::string message = stream.str();
 	client.Send(message.c_str(), message.size());
 
 	std::cout << "Sending: " << message.size() << " bytes" << std::endl;
-	std::cout << "Closing server. Bye! :)" << std::endl;
-
 	return 0;
 }

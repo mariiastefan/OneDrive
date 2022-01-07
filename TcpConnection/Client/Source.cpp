@@ -2,6 +2,7 @@
 #include <array>
 #include <experimental/filesystem>
 #include "../Network/TcpSocket.h"
+#include <Windows.h>
 
 namespace fs = std::experimental::filesystem;
 
@@ -33,21 +34,33 @@ int main(int argc, char* argv[])
 
 	TcpSocket socket;
 	std::cout << "Connecting to server at: " << argv[1] << std::endl;
-	socket.Connect("192.168.2.99", 54000);
+	socket.Connect("127.0.0.1", 8080);
 
-	fs::path file_to_download = "C:\\Users\\Andrei\\Desktop\\salut\\salut2343.txt";
+	fs::path fileToDownload = "C:/Users/Andrei/Desktop/salut/salut.txt";	
+	fs::path whereToSave = "C:/Users/Andrei/Desktop/save";
+	std::cout << "I want to download the file with the path: " << fileToDownload << std::endl;
+	std::string pathString{ fileToDownload.u8string() };
+	std::string saveString{ whereToSave.u8string() };
+	//URLDownloadToFile(NULL, pathString.c_str(), saveString.c_str(), 0, NULL);
 
-	std::cout << "I want to download the file with the path: " << file_to_download << std::endl;
-	bool result = socket.Send(file_to_download.filename().c_str(), fs::file_size(file_to_download));
+	bool result = socket.Send(pathString.c_str(), pathString.size());
 	if (result)
 	{
 		std::array<char, 512> receiveBuffer;
 		int received;
+		if (fs::file_size(fileToDownload) > receiveBuffer.size())
+		{
+			std::cerr << "File you are trying to download is to big !";
+			return 1;                                                                  
+		}
 		socket.Receive(receiveBuffer.data(), receiveBuffer.size(), received);
 		std::cout << "Received: ";
 		std::copy(receiveBuffer.begin(), receiveBuffer.begin() + received, std::ostream_iterator<char>(std::cout, ""));
 		std::cout << std::endl;
 	}
-
+	else {
+		std::cerr << "Couldn't send the data to the server !";
+		return 1;
+	}
 	return 0;
 }
