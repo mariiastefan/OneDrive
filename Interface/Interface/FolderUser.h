@@ -18,10 +18,12 @@ private:
 public:
 	FolderUser();
 	FolderUser(std::string userName);
+	FolderUser(std::string foldername, fs::path path, fs::file_time_type date, std::vector<std::string>filename);
 
 	void DeleteFolder(std::string userName);
 	void DeleteUsernameFolder();
 	void DeleteFile(std::string username, std::string file);
+	void DeleteFile();
 
 	void SetFolderName(const std::string& foldername);
 	void SetNrItems();

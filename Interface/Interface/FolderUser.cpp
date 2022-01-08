@@ -33,6 +33,21 @@ FolderUser::FolderUser(std::string userName)
 
 	m_date = fs::last_write_time(m_path);
 }
+FolderUser::FolderUser(std::string foldername, fs::path path, fs::file_time_type date, std::vector<std::string> filename) : m_FolderName{ foldername }, m_path{ path }, m_date{ date }, m_fileName{ filename }
+{
+	std::wstring pathOrigin = fs::current_path();
+	std::string path1 = "../../Client/UserFolder";
+	fs::current_path(path1);
+	fs::create_directory(foldername);
+	path1 += "/";
+	m_path = path1 + m_FolderName;
+
+	fs::current_path(pathOrigin);
+	std::string path2 = "../../Server/UserFolder";
+	fs::current_path(path2);
+	fs::create_directory(foldername);
+	fs::current_path(pathOrigin);
+}
 
 void FolderUser::DeleteFolder(std::string userName)
 {
@@ -66,6 +81,13 @@ void FolderUser::DeleteFile(std::string username, std::string file)
 	pathServer += file;
 	std::uintmax_t n2 = fs::remove(pathServer);
 
+}
+void FolderUser::DeleteFile()
+{
+	fs::path path;
+	std::cout << "Introduceti calea fisierului pe care doriti sa il stergeti: ";
+	std::cin >> path;
+	std::uintmax_t deleted = fs::remove(path);
 }
 std::string FolderUser::GetFolderName() const
 {
@@ -110,47 +132,6 @@ void FolderUser::SetNrItems()
 	if (m_nrItems_server == m_nrItems_local) std::cout << std::endl << "Fisiere sincronizate" << std::endl;
 	else std::cout << std::endl << "Fisierele nu sunt sincronizate cu serverul" << std::endl;
 }
-
-//void FolderUser::AddFile(std::string userName)
-//{
-//	std::string old_place;
-//	std::cout << "introduceti calea catre fisier: ";
-//	std::cin >> old_place;
-//
-//	std::string ItemName;
-//	do {
-//		std::cout << "cititi numele fisierului: ";
-//		std::cin >> ItemName;
-//	} while (CheckIfTheUsernameExists(ItemName) == true);
-//	old_place += "/";
-//	old_place += ItemName;
-//	std::string old_place2 = old_place;
-//
-//	namespace fs = std::filesystem;
-//	std::string pathClient = "../../Client/UserFolder";
-//	std::string pathServer = "../../Server/UserFolder";
-//	std::wstring pathOrigin = fs::current_path();
-//
-//	pathClient += "/";
-//	pathClient += userName;
-//	fs::current_path(pathClient);
-//	pathClient += "/";
-//	pathClient += ItemName;
-//	fs::copy((old_place), fs::current_path());
-//	fs::current_path(pathOrigin);
-//
-//	pathServer += "/";
-//	pathServer += userName;
-//	fs::current_path(pathServer);
-//	pathServer += "/";
-//	pathServer += ItemName;
-//	fs::copy((old_place2), fs::current_path());
-//
-//	fs::current_path(pathOrigin);
-//	m_nrItems++;
-//	File aux(ItemName, "data");
-//	m_itemUser.push_back(aux);
-//}
 
 void FolderUser::AddFile()
 {

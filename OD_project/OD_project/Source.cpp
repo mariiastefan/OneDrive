@@ -36,7 +36,7 @@ int main()
 	//std::cout<<b.GetNrItems();
 	FolderUser b("ana");
 	//b.AddFile("ana");
-	b.AddFile2();
+	b.DeleteFile2();
 	//b.SetNrItems();
 	//std::cout << b.GetPath() << '\n';
 	//::cout << b.GetFolderSize();
