@@ -31,13 +31,13 @@ int main()
 	std::cout << "Waiting for client to connect..." << std::endl;
 	TcpSocket client = listener.Accept();
 
-	// receive
+	// receive path for the download
 	std::array<char, 512> receiveBuffer;
 	int received;
 	client.Receive(receiveBuffer.data(), receiveBuffer.size(), received);
 	std::cout << "Received: ";
 	std::copy(receiveBuffer.begin(), receiveBuffer.begin() + received, std::ostream_iterator<char>(std::cout, ""));
-	std::cout << std::endl;
+	std::cout <<" the path for the download file " << std::endl;
 	std::string filename;
 	
 
@@ -57,10 +57,33 @@ int main()
 
 	// send
 	std::stringstream stream;
-	stream << "Thank you, I received " << received << " bytes from you and the size of the file you sent is : "<< fs::file_size(fileToDownload) << " bytes \n";
+	stream << "The download will begin shortly !\n";
 	std::string message = stream.str();
 	client.Send(message.c_str(), message.size());
+	
+	//path for where to be save
+	std::array<char, 512> receiveBuffer2;
+	int received2;
+	client.Receive(receiveBuffer2.data(), receiveBuffer2.size(), received2);
+	std::cout << "Received: ";
+	std::copy(receiveBuffer2.begin(), receiveBuffer2.begin() + received2, std::ostream_iterator<char>(std::cout, ""));
+	std::cout <<" the path where the file will be saved " << std::endl;
+	std::string filenameToSave;
 
-	std::cout << "Sending: " << message.size() << " bytes" << std::endl;
+	for (int index = 0; index < received2; index++)
+	{
+		filenameToSave += receiveBuffer2[index];
+	}
+
+	fs::path whereToBeSaved = filenameToSave;
+	const auto copyOptions = fs::copy_options::update_existing
+		| fs::copy_options::recursive
+		;
+	fs::copy(fileToDownload, whereToBeSaved, copyOptions);
+	std::stringstream stream2;
+	stream2 << "Download complete !" ;
+	std::string message2 = stream2.str();
+	client.Send(message2.c_str(), message2.size());
+
 	return 0;
 }

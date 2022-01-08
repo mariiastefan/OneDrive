@@ -242,7 +242,7 @@ fs::path FolderUser::GetPath()
 	return m_path;
 }
 
-fs::path FolderUser::SetPath(fs::path& path)
+void FolderUser::SetPath(fs::path& path)
 {
 	m_path = path;
 }
