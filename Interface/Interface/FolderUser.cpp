@@ -111,49 +111,58 @@ void FolderUser::SetNrItems()
 	else std::cout << std::endl << "Fisierele nu sunt sincronizate cu serverul" << std::endl;
 }
 
-void FolderUser::AddFile(std::string userName)
-{
-	std::string old_place;
-	std::cout << "introduceti calea catre fisier: ";
-	std::cin >> old_place;
-
-	std::string ItemName;
-	do {
-		std::cout << "cititi numele fisierului: ";
-		std::cin >> ItemName;
-	} while (CheckIfTheUsernameExists(ItemName) == true);
-	old_place += "/";
-	old_place += ItemName;
-	std::string old_place2 = old_place;
-
-	namespace fs = std::filesystem;
-	std::string pathClient = "../../Client/UserFolder";
-	std::string pathServer = "../../Server/UserFolder";
-	std::wstring pathOrigin = fs::current_path();
-
-	pathClient += "/";
-	pathClient += userName;
-	fs::current_path(pathClient);
-	pathClient += "/";
-	pathClient += ItemName;
-	fs::copy((old_place), fs::current_path());
-	fs::current_path(pathOrigin);
-
-	pathServer += "/";
-	pathServer += userName;
-	fs::current_path(pathServer);
-	pathServer += "/";
-	pathServer += ItemName;
-	fs::copy((old_place2), fs::current_path());
-
-	fs::current_path(pathOrigin);
-	m_nrItems++;
-	File aux(ItemName, "data");
-	m_itemUser.push_back(aux);
-}
+//void FolderUser::AddFile(std::string userName)
+//{
+//	std::string old_place;
+//	std::cout << "introduceti calea catre fisier: ";
+//	std::cin >> old_place;
+//
+//	std::string ItemName;
+//	do {
+//		std::cout << "cititi numele fisierului: ";
+//		std::cin >> ItemName;
+//	} while (CheckIfTheUsernameExists(ItemName) == true);
+//	old_place += "/";
+//	old_place += ItemName;
+//	std::string old_place2 = old_place;
+//
+//	namespace fs = std::filesystem;
+//	std::string pathClient = "../../Client/UserFolder";
+//	std::string pathServer = "../../Server/UserFolder";
+//	std::wstring pathOrigin = fs::current_path();
+//
+//	pathClient += "/";
+//	pathClient += userName;
+//	fs::current_path(pathClient);
+//	pathClient += "/";
+//	pathClient += ItemName;
+//	fs::copy((old_place), fs::current_path());
+//	fs::current_path(pathOrigin);
+//
+//	pathServer += "/";
+//	pathServer += userName;
+//	fs::current_path(pathServer);
+//	pathServer += "/";
+//	pathServer += ItemName;
+//	fs::copy((old_place2), fs::current_path());
+//
+//	fs::current_path(pathOrigin);
+//	m_nrItems++;
+//	File aux(ItemName, "data");
+//	m_itemUser.push_back(aux);
+//}
 
 void FolderUser::AddFile()
 {
+	fs::path path, helpPath;
+	std::cout << "Introduceti calea fisierului pe care doriti sa il adaugati: ";
+	std::cin >> path;
+	std::cout << path.filename().string();
+	fs::current_path(m_path);
+	helpPath = m_path;
+	helpPath += "/";
+	helpPath += path.filename().string();
+	fs::copy(path, fs::current_path());
 }
 
 bool FolderUser::VerifyFolderName(FolderUser folder, std::string name)

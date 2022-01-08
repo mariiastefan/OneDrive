@@ -1,7 +1,7 @@
 #include <iostream>
 #include <filesystem>
 #include <cstdlib>
-#include "user.h";
+#include "User.h";
 #include "FolderUser.h";
 #include "server.h";
 #include "client.h";
@@ -34,12 +34,12 @@ int main()
 	//b.AddFile("Ela");
 	//b.DeleteFile("ana", "poza_bd.jpeg");
 	//std::cout<<b.GetNrItems();
-	std::cout << "s";
 	FolderUser b("ana");
-	b.AddFile("ana");
-	b.SetNrItems();
+	//b.AddFile("ana");
+	b.AddFile2();
+	//b.SetNrItems();
 	//std::cout << b.GetPath() << '\n';
-	std::cout << b.GetFolderSize();
+	//::cout << b.GetFolderSize();
 	std::cout << '\n';
 
 

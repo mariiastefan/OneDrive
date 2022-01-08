@@ -33,9 +33,6 @@ void App::on_addNew_clicked()
     ui.new_folder->setHidden(false);
     ui.lineEditaddnew->setHidden(false);
    
-
-
-
     ui.upload->setHidden(true);
     ui.rename->setHidden(true);
     ui.lineEdit->setHidden(true);
@@ -44,7 +41,6 @@ void App::on_addNew_clicked()
 }
 void App::on_new_folder_clicked()
 {
-
     QString foldername = ui.lineEditaddnew->text();
     std::string folder_name = foldername.toStdString();
     FolderUser folderuser(folder_name);

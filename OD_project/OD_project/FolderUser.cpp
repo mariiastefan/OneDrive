@@ -64,7 +64,7 @@ void FolderUser::DeleteFile(std::string username, std::string file)
 	pathServer += username;
 	pathServer += '/';
 	pathServer += file;
-	std::uintmax_t n2= fs::remove(pathServer);
+	std::uintmax_t n2 = fs::remove(pathServer);
 
 }
 std::string FolderUser::GetFolderName() const
@@ -108,53 +108,63 @@ void FolderUser::SetNrItems()
 	m_nrItems = m_nrItems_server;
 
 	if (m_nrItems_server == m_nrItems_local) std::cout << std::endl << "Fisiere sincronizate" << std::endl;
-	else std::cout << std::endl << "Fisierele nu sunt sincronizate cu serverul"<<std::endl;
+	else std::cout << std::endl << "Fisierele nu sunt sincronizate cu serverul" << std::endl;
 }
 
-void FolderUser::AddFile(std::string userName)
-{
-	std::string old_place;
-	std::cout << "introduceti calea catre fisier: ";
-	std::cin >> old_place;
-
-	std::string ItemName;
-	do {
-		std::cout << "cititi numele fisierului: ";
-		std::cin >> ItemName;
-	} while (CheckIfTheUsernameExists(ItemName) == true);
-	old_place += "/";
-	old_place += ItemName;
-	std::string old_place2= old_place;
-
-	namespace fs = std::filesystem;
-	std::string pathClient = "../../Client/UserFolder";
-	std::string pathServer = "../../Server/UserFolder";
-	std::wstring pathOrigin = fs::current_path();
-
-	pathClient += "/";
-	pathClient += userName;
-	fs::current_path(pathClient);
-	pathClient += "/";
-	pathClient += ItemName;
-	fs::copy((old_place), fs::current_path());
-	fs::current_path(pathOrigin);
-
-	pathServer += "/";
-	pathServer += userName;
-	fs::current_path(pathServer);
-	pathServer += "/";
-	pathServer += ItemName;
-	fs::copy((old_place2), fs::current_path());
-
-	fs::current_path(pathOrigin);
-	m_nrItems++;
-	File aux(ItemName, "data");
-	m_itemUser.push_back(aux);
-}
+//void FolderUser::AddFile(std::string userName)
+//{
+//	std::string old_place;
+//	std::cout << "introduceti calea catre fisier: ";
+//	std::cin >> old_place;
+//
+//	std::string ItemName;
+//	do {
+//		std::cout << "cititi numele fisierului: ";
+//		std::cin >> ItemName;
+//	} while (CheckIfTheUsernameExists(ItemName) == true);
+//	old_place += "/";
+//	old_place += ItemName;
+//	std::string old_place2 = old_place;
+//
+//	namespace fs = std::filesystem;
+//	std::string pathClient = "../../Client/UserFolder";
+//	std::string pathServer = "../../Server/UserFolder";
+//	std::wstring pathOrigin = fs::current_path();
+//
+//	pathClient += "/";
+//	pathClient += userName;
+//	fs::current_path(pathClient);
+//	pathClient += "/";
+//	pathClient += ItemName;
+//	fs::copy((old_place), fs::current_path());
+//	fs::current_path(pathOrigin);
+//
+//	pathServer += "/";
+//	pathServer += userName;
+//	fs::current_path(pathServer);
+//	pathServer += "/";
+//	pathServer += ItemName;
+//	fs::copy((old_place2), fs::current_path());
+//
+//	fs::current_path(pathOrigin);
+//	m_nrItems++;
+//	File aux(ItemName, "data");
+//	m_itemUser.push_back(aux);
+//}
 
 void FolderUser::AddFile()
 {
+	fs::path path,helpPath;
+	std::cout << "Introduceti calea fisierului pe care doriti sa il adaugati: ";
+	std::cin >> path;
+	std::cout << path.filename().string();
+	fs::current_path(m_path);
+	helpPath = m_path;
+	helpPath += "/";
+	helpPath+= path.filename().string();
+	fs::copy(path, fs::current_path());
 }
+
 
 bool FolderUser::VerifyFolderName(FolderUser folder, std::string name)
 {
@@ -214,19 +224,19 @@ void FolderUser::SetItemUser()
 	DisplayUserFiles();
 
 }
-void FolderUser::itemsList(std::string name)
-{
-	std::string path1 = "../../Client/UserFolder";
-	std::wstring pathOrigin = fs::current_path();
-	path1 += "/";
-	path1 += m_FolderName;
-	fs::current_path(path1);
-	std::ofstream out("ItemsList.txt");
-	time_t now = time(0);
-	char* dt = ctime(&now);
-	out << name<<" "<< dt <<std::endl;
-	fs::current_path(pathOrigin);
-}
+//void FolderUser::itemsList(std::string name)
+//{
+//	std::string path1 = "../../Client/UserFolder";
+//	std::wstring pathOrigin = fs::current_path();
+//	path1 += "/";
+//	path1 += m_FolderName;
+//	fs::current_path(path1);
+//	std::ofstream out("ItemsList.txt");
+//	time_t now = time(0);
+//	char* dt = ctime(&now);
+//	out << name<<" "<< dt <<std::endl;
+//	fs::current_path(pathOrigin);
+//}
 std::uintmax_t FolderUser::GetFolderSize()
 {
 	uintmax_t size = 0;
@@ -242,7 +252,7 @@ fs::path FolderUser::GetPath()
 	return m_path;
 }
 
-fs::path FolderUser::SetPath(fs::path& path)
+void FolderUser::SetPath(fs::path& path)
 {
 	m_path = path;
 }

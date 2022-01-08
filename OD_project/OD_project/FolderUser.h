@@ -26,11 +26,11 @@ public:
 	void SetFolderName(const std::string& foldername);
 	void SetNrItems();
 	void SetItemUser();
-	fs::path SetPath(fs::path& path);
+	void SetPath(fs::path& path);
 	std::string GetFolderName()const;
 	int GetNrItems()const;
 
-	void AddFile(std::string userName);
+	//void AddFile(std::string userName);
 	void AddFile();
 	bool VerifyFolderName(FolderUser folder, std::string name);
 	bool CheckIfTheUsernameExists(std::string filename);
