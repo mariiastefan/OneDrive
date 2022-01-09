@@ -13,6 +13,7 @@
 #include <QTreeView>
 #include <QtCore>
 #include <QtGui>
+#include<QCompleter>
 
 App::App(QWidget* parent)
     : QMainWindow(parent)
@@ -26,17 +27,37 @@ App::App(QWidget* parent)
     ui.new_folder->setHidden(true);
     ui.lineEditaddnew->setHidden(true);
     ui.folderName->setHidden(true);
-    
+    ui.folderName_2->setHidden(true);
+    ui.AddLine->setHidden(true);
 
     dirModel = new QFileSystemModel(this);
     dirModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
     dirModel->setRootPath(QDir::currentPath());
-    //ui.treeWidget->setModel(dirModel);
+    ui.treeView->setModel(dirModel);
 
     fileModel = new QFileSystemModel(this);
-    fileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
+    fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
     fileModel->setRootPath(QDir::currentPath());
-    //ui.listWidget->setModel(fileModel);
+    ui.listView->setModel(fileModel);
+}
+
+void App::on_treeView_clicked(QModelIndex index)
+{
+    QString sPath = dirModel->fileInfo(index).absoluteFilePath();
+    ui.listView->setRootIndex(fileModel->setRootPath(sPath));
+}
+
+
+void App::on_add_clicked()
+{
+    ui.folderName_2->setHidden(false);
+    ui.AddLine->setHidden(false);
+    QCompleter* cmpt;
+    QFileSystemModel* mo;
+    mo = new QFileSystemModel(this);
+    cmpt = new QCompleter(mo, this);
+    mo->setRootPath(QDir::rootPath());
+    ui.AddLine->setCompleter(cmpt);
 
 }
 
@@ -66,9 +87,6 @@ void App::on_new_folder_clicked()
     msgBox.setText("You have added a new folder");
     msgBox.exec();
 }
-
-
-
 
 void App::on_searchBtn_clicked()
 {

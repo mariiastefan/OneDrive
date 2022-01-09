@@ -13,7 +13,10 @@ public:
 private slots:
 	void on_addNew_clicked();
 	void on_new_folder_clicked();
+	void on_add_clicked();
 	void on_searchBtn_clicked();
+	void on_treeView_clicked(QModelIndex index);
+
 private:
 	Ui::App ui;
 	bool on_addNew = false;
@@ -21,5 +24,4 @@ private:
 	QPushButton* newButton;
 	QFileSystemModel* dirModel;
 	QFileSystemModel* fileModel;
-
 };
