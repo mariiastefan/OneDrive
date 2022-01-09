@@ -8,6 +8,12 @@
 #include <QLabel>
 #include <QDebug>
 #include <QMessageBox>
+#include "qtreewidget.h"
+#include <QListView>
+#include <QTreeView>
+#include <QtCore>
+#include <QtGui>
+
 App::App(QWidget* parent)
     : QMainWindow(parent)
 {
@@ -21,6 +27,17 @@ App::App(QWidget* parent)
     ui.lineEditaddnew->setHidden(true);
     ui.folderName->setHidden(true);
     
+
+    dirModel = new QFileSystemModel(this);
+    dirModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
+    dirModel->setRootPath(QDir::currentPath());
+    //ui.treeWidget->setModel(dirModel);
+
+    fileModel = new QFileSystemModel(this);
+    fileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
+    fileModel->setRootPath(QDir::currentPath());
+    //ui.listWidget->setModel(fileModel);
+
 }
 
 void App::on_addNew_clicked()

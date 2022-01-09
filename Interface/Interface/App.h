@@ -2,6 +2,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_App.h"
 #include <QPushButton>
+#include <QFileSystemModel>
 
 class App : public QMainWindow
 {
@@ -18,6 +19,7 @@ private:
 	bool on_addNew = false;
 	bool Search = false;
 	QPushButton* newButton;
-
+	QFileSystemModel* dirModel;
+	QFileSystemModel* fileModel;
 
 };
