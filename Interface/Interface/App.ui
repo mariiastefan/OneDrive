@@ -293,7 +293,7 @@
      <widget class="QLineEdit" name="lineEdit"/>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="searchBtn">
       <property name="text">
        <string/>
       </property>
@@ -328,7 +328,7 @@
     <string>+ New folder</string>
    </property>
   </widget>
-  <widget class="QLabel" name="foldername">
+  <widget class="QLabel" name="folderName">
    <property name="geometry">
     <rect>
      <x>180</x>
@@ -353,6 +353,31 @@
    <property name="text">
     <string>Add</string>
    </property>
+  </widget>
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>171</y>
+     <width>256</width>
+     <height>421</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTreeWidget" name="treeWidget">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>171</y>
+     <width>256</width>
+     <height>421</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+   </column>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

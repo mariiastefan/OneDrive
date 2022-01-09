@@ -19,6 +19,7 @@ App::App(QWidget* parent)
     this->setWindowTitle("OneDrive");
     ui.new_folder->setHidden(true);
     ui.lineEditaddnew->setHidden(true);
+    ui.folderName->setHidden(true);
     
 }
 
@@ -36,7 +37,7 @@ void App::on_addNew_clicked()
     ui.upload->setHidden(true);
     ui.rename->setHidden(true);
     ui.lineEdit->setHidden(true);
-    ui.pushButton->setHidden(true);
+    ui.searchBtn->setHidden(true);
 
 }
 void App::on_new_folder_clicked()
@@ -52,3 +53,10 @@ void App::on_new_folder_clicked()
 
 
 
+void App::on_searchBtn_clicked()
+{
+    ui.folderName->setHidden(Search);
+    ui.lineEditaddnew->setHidden(Search);
+    if (Search == true) Search = false;
+    else Search = true;
+}
