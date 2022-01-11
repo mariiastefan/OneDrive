@@ -14,7 +14,7 @@ bool ShowFiles(fs::path path)
 		/*std::cout << p.path().filename() << '\n';
 		std::cout << path.parent_path() << "\n";
 		std::cout << p.path().parent_path() << "\n";*/
-		if (p.path()== path)
+		if (p.path() == path)
 		{
 			return 1;
 		}
@@ -22,7 +22,7 @@ bool ShowFiles(fs::path path)
 	return 0;
 }
 
-
+//download from server
 int main(int argc, char* argv[]) 
 {
 	// Validate the parameters
@@ -31,26 +31,33 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	std::cout << "Starting client..." << std::endl;
+	std::cout << "[CLIENT] Starting client..." << std::endl;
 
 	TcpSocket socket;
-	std::cout << "Connecting to server at: " << argv[1] << std::endl;
+	std::cout << "[CLIENT] Connecting to server at: " << argv[1] << std::endl;
 	socket.Connect("127.0.0.1", 8080);
 
-	fs::path defaultPath = "C:/Users/Andrei/Desktop/salut";
-
 	fs::path filename;
-	std::cout << "Enter the name of the folder you want to download : ";
+
+	std::array<char, 512> receiveBuffer2;
+	int received2;
+	socket.Receive(receiveBuffer2.data(), receiveBuffer2.size(), received2);
+	std::copy(receiveBuffer2.begin(), receiveBuffer2.begin() + received2, std::ostream_iterator<char>(std::cout, ""));
+	std::cout << std::endl;
+
 	std::cin >> filename;
-	fs::path fileToDownload = defaultPath;
-	fileToDownload += "\\";
-	fileToDownload += filename;
 
 	fs::path whereToSave;
-	std::cout<<"Enter the path where you want to save the file :"<<  std::endl;
+	
+	std::array<char, 512> receiveBuffer3;
+	int received3;
+	socket.Receive(receiveBuffer3.data(), receiveBuffer3.size(), received3);
+	std::copy(receiveBuffer3.begin(), receiveBuffer3.begin() + received3, std::ostream_iterator<char>(std::cout, ""));
+	std::cout << std::endl;
+	
 	std::cin >> whereToSave;
 
-	std::string pathString{ fileToDownload.u8string() };
+	std::string pathString{ filename.u8string() };
 	std::string saveString{ whereToSave.u8string() };
 
 	bool result = socket.Send(pathString.c_str(), pathString.size());
@@ -59,12 +66,11 @@ int main(int argc, char* argv[])
 		std::array<char, 512> receiveBuffer;
 		int received;
 		socket.Receive(receiveBuffer.data(), receiveBuffer.size(), received);
-		std::cout << "Received: ";
 		std::copy(receiveBuffer.begin(), receiveBuffer.begin() + received, std::ostream_iterator<char>(std::cout, ""));
 		std::cout << std::endl;
 	}
 	else {
-		std::cerr << "Couldn't send the data to the server !";
+		std::cerr << "[CLIENT] Couldn't send the data to the server !";
 		return 1;
 	}
 
@@ -74,13 +80,60 @@ int main(int argc, char* argv[])
 		std::array<char, 512> receiveBuffer2;
 		int received2;
 		socket.Receive(receiveBuffer2.data(), receiveBuffer2.size(), received2);
-		std::cout << "Received: ";
 		std::copy(receiveBuffer2.begin(), receiveBuffer2.begin() + received2, std::ostream_iterator<char>(std::cout, ""));
 		std::cout << std::endl;
 	}
 	else {
-		std::cerr << "Couldn't send the data to the server !";
+		std::cerr << "[CLIENT]Couldn't send the data to the server !";
 		return 1;
 	}
 	return 0;
 }
+//upload from client
+//int main(int argc, char* argv[])
+//{
+//	// Validate the parameters
+//	if (argc != 2) {
+//		std::cerr << "usage: " << argv[0] << " server-name" << std::endl;
+//		return 1;
+//	}
+//
+//	std::cout << "[CLIENT]	Starting client..." << std::endl;
+//
+//	TcpSocket socket;
+//	std::cout << "[CLIENT] Connecting to server at: " << argv[1] << std::endl;
+//	socket.Connect("127.0.0.1", 8080);
+//
+//	std::array<char, 512> receiveBuffer2;
+//	int received2;
+//	socket.Receive(receiveBuffer2.data(), receiveBuffer2.size(), received2);
+//	std::copy(receiveBuffer2.begin(), receiveBuffer2.begin() + received2, std::ostream_iterator<char>(std::cout, ""));
+//	std::cout << std::endl;
+//
+//	fs::path filepath;
+//	std::cin >> filepath;
+//
+//	std::string a = "WM_ENDSESSION";
+//
+//	if (ShowFiles(filepath) == 0)
+//	{
+//		std::cerr << "[CLIENT] Couldn't find file !";
+//		socket.Send("exit", 4);
+//		return 1;
+//	}
+//
+//	std::string filePathString{ filepath.u8string() };
+//	bool result = socket.Send(filePathString.c_str(), filePathString.size());
+//	if (result)
+//	{
+//		std::array<char, 512> receiveBuffer;
+//		int received;
+//		socket.Receive(receiveBuffer.data(), receiveBuffer.size(), received);
+//		std::copy(receiveBuffer.begin(), receiveBuffer.begin() + received, std::ostream_iterator<char>(std::cout, ""));
+//		std::cout << std::endl;
+//	}
+//	else {
+//		std::cerr << "[CLIENT] Couldn't send the data to the server !";
+//		return 1;
+//	}
+//}
