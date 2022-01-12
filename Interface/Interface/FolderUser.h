@@ -3,6 +3,7 @@
 #include <vector>
 #include <filesystem>
 #include "User.h"
+#include <QString>
 #include "file.h"
 
 namespace fs = std::filesystem;
@@ -12,6 +13,7 @@ private:
 	std::vector<File>m_itemUser;
 	std::vector<std::string>m_fileName;
 	fs::path m_path;
+	std::string m_path2;
 	fs::file_time_type m_date;
 	std::string m_FolderName;
 	int m_nrItems;
@@ -43,5 +45,6 @@ public:
 	uintmax_t GetFolderSize();
 	uint32_t GetLastTimeWrite();
 	fs::path GetPath();
+	std::string GetPath2();
 
 };

@@ -25,7 +25,7 @@ FolderUser::FolderUser(std::string userName)
 	fs::create_directory(userName);
 	path1 += "/";
 	m_path = path1 + m_FolderName;
-
+	m_path2 = path1 + m_FolderName;
 	fs::current_path(pathOrigin);
 	std::string path2 = "../../TcpConnection/Server/UserFolder";
 	fs::create_directory(path2);
@@ -232,6 +232,11 @@ std::uintmax_t FolderUser::GetFolderSize()
 fs::path FolderUser::GetPath()
 {
 	return m_path;
+}
+
+std::string FolderUser::GetPath2()
+{
+	return m_path2;
 }
 
 void FolderUser::SetPath(fs::path& path)
