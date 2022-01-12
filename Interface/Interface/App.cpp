@@ -14,6 +14,7 @@
 #include <QtCore>
 #include <QtGui>
 #include<QCompleter>
+#include "User.h"
 
 App::App(QWidget* parent)
     : QMainWindow(parent)
@@ -30,20 +31,54 @@ App::App(QWidget* parent)
     ui.folderName_2->setHidden(true);
     ui.AddLine->setHidden(true);
 
+    QString sPath = "C:/Users/Andrei/Desktop/OneDrive/proiect/TcpConnection/Client/UserFolder/ana";
+
     dirModel = new QFileSystemModel(this);
-    dirModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
-    dirModel->setRootPath(QDir::currentPath());
+    //dirModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
+    dirModel->setRootPath(sPath);
     ui.treeView->setModel(dirModel);
 
     fileModel = new QFileSystemModel(this);
     fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
-    fileModel->setRootPath(QDir::currentPath());
+    
+    fileModel->setRootPath(sPath);
     ui.listView->setModel(fileModel);
 }
 
+App::App(const User& x, QWidget* parent) : QMainWindow(parent)
+{
+    ui.setupUi(this);
+    QPalette palette;
+    palette.setBrush(QPalette::Background, Qt::white);
+    this->setPalette(palette);
+    this->setWindowIcon(QIcon("logo1.jpg"));
+    this->setWindowTitle("OneDrive");
+    ui.new_folder->setHidden(true);
+    ui.lineEditaddnew->setHidden(true);
+    ui.folderName->setHidden(true);
+    ui.folderName_2->setHidden(true);
+    ui.AddLine->setHidden(true);
+    FolderUser user(x.GetUsername());
+   
+    QString sPath = "C:/Users/Andrei/Desktop/OneDrive/proiect/TcpConnection/Client/UserFolder/ana";
+
+    dirModel = new QFileSystemModel();
+    dirModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
+    dirModel->setRootPath(sPath);
+    ui.treeView->setModel(dirModel);
+
+    fileModel = new QFileSystemModel(this); 
+    fileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files );
+
+    fileModel->setRootPath(sPath);
+    ui.listView->setModel(fileModel);
+}
+
+
 void App::on_treeView_clicked(QModelIndex index)
 {
-    QString sPath = dirModel->fileInfo(index).absoluteFilePath();
+    //QString sPath = dirModel->fileInfo(index).absoluteFilePath();
+    QString sPath = "C:/Users/Andrei/Desktop/OneDrive/proiect/TcpConnection/Client/UserFolder/ana";
     ui.listView->setRootIndex(fileModel->setRootPath(sPath));
 }
 
@@ -78,6 +113,7 @@ void App::on_addNew_clicked()
     ui.searchBtn->setHidden(true);
 
 }
+
 void App::on_new_folder_clicked()
 {
     QString foldername = ui.lineEditaddnew->text();

@@ -5,7 +5,7 @@
 #include <fstream>
 #include <filesystem>
 #include <cstdio>
-
+using namespace std::chrono_literals;
 
 
 FolderUser::FolderUser()
@@ -19,14 +19,14 @@ FolderUser::FolderUser(std::string userName)
 	m_nrItems = 0;
 
 	std::wstring pathOrigin = fs::current_path();
-	std::string path1 = "../../Client/UserFolder";
+	std::string path1 = "../../TcpConnection/Client/UserFolder";
 	fs::current_path(path1);
 	fs::create_directory(userName);
 	path1 += "/";
 	m_path = path1 + m_FolderName;
 
 	fs::current_path(pathOrigin);
-	std::string path2 = "../../Server/UserFolder";
+	std::string path2 = "../../TcpConnection/Server/UserFolder";
 	fs::current_path(path2);
 	fs::create_directory(userName);
 	fs::current_path(pathOrigin);
@@ -244,7 +244,7 @@ void FolderUser::SetPath(fs::path& path)
 //
 //	using namespace std::chrono_literals;
 //	auto print_last_write_time = [](std::filesystem::file_time_type const& ftime) {
-//		std::time_t cftime = std::chrono::system_clock::to_time_t(std::chrono::file_clock::to_sys(ftime));
+//		std::time_t cftime = std::chrono::system_clock::to_time_t(ftime);
 //		std::cout << "File write time is " << std::asctime(std::localtime(&cftime));
 //	};
 //

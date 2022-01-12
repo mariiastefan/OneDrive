@@ -21,13 +21,13 @@ void ShowFiles(const fs::path& path)
 	std::ofstream g("log.txt", std::ios::app);
 	auto print_last_write_time = [&g](fs::file_time_type const& ftime) {
 		std::time_t cftime = std::chrono::system_clock::to_time_t(ftime);
-		g << "File was modified last time in " << std::asctime(std::localtime(&cftime));
+		g << "was modified last time in " << std::asctime(std::localtime(&cftime));
 	};
-	g << "finished computation at " << std::ctime(&end_time);
+	g << "[LOG] Started downloading files at " << std::ctime(&end_time);
 	for (auto& p : fs::recursive_directory_iterator(path))
 	{
 		auto ftime = fs::last_write_time(p);
-		std::cout << p << " \n";
+		g << p << " ";
 		print_last_write_time(ftime);
 		std::cout << "\n";
 	}

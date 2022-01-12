@@ -3,6 +3,7 @@
 #include "ui_App.h"
 #include <QPushButton>
 #include <QFileSystemModel>
+#include "User.h"
 
 class App : public QMainWindow
 {
@@ -10,6 +11,7 @@ class App : public QMainWindow
 
 public:
 	App(QWidget* parent = Q_NULLPTR);
+	App(const User& x, QWidget* parent = Q_NULLPTR);
 private slots:
 	void on_addNew_clicked();
 	void on_new_folder_clicked();
