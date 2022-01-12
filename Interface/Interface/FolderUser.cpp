@@ -20,6 +20,7 @@ FolderUser::FolderUser(std::string userName)
 
 	std::wstring pathOrigin = fs::current_path();
 	std::string path1 = "../../TcpConnection/Client/UserFolder";
+	fs::create_directory(path1);
 	fs::current_path(path1);
 	fs::create_directory(userName);
 	path1 += "/";
@@ -27,6 +28,7 @@ FolderUser::FolderUser(std::string userName)
 
 	fs::current_path(pathOrigin);
 	std::string path2 = "../../TcpConnection/Server/UserFolder";
+	fs::create_directory(path2);
 	fs::current_path(path2);
 	fs::create_directory(userName);
 	fs::current_path(pathOrigin);

@@ -69,7 +69,6 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
 
     fileModel = new QFileSystemModel(this); 
     fileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files );
-
     fileModel->setRootPath(sPath);
     ui.listView->setModel(fileModel);
 }
