@@ -1,18 +1,42 @@
 #include <iostream>
 #include <array>
 #include <sstream>
+#include <fstream>
 #include <experimental/filesystem>
+#include <chrono>
 #include "../Network/TcpSocket.h"
+using namespace std::chrono_literals;
 
 namespace fs = std::experimental::filesystem;
 
-bool ShowFiles(fs::path path)
+void ShowFiles(const fs::path& path)
+{
+	auto start = std::chrono::system_clock::now();
+	// Some computation here
+	auto end = std::chrono::system_clock::now();
+
+	std::chrono::duration<double> elapsed_seconds = end - start;
+	std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+	std::ofstream g("log.txt", std::ios::app);
+	auto print_last_write_time = [&g](fs::file_time_type const& ftime) {
+		std::time_t cftime = std::chrono::system_clock::to_time_t(ftime);
+		g << "File was modified last time in " << std::asctime(std::localtime(&cftime));
+	};
+	g << "finished computation at " << std::ctime(&end_time);
+	for (auto& p : fs::recursive_directory_iterator(path))
+	{
+		auto ftime = fs::last_write_time(p);
+		std::cout << p << " \n";
+		print_last_write_time(ftime);
+		std::cout << "\n";
+	}
+}
+
+bool verifyIfFileExists(const fs::path &path)
 {
 	for (auto& p : fs::recursive_directory_iterator(path.parent_path()))
 	{
-		/*std::cout << p.path().filename() << '\n';
-		std::cout << path.parent_path() << "\n";
-		std::cout << p.path().parent_path() << "\n";*/
 		if (p.path() == path)
 		{
 			return 1;
@@ -24,6 +48,7 @@ bool ShowFiles(fs::path path)
 //download from server
 int main()
 {
+	std::ofstream g;
 	std::cout << "[SERVER] Starting server..." << std::endl;
 
 	TcpSocket listener;
@@ -58,12 +83,15 @@ int main()
 	}
 
 	fs::path fileToDownload = filename;
-	if (ShowFiles(fileToDownload) == 0)
+	if (verifyIfFileExists(fileToDownload) == 0)
 	{
 		std::cerr << "[SERVER] Couldn't find the file !" << std::endl;
 		std::string message = "[SERVER] Couldn't find the file !";
 		client.Send(message.c_str(), message.size());
 		return 1;
+	}
+	else {
+		ShowFiles(fileToDownload);
 	}
 
 	// send

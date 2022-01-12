@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 
 	TcpSocket socket;
 	std::cout << "[CLIENT] Connecting to server at: " << argv[1] << std::endl;
-	socket.Connect("127.0.0.1", 8080);
+	socket.Connect("127.0.0.1", 8080);		
 
 	fs::path filename;
 
@@ -113,7 +113,6 @@ int main(int argc, char* argv[])
 //	fs::path filepath;
 //	std::cin >> filepath;
 //
-//	std::string a = "WM_ENDSESSION";
 //
 //	if (ShowFiles(filepath) == 0)
 //	{
