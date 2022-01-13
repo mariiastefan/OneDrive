@@ -31,7 +31,7 @@ App::App(QWidget* parent)
     ui.folderName_2->setHidden(true);
     ui.AddLine->setHidden(true);
 
-
+    ui.AddItemBtn->setHidden(true);
     //dirModel = new QFileSystemModel(this);
     ////dirModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
     //dirModel->setRootPath(sPath);
@@ -54,6 +54,7 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     this->setWindowTitle("OneDrive");
    // ui.new_folder->setHidden(true);
     ui.lineEditaddnew->setHidden(true);
+    ui.AddItemBtn->setHidden(true);
     ui.folderName->setHidden(true);
     ui.folderName_2->setHidden(true);
     ui.AddLine->setHidden(true);
@@ -92,6 +93,7 @@ void App::on_add_clicked()
 {
     ui.folderName_2->setHidden(false);
     ui.AddLine->setHidden(false);
+    ui.AddItemBtn->setHidden(false);
     QCompleter* cmpt;
     QFileSystemModel* mo;
     mo = new QFileSystemModel(this);
@@ -99,6 +101,15 @@ void App::on_add_clicked()
     mo->setRootPath(QDir::rootPath());
     ui.AddLine->setCompleter(cmpt);
 
+}
+
+void App::on_AddItemBtn_clicked()
+{
+    ui.folderName_2->setHidden(true);
+    ui.AddLine->setHidden(true);
+    ui.AddItemBtn->setHidden(true);
+    QString newPath = ui.AddLine->text();
+    std::cout << newPath.toStdString();
 }
 
 //void App::on_addNew_clicked()
