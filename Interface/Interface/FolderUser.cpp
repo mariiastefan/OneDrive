@@ -70,8 +70,8 @@ void FolderUser::DeleteUsernameFolder()
 void FolderUser::DeleteFile(std::string username, std::string file)
 {
 	namespace fs = std::filesystem;
-	std::string pathClient = "../../Client/UserFolder";
-	std::string pathServer = "../../Server/UserFolder";
+	std::string pathClient = "../../TcpConnection/Client/UserFolder";
+	std::string pathServer = "../../TcpConnection/Server/UserFolder";
 	pathClient += '/';
 	pathClient += username;
 	pathClient += '/';

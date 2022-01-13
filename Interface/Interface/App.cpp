@@ -59,7 +59,7 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     ui.AddLine->setHidden(true);
     FolderUser user(x.GetUsername());
     model = new QFileSystemModel(this);
-
+    UserName = x.GetUsername();
     model->setReadOnly(false);
     QString qstr = QString::fromStdString(user.GetPath2());
     model->setRootPath(qstr);
@@ -117,6 +117,20 @@ void App::on_addNew_clicked()
     ui.lineEdit->setHidden(true);
     ui.searchBtn->setHidden(true);
 
+}
+
+void App::on_deleteBtn_clicked()
+{
+    QModelIndex index = ui.treeView->currentIndex();
+    FolderUser aux(UserName);
+    std::string name = model->fileName(index).toStdString();
+    std::string pathClient = "../../TcpConnection/Client/UserFolder";
+    pathClient += '/';
+    pathClient += UserName;
+    pathClient += '/';
+    pathClient += name;
+    std::uintmax_t n1 = fs::remove(pathClient);
+    //aux.DeleteFile(UserName,name);
 }
 
 void App::on_new_folder_clicked()
