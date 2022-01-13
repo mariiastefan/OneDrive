@@ -13,8 +13,7 @@ public:
 	App(QWidget* parent = Q_NULLPTR);
 	App(const User& x, QWidget* parent = Q_NULLPTR);
 private slots:
-	void on_addNew_clicked();
-	void on_new_folder_clicked();
+	//void on_new_folder_clicked();
 	void on_add_clicked();
 	void on_deleteBtn_clicked();
 	void on_searchBtn_clicked();
@@ -22,7 +21,6 @@ private slots:
 
 private:
 	Ui::App ui;
-	bool on_addNew = false;
 	bool Search = false;
 	QPushButton* newButton;
 	/*QFileSystemModel* dirModel;

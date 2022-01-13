@@ -25,7 +25,7 @@ App::App(QWidget* parent)
     this->setPalette(palette);
     this->setWindowIcon(QIcon("logo1.jpg"));
     this->setWindowTitle("OneDrive");
-    ui.new_folder->setHidden(true);
+    //ui.new_folder->setHidden(true);
     ui.lineEditaddnew->setHidden(true);
     ui.folderName->setHidden(true);
     ui.folderName_2->setHidden(true);
@@ -52,7 +52,7 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     this->setPalette(palette);
     this->setWindowIcon(QIcon("logo1.jpg"));
     this->setWindowTitle("OneDrive");
-    ui.new_folder->setHidden(true);
+   // ui.new_folder->setHidden(true);
     ui.lineEditaddnew->setHidden(true);
     ui.folderName->setHidden(true);
     ui.folderName_2->setHidden(true);
@@ -101,23 +101,23 @@ void App::on_add_clicked()
 
 }
 
-void App::on_addNew_clicked()
-{
-    on_addNew = true;
-    QPalette palette;
-    this->setWindowTitle("ADD");
-    palette.setBrush(QPalette::Background, Qt::white);
-
-    ui.add->setHidden(false);
-    ui.new_folder->setHidden(false);
-    ui.lineEditaddnew->setHidden(false);
-   
-    ui.upload->setHidden(true);
-    ui.rename->setHidden(true);
-    ui.lineEdit->setHidden(true);
-    ui.searchBtn->setHidden(true);
-
-}
+//void App::on_addNew_clicked()
+//{
+//    on_addNew = true;
+//    QPalette palette;
+//    this->setWindowTitle("ADD");
+//    palette.setBrush(QPalette::Background, Qt::white);
+//
+//    ui.add->setHidden(false);
+//    ui.new_folder->setHidden(false);
+//    ui.lineEditaddnew->setHidden(false);
+//   
+//    ui.upload->setHidden(true);
+//    ui.rename->setHidden(true);
+//    ui.lineEdit->setHidden(true);
+//    ui.searchBtn->setHidden(true);
+//
+//}
 
 void App::on_deleteBtn_clicked()
 {
@@ -133,15 +133,15 @@ void App::on_deleteBtn_clicked()
     //aux.DeleteFile(UserName,name);
 }
 
-void App::on_new_folder_clicked()
-{
-    QString foldername = ui.lineEditaddnew->text();
-    std::string folder_name = foldername.toStdString();
-    FolderUser folderuser(folder_name);
-    QMessageBox msgBox;
-    msgBox.setText("You have added a new folder");
-    msgBox.exec();
-}
+//void App::on_new_folder_clicked()
+//{
+//    QString foldername = ui.lineEditaddnew->text();
+//    std::string folder_name = foldername.toStdString();
+//    FolderUser folderuser(folder_name);
+//    QMessageBox msgBox;
+//    msgBox.setText("You have added a new folder");
+//    msgBox.exec();
+//}
 
 void App::on_searchBtn_clicked()
 {

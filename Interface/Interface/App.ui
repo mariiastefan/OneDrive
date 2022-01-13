@@ -56,26 +56,13 @@
    <property name="geometry">
     <rect>
      <x>-10</x>
-     <y>180</y>
-     <width>181</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Upload</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="rename">
-   <property name="geometry">
-    <rect>
-     <x>-10</x>
      <y>220</y>
      <width>181</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>Rename</string>
+    <string>Upload</string>
    </property>
   </widget>
   <widget class="QGraphicsView" name="MenuBox_2">
@@ -212,19 +199,6 @@
     <string notr="true">background-color: rgb(36, 21, 255);</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="addNew">
-   <property name="geometry">
-    <rect>
-     <x>-10</x>
-     <y>140</y>
-     <width>181</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>+ New</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
@@ -339,7 +313,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>170</x>
      <y>50</y>
      <width>179</width>
      <height>31</height>
@@ -370,19 +344,6 @@
      <width>831</width>
      <height>21</height>
     </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="new_folder">
-   <property name="geometry">
-    <rect>
-     <x>-10</x>
-     <y>140</y>
-     <width>181</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>+ New folder</string>
    </property>
   </widget>
   <widget class="QLabel" name="folderName">

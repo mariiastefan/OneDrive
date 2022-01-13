@@ -95,9 +95,9 @@ font: bold 15x;</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>420</x>
       <y>300</y>
-      <width>351</width>
+      <width>181</width>
       <height>20</height>
      </rect>
     </property>
@@ -107,7 +107,7 @@ text-decoration: underline;
 color: rgb(12, 2, 94);</string>
     </property>
     <property name="text">
-     <string>Don't you have an account? Press Sign Up</string>
+     <string>Don't you have an account?</string>
     </property>
    </widget>
    <widget class="QPushButton" name="Register">
