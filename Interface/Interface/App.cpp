@@ -109,7 +109,9 @@ void App::on_AddItemBtn_clicked()
     ui.AddLine->setHidden(true);
     ui.AddItemBtn->setHidden(true);
     QString newPath = ui.AddLine->text();
-    std::cout << newPath.toStdString();
+
+    FolderUser aux(UserName);
+    aux.AddFile2(newPath.toStdString());
 }
 
 //void App::on_addNew_clicked()
@@ -132,6 +134,8 @@ void App::on_AddItemBtn_clicked()
 
 void App::on_deleteBtn_clicked()
 {
+    std::wstring pathOrigin = fs::current_path();
+
     QModelIndex index = ui.treeView->currentIndex();
     FolderUser aux(UserName);
     std::string name = model->fileName(index).toStdString();
@@ -142,6 +146,8 @@ void App::on_deleteBtn_clicked()
     pathClient += name;
     std::uintmax_t n1 = fs::remove(pathClient);
     //aux.DeleteFile(UserName,name);
+
+    fs::current_path(pathOrigin);
 }
 
 //void App::on_new_folder_clicked()

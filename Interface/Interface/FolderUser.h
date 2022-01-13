@@ -36,6 +36,7 @@ public:
 
 	void AddFile(std::string userName);
 	void AddFile();
+	void AddFile2(std::string fileName);
 	bool VerifyFolderName(FolderUser folder, std::string name);
 	bool CheckIfTheUsernameExists(std::string filename);
 	bool FindInFolder(std::string file);

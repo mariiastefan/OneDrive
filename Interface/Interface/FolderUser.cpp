@@ -135,17 +135,17 @@ void FolderUser::SetNrItems()
 	else std::cout << std::endl << "Fisierele nu sunt sincronizate cu serverul" << std::endl;
 }
 
-void FolderUser::AddFile()
+void FolderUser::AddFile2(std::string fileName)
 {
+	std::wstring pathOrigin = fs::current_path();
 	fs::path path, helpPath;
-	std::cout << "Introduceti calea fisierului pe care doriti sa il adaugati: ";
-	std::cin >> path;
-	std::cout << path.filename().string();
+	path = fileName;
 	fs::current_path(m_path);
 	helpPath = m_path;
 	helpPath += "/";
 	helpPath += path.filename().string();
 	fs::copy(path, fs::current_path());
+	fs::current_path(pathOrigin);
 }
 
 bool FolderUser::VerifyFolderName(FolderUser folder, std::string name)
