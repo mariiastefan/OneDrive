@@ -56,74 +56,79 @@ int main()
 	
 	std::cout << "[SERVER] Waiting for client to connect..." << std::endl;
 	TcpSocket client = listener.Accept();
-
-
+	std::cout << "[SERVER] Client connected !";
 	std::stringstream stream;
-	stream << "[SERVER] The file you want to download !\n";
+	stream << "[SERVER] Connection succesful !\n";
 	std::string message = stream.str();
 	client.Send(message.c_str(), message.size());
 
-	std::stringstream stream2;
-	stream2 << "[SERVER] Where do you want to save the file ?\n";
-	std::string message2 = stream2.str();
-	client.Send(message2.c_str(), message2.size());
 
-	// receive path for the download
-	std::array<char, 512> receiveBuffer;
-	int received;
-	client.Receive(receiveBuffer.data(), receiveBuffer.size(), received);
-	std::copy(receiveBuffer.begin(), receiveBuffer.begin() + received, std::ostream_iterator<char>(std::cout, ""));
-	std::cout <<" the path for the download file " << std::endl;
-	std::string filename;
-	
+	//std::stringstream stream;
+	//stream << "[SERVER] The file you want to download !\n";
+	//std::string message = stream.str();
+	//client.Send(message.c_str(), message.size());
 
-	for (int index = 0; index< received; index++)
-	{
-		filename += receiveBuffer[index];
-	}
+	//std::stringstream stream2;
+	//stream2 << "[SERVER] Where do you want to save the file ?\n";
+	//std::string message2 = stream2.str();
+	//client.Send(message2.c_str(), message2.size());
 
-	fs::path fileToDownload = filename;
-	if (verifyIfFileExists(fileToDownload) == 0)
-	{
-		std::cerr << "[SERVER] Couldn't find the file !" << std::endl;
-		std::string message = "[SERVER] Couldn't find the file !";
-		client.Send(message.c_str(), message.size());
-		return 1;
-	}
-	else {
-		ShowFiles(fileToDownload);
-	}
+	//// receive path for the download
+	//std::array<char, 512> receiveBuffer;
+	//int received;
+	//client.Receive(receiveBuffer.data(), receiveBuffer.size(), received);
+	//std::copy(receiveBuffer.begin(), receiveBuffer.begin() + received, std::ostream_iterator<char>(std::cout, ""));
+	//std::cout <<" the path for the download file " << std::endl;
+	//std::string filename;
+	//
 
-	// send
-	std::stringstream stream1;
-	stream1 << "[SERVER] The download will begin shortly !\n";
-	std::string message1 = stream1.str();
-	client.Send(message1.c_str(), message1.size());
-	
-	//path for where to be save
+	//for (int index = 0; index< received; index++)
+	//{
+	//	filename += receiveBuffer[index];
+	//}
 
-	std::array<char, 512> receiveBuffer2;
-	int received2;
-	client.Receive(receiveBuffer2.data(), receiveBuffer2.size(), received2);
-	std::cout << "Received: ";
-	std::copy(receiveBuffer2.begin(), receiveBuffer2.begin() + received2, std::ostream_iterator<char>(std::cout, ""));
-	std::cout <<" the path where the file will be saved " << std::endl;
-	std::string filenameToSave;
+	//fs::path fileToDownload = filename;
+	//if (verifyIfFileExists(fileToDownload) == 0)
+	//{
+	//	std::cerr << "[SERVER] Couldn't find the file !" << std::endl;
+	//	std::string message = "[SERVER] Couldn't find the file !";
+	//	client.Send(message.c_str(), message.size());
+	//	return 1;
+	//}
+	//else {
+	//	ShowFiles(fileToDownload);
+	//}
 
-	for (int index = 0; index < received2; index++)
-	{
-		filenameToSave += receiveBuffer2[index];
-	}
+	//// send
+	//std::stringstream stream1;
+	//stream1 << "[SERVER] The download will begin shortly !\n";
+	//std::string message1 = stream1.str();
+	//client.Send(message1.c_str(), message1.size());
+	//
+	////path for where to be save
 
-	fs::path whereToBeSaved = filenameToSave;
-	const auto copyOptions = fs::copy_options::update_existing
-		| fs::copy_options::recursive
-		;
-	fs::copy(fileToDownload, whereToBeSaved, copyOptions);
-	std::stringstream stream3;
-	stream3 << "[SERVER] Download complete !" ;
-	std::string message3 = stream3.str();
-	client.Send(message3.c_str(), message3.size());
+	//std::array<char, 512> receiveBuffer2;
+	//int received2;
+	//client.Receive(receiveBuffer2.data(), receiveBuffer2.size(), received2);
+	//std::cout << "Received: ";
+	//std::copy(receiveBuffer2.begin(), receiveBuffer2.begin() + received2, std::ostream_iterator<char>(std::cout, ""));
+	//std::cout <<" the path where the file will be saved " << std::endl;
+	//std::string filenameToSave;
+
+	//for (int index = 0; index < received2; index++)
+	//{
+	//	filenameToSave += receiveBuffer2[index];
+	//}
+
+	//fs::path whereToBeSaved = filenameToSave;
+	//const auto copyOptions = fs::copy_options::update_existing
+	//	| fs::copy_options::recursive
+	//	;
+	//fs::copy(fileToDownload, whereToBeSaved, copyOptions);
+	//std::stringstream stream3;
+	//stream3 << "[SERVER] Download complete !" ;
+	//std::string message3 = stream3.str();
+	//client.Send(message3.c_str(), message3.size());
 
 	return 0;
 }

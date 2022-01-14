@@ -13,6 +13,9 @@
 #include "ui_App.h"
 //#include "AppWindow.h"
 #include <fstream>
+#include "Client.h"
+
+
 std::fstream g("conturi.txt", std::ios::app);
 Interface::Interface(QWidget* parent)
 	: QMainWindow(parent)
@@ -46,11 +49,13 @@ void Interface::on_signIn_clicked()
 	verif_user = user.verify_if_user_exists(g);
 	if (verif_user == true)
 	{
+		Client client;
+		client.connect();
 		QMessageBox msgBox;
 		msgBox.setText("corect !");
 		msgBox.exec();
 		hide();
-		homePage = new App(x, this);
+		homePage = new App(user, this);
 		homePage->show();
 	}
 	else {
