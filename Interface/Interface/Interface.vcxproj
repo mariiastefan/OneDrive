@@ -62,7 +62,6 @@
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>D:\OneDrive\OD_project\OD_project\user.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -99,7 +98,6 @@
   <ItemGroup>
     <ClCompile Include="File.cpp" />
     <ClCompile Include="FolderUser.cpp" />
-    <ClCompile Include="Network.cpp" />
     <ClCompile Include="User.cpp" />
     <QtRcc Include="Interface.qrc" />
     <QtUic Include="App.ui" />
@@ -116,12 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h" />
-    <ClInclude Include="Client.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="FolderUser.h" />
-    <ClInclude Include="Network.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Server.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
