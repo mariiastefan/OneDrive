@@ -41,7 +41,7 @@ bool verifyIfFileExists(const fs::path &path)
 		{
 			return 1;
 		}
-	}
+	}	
 	return 0;
 }
 
@@ -62,6 +62,11 @@ int main()
 	std::string message = stream.str();
 	client.Send(message.c_str(), message.size());
 	int op = 0;
+	bool running = true;
+	while (running)
+	{
+		
+	}
 
 	//std::stringstream stream;
 	//stream << "[SERVER] The file you want to download !\n";
