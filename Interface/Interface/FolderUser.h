@@ -13,6 +13,7 @@ private:
 	std::vector<File>m_itemUser;
 	std::vector<std::string>m_fileName;
 	fs::path m_path;
+	std::string m_serverPath;
 	std::string m_path2;
 	fs::file_time_type m_date;
 	std::string m_FolderName;
@@ -47,5 +48,6 @@ public:
 	uint32_t GetLastTimeWrite();
 	fs::path GetPath();
 	std::string GetPath2();
+	std::string GetServerPath();
 
 };

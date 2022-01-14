@@ -61,7 +61,7 @@ int main()
 	stream << "[SERVER] Connection succesful !\n";
 	std::string message = stream.str();
 	client.Send(message.c_str(), message.size());
-
+	int op = 0;
 
 	//std::stringstream stream;
 	//stream << "[SERVER] The file you want to download !\n";
