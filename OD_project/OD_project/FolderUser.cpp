@@ -179,7 +179,6 @@ void FolderUser::AddFile()
 	fs::path path,helpPath;
 	std::cout << "Introduceti calea fisierului pe care doriti sa il adaugati: ";
 	std::cin >> path;
-	std::cout << path.filename().string();
 	fs::current_path(m_path);
 	helpPath = m_path;
 	helpPath += "/";
@@ -281,16 +280,3 @@ void FolderUser::SetPath(fs::path& path)
 
 
 
-//uint32_t FolderUser::GetLastTimeWrite()
-//{
-//
-//	using namespace std::chrono_literals;
-//	auto print_last_write_time = [](std::filesystem::file_time_type const& ftime) {
-//		std::time_t cftime = std::chrono::system_clock::to_time_t(std::chrono::file_clock::to_sys(ftime));
-//		std::cout << "File write time is " << std::asctime(std::localtime(&cftime));
-//	};
-//
-//	auto ftime = std::filesystem::last_write_time(p);
-//	print_last_write_time(ftime);
-//
-//}

@@ -144,7 +144,7 @@ font: bold 15x;</string>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;-</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="delete_account">

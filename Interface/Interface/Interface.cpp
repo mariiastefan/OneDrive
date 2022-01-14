@@ -59,9 +59,6 @@ void Interface::on_signIn_clicked()
 		msgBox.exec();
 	}
 
-	/*AppWindow app;
-	app.show();
-	this->setHidden(true);*/
 }
 
 void Interface::on_signUp_clicked()

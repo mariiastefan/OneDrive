@@ -40,7 +40,6 @@ public:
 	void DisplayUserFiles();
 	void itemsList(std::string name);
 	uintmax_t GetFolderSize();
-	uint32_t GetLastTimeWrite();
 	fs::path GetPath();
 
 };

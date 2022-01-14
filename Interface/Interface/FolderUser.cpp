@@ -7,7 +7,6 @@
 #include <cstdio>
 using namespace std::chrono_literals;
 
-
 FolderUser::FolderUser()
 {
 	m_nrItems = 0;
@@ -26,6 +25,8 @@ FolderUser::FolderUser(std::string userName)
 	path1 += "/";
 	m_path = path1 + m_FolderName;
 	m_path2 = path1 + m_FolderName;
+
+
 	fs::current_path(pathOrigin);
 	std::string path2 = "../../TcpConnection/Server/UserFolder";
 	fs::create_directory(path2);
@@ -38,14 +39,14 @@ FolderUser::FolderUser(std::string userName)
 FolderUser::FolderUser(std::string foldername, fs::path path, fs::file_time_type date, std::vector<std::string> filename) : m_FolderName{ foldername }, m_path{ path }, m_date{ date }, m_fileName{ filename }
 {
 	std::wstring pathOrigin = fs::current_path();
-	std::string path1 = "../../Client/UserFolder";
+	std::string path1 = "../../TcpConnection/Client/UserFolder";
 	fs::current_path(path1);
 	fs::create_directory(foldername);
 	path1 += "/";
 	m_path = path1 + m_FolderName;
 
 	fs::current_path(pathOrigin);
-	std::string path2 = "../../Server/UserFolder";
+	std::string path2 = "../../TcpConnection/Server/UserFolder";
 	fs::current_path(path2);
 	fs::create_directory(foldername);
 	fs::current_path(pathOrigin);
@@ -53,8 +54,8 @@ FolderUser::FolderUser(std::string foldername, fs::path path, fs::file_time_type
 
 void FolderUser::DeleteFolder(std::string userName)
 {
-	std::string pathClient = "../../Client/UserFolder";
-	std::string pathServer = "../../Server/UserFolder";
+	std::string pathClient = "../../TcpConnection/Client/UserFolder";
+	std::string pathServer = "../../TcpConnection/Server/UserFolder";
 	std::wstring pathOrigin = fs::current_path();
 	fs::current_path(pathClient);
 	std::uintmax_t n1 = fs::remove_all(userName);

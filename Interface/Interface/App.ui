@@ -313,7 +313,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>220</x>
      <y>50</y>
      <width>179</width>
      <height>31</height>
@@ -375,8 +375,8 @@
   <widget class="QTreeView" name="treeView">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>150</y>
+     <x>280</x>
+     <y>160</y>
      <width>631</width>
      <height>421</height>
     </rect>
