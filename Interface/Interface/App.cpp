@@ -14,7 +14,6 @@
 #include <QtCore>
 #include <QtGui>
 #include<QCompleter>
-#include "User.h"
 #include <QFileDialog>
 
 
@@ -71,10 +70,10 @@ App::App(QWidget* parent)
     this->setWindowIcon(QIcon("logo1.jpg"));
     this->setWindowTitle("OneDrive");
     //ui.new_folder->setHidden(true);
-    ui.lineEditaddnew->setHidden(true);
+   /* ui.lineEditaddnew->setHidden(true);
     ui.folderName->setHidden(true);
     ui.folderName_2->setHidden(true);
-    ui.AddLine->setHidden(true);
+    ui.AddLine->setHidden(true);*/
 }
 
 App::App(const User& x, QWidget* parent) : QMainWindow(parent)
@@ -87,12 +86,12 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     this->setWindowTitle("OneDrive");
 
     // ui.new_folder->setHidden(true);
-    ui.lineEditaddnew->setHidden(true);
+    //ui.lineEditaddnew->setHidden(true);
     //ui.AddItemBtn->setHidden(true);
 
-    ui.folderName->setHidden(true);
+    /*ui.folderName->setHidden(true);
     ui.folderName_2->setHidden(true);
-    ui.AddLine->setHidden(true);
+    ui.AddLine->setHidden(true);*/
 
     FolderUser user(x.GetUsername());
     model = new QFileSystemModel(this);
@@ -109,15 +108,13 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
 
 void App::on_add_clicked()
 {
-    ui.folderName_2->setHidden(false);
-    ui.AddLine->setHidden(false);
-    //ui.AddItemBtn->setHidden(false);
+  
     QCompleter* cmpt;
     QFileSystemModel* mo;
     mo = new QFileSystemModel(this);
     cmpt = new QCompleter(mo, this);
     mo->setRootPath(QDir::rootPath());
-    ui.AddLine->setCompleter(cmpt);
+    /*ui.AddLine->setCompleter(cmpt);*/
     QString filter = "All File (*.*) ;; Text File(*.txt) ;; XML File (*.xml*)";
     QString file_name = QFileDialog::getOpenFileName(this, "Open a file", "C://");
     QFile file(file_name);
@@ -127,37 +124,9 @@ void App::on_add_clicked()
     QTextStream in(&file);
     QString text = in.readAll();
     FolderUser aux(UserName);
-    aux.AddFile2(file_name.toStdString());
+    aux.AddFile(file_name.toStdString());
 }
 
-void App::on_AddItemBtn_clicked()
-{
-    //ui.folderName_2->setHidden(true);
-    //ui.AddLine->setHidden(true);
-    //ui.AddItemBtn->setHidden(true);
-    //QString newPath = ui.AddLine->text();
-
-    //FolderUser aux(UserName);
-    //aux.AddFile2(newPath.toStdString());
-}
-
-//void App::on_addNew_clicked()
-//{
-//    on_addNew = true;
-//    QPalette palette;
-//    this->setWindowTitle("ADD");
-//    palette.setBrush(QPalette::Background, Qt::white);
-//
-//    ui.add->setHidden(false);
-//    ui.new_folder->setHidden(false);
-//    ui.lineEditaddnew->setHidden(false);
-//   
-//    ui.upload->setHidden(true);
-//    ui.rename->setHidden(true);
-//    ui.lineEdit->setHidden(true);
-//    ui.searchBtn->setHidden(true);
-//
-//}
 
 void App::on_deleteBtn_clicked()
 {
@@ -177,15 +146,6 @@ void App::on_deleteBtn_clicked()
     fs::current_path(pathOrigin);
 }
 
-//void App::on_new_folder_clicked()
-//{
-//    QString foldername = ui.lineEditaddnew->text();
-//    std::string folder_name = foldername.toStdString();
-//    FolderUser folderuser(folder_name);
-//    QMessageBox msgBox;
-//    msgBox.setText("You have added a new folder");
-//    msgBox.exec();
-//}
 
 void App::on_searchBtn_clicked()
 {

@@ -16,7 +16,6 @@ private slots:
 	//void on_new_folder_clicked();
 	void on_add_clicked();
 	void on_deleteBtn_clicked();
-	void on_AddItemBtn_clicked();
 	void on_searchBtn_clicked();
 	//void on_treeView_clicked(QModelIndex index);
 

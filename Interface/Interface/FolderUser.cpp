@@ -139,7 +139,7 @@ void FolderUser::SetNrItems()
 	else std::cout << std::endl << "Fisierele nu sunt sincronizate cu serverul" << std::endl;
 }
 
-void FolderUser::AddFile2(std::string fileName)
+void FolderUser::AddFile(const std::string &fileName)
 {
 	std::wstring pathOrigin = fs::current_path();
 	fs::path path, helpPath;
@@ -159,7 +159,7 @@ bool FolderUser::VerifyFolderName(FolderUser folder, std::string name)
 	return false;
 }
 
-bool FolderUser::CheckIfTheUsernameExists(std::string filename)
+bool FolderUser::CheckIfTheUsernameExists(const std::string &filename)
 {
 	for (auto& index : m_itemUser)
 	{
@@ -168,7 +168,7 @@ bool FolderUser::CheckIfTheUsernameExists(std::string filename)
 	}
 	return false;
 }
-bool FolderUser::FindInFolder(std::string file)
+bool FolderUser::FindInFolder(const std::string & file)
 {
 	for (auto& fil : m_fileName)
 	{
@@ -178,7 +178,7 @@ bool FolderUser::FindInFolder(std::string file)
 	return false;
 }
 
-std::string FolderUser::SplitFilename(const std::string str)
+std::string FolderUser::SplitFilename(const std::string& str)
 {
 	std::size_t found = str.find_last_of("/\\");
 	return str.substr(found + 1);
@@ -210,7 +210,7 @@ void FolderUser::SetItemUser()
 	DisplayUserFiles();
 
 }
-void FolderUser::itemsList(std::string name)
+void FolderUser::itemsList(const std::string & name)
 {
 	std::string path1 = "../../TcpConnection/Client/UserFolder";
 	std::wstring pathOrigin = fs::current_path();
@@ -254,16 +254,3 @@ std::string FolderUser::GetServerPath()
 }
 
 
-//uint32_t FolderUser::GetLastTimeWrite()
-//{
-//
-//	using namespace std::chrono_literals;
-//	auto print_last_write_time = [](std::filesystem::file_time_type const& ftime) {
-//		std::time_t cftime = std::chrono::system_clock::to_time_t(ftime);
-//		std::cout << "File write time is " << std::asctime(std::localtime(&cftime));
-//	};
-//
-//	auto ftime = std::filesystem::last_write_time(p);
-//	print_last_write_time(ftime);
-//
-//}

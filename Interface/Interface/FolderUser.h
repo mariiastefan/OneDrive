@@ -33,21 +33,20 @@ public:
 	void SetItemUser();
 	void SetPath(fs::path& path);
 	std::string GetFolderName()const;
-	int GetNrItems()const;
 
-	void AddFile(std::string userName);
-	void AddFile();
-	void AddFile2(std::string fileName);
+
+	void AddFile(const std::string &fileName);
 	bool VerifyFolderName(FolderUser folder, std::string name);
-	bool CheckIfTheUsernameExists(std::string filename);
-	bool FindInFolder(std::string file);
-	std::string SplitFilename(const std::string str);
+	bool CheckIfTheUsernameExists(const std::string &filename);
+	bool FindInFolder(const std::string &file);
+	std::string SplitFilename(const std::string &str);
 	void DisplayUserFiles();
-	void itemsList(std::string name);
+	void itemsList(const std::string &name);
+
 	uintmax_t GetFolderSize();
-	uint32_t GetLastTimeWrite();
 	fs::path GetPath();
 	std::string GetPath2();
 	std::string GetServerPath();
+	int GetNrItems()const;
 
 };

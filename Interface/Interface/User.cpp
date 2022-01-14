@@ -98,8 +98,7 @@ void delete_account(std::fstream& file, const User& obj)
 	remove("conturi.txt");
 	rename("temp.txt", "conturi.txt");
 
-	/*FolderUser aux;
-	aux.DeleteFolder(obj.GetUsername());*/
+
 
 }
 bool User::findUser(std::string name)
