@@ -71,10 +71,11 @@ App::App(QWidget* parent)
     this->setWindowIcon(QIcon("logo1.jpg"));
     this->setWindowTitle("OneDrive");
     //ui.new_folder->setHidden(true);
-    ui.lineEditaddnew->setHidden(true);
-    ui.folderName->setHidden(true);
-    ui.folderName_2->setHidden(true);
-    ui.AddLine->setHidden(true);
+   // ui.lineEditaddnew->setHidden(true);
+    //ui.folderName->setHidden(true);
+  //  ui.folderName_2->setHidden(true);
+  //  ui.AddLine->setHidden(true);
+    ui.BackButton->setHidden(true);
 }
 
 App::App(const User& x, QWidget* parent) : QMainWindow(parent)
@@ -87,12 +88,12 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     this->setWindowTitle("OneDrive");
 
     // ui.new_folder->setHidden(true);
-    ui.lineEditaddnew->setHidden(true);
+   // ui.lineEditaddnew->setHidden(true);
     //ui.AddItemBtn->setHidden(true);
 
-    ui.folderName->setHidden(true);
-    ui.folderName_2->setHidden(true);
-    ui.AddLine->setHidden(true);
+    //ui.folderName->setHidden(true);
+  //  ui.folderName_2->setHidden(true);
+  //  ui.AddLine->setHidden(true);
 
     FolderUser user(x.GetUsername());
     model = new QFileSystemModel(this);
@@ -105,20 +106,21 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     ui.treeView->setRootIndex(model->index(qstr));
     
     QModelIndex index = ui.treeView->currentIndex();
+    ui.BackButton->setHidden(false);
     
 }
 
 void App::on_add_clicked()
 {
-    ui.folderName_2->setHidden(false);
-    ui.AddLine->setHidden(false);
+    //ui.folderName_2->setHidden(false);
+    //ui.AddLine->setHidden(false);
     //ui.AddItemBtn->setHidden(false);
     QCompleter* cmpt;
     QFileSystemModel* mo;
     mo = new QFileSystemModel(this);
     cmpt = new QCompleter(mo, this);
     mo->setRootPath(QDir::rootPath());
-    ui.AddLine->setCompleter(cmpt);
+   // ui.AddLine->setCompleter(cmpt);
     QString filter = "All File (*.*) ;; Text File(*.txt) ;; XML File (*.xml*)";
     QString file_name = QFileDialog::getOpenFileName(this, "Open a file", "C://");
     QFile file(file_name);
@@ -128,7 +130,9 @@ void App::on_add_clicked()
     QTextStream in(&file);
     QString text = in.readAll();
     FolderUser aux(UserName);
-    aux.AddFile2(file_name.toStdString());
+   // aux.AddFile2(file_name.toStdString());
+
+    ui.BackButton->setHidden(false);
 }
 
 
@@ -166,6 +170,8 @@ void App::on_deleteBtn_clicked()
     //aux.DeleteFile(UserName,name);
 
     fs::current_path(pathOrigin);
+
+    ui.BackButton->setHidden(false);
 }
 
 
@@ -176,3 +182,4 @@ void App::on_searchBtn_clicked()
     if (Search == true) Search = false;
     else Search = true;*/
 }
+
