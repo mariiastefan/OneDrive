@@ -48,25 +48,27 @@ bool verifyIfFileExists(const fs::path &path)
 //download from server
 int main()
 {
-	std::ofstream g;
-	std::cout << "[SERVER] Starting server..." << std::endl;
-
-	TcpSocket listener;
-	listener.Listen(8080);
-	
-	std::cout << "[SERVER] Waiting for client to connect..." << std::endl;
-	TcpSocket client = listener.Accept();
-	std::cout << "[SERVER] Client connected !";
-	std::stringstream stream;
-	stream << "[SERVER] Connection succesful !\n";
-	std::string message = stream.str();
-	client.Send(message.c_str(), message.size());
-	int op = 0;
 	bool running = true;
-	while (running)
-	{
-		
-	}
+
+		std::ofstream g;
+		std::cout << "[SERVER] Starting server..." << std::endl;
+
+		TcpSocket listener;
+		listener.Listen(8080);
+
+		std::cout << "[SERVER] Waiting for client to connect..." << std::endl;
+		TcpSocket client = listener.Accept();
+		std::cout << "[SERVER] Client connected !";
+		std::stringstream stream;
+		stream << "[SERVER] Connection succesful !\n";
+		std::string message = stream.str();
+		client.Send(message.c_str(), message.size());
+
+		std::cout << "[SERVER] Starting server..." << std::endl;
+
+
+	int op = 0;
+	
 
 	//std::stringstream stream;
 	//stream << "[SERVER] The file you want to download !\n";

@@ -31,10 +31,10 @@ public:
 		TcpSocket socket;
 		std::cout << "[CLIENT] Connecting to server ... " << std::endl;
 		socket.Connect("127.0.0.1", 8080);
-		std::array<char, 512> receiveBuffer2;
-		int received2;
-		socket.Receive(receiveBuffer2.data(), receiveBuffer2.size(), received2);
-		std::copy(receiveBuffer2.begin(), receiveBuffer2.begin() + received2, std::ostream_iterator<char>(std::cout, ""));
+		std::array<char, 512> receiveBuffer;
+		int received;
+		socket.Receive(receiveBuffer.data(), receiveBuffer.size(), received);
+		std::copy(receiveBuffer.begin(), receiveBuffer.begin() + received, std::ostream_iterator<char>(std::cout, ""));
 		std::cout << std::endl;
 	}
 
@@ -150,5 +150,7 @@ public:
 			std::cerr << "[CLIENT] Couldn't send the data to the server !";
 			return 1;
 		}
+
+
 	}
 };
