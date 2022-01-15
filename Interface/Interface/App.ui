@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1016</width>
+    <width>1009</width>
     <height>606</height>
    </rect>
   </property>
@@ -362,10 +362,10 @@
   <widget class="QTreeView" name="treeView">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>160</y>
-     <width>631</width>
-     <height>421</height>
+     <x>180</x>
+     <y>110</y>
+     <width>371</width>
+     <height>471</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -422,6 +422,42 @@
    </property>
    <property name="text">
     <string>          Delete account</string>
+   </property>
+  </widget>
+  <widget class="QTreeView" name="treeView_2">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>110</y>
+     <width>361</width>
+     <height>451</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>90</y>
+     <width>191</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>LOCAL FILES</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>90</y>
+     <width>61</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ALL FILES</string>
    </property>
   </widget>
  </widget>

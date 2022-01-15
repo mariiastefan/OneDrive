@@ -30,4 +30,5 @@ private:
 	QFileSystemModel* fileModel;*/
 	QFileSystemModel* model;
 	std::string UserName;
+	QFileSystemModel* model2;
 };

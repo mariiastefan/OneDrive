@@ -71,11 +71,7 @@ App::App(QWidget* parent)
     this->setPalette(palette);
     this->setWindowIcon(QIcon("logo1.jpg"));
     this->setWindowTitle("OneDrive");
-    //ui.new_folder->setHidden(true);
-   // ui.lineEditaddnew->setHidden(true);
-    //ui.folderName->setHidden(true);
-  //  ui.folderName_2->setHidden(true);
-  //  ui.AddLine->setHidden(true);
+  
     ui.BackButton->setHidden(true);
     
 }
@@ -89,13 +85,6 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     this->setWindowIcon(QIcon("logo1.jpg"));
     this->setWindowTitle("OneDrive");
 
-    // ui.new_folder->setHidden(true);
-   // ui.lineEditaddnew->setHidden(true);
-    //ui.AddItemBtn->setHidden(true);
-
-    //ui.folderName->setHidden(true);
-  //  ui.folderName_2->setHidden(true);
-  //  ui.AddLine->setHidden(true);
 
     FolderUser user(x.GetUsername());
     model = new QFileSystemModel(this);
@@ -109,6 +98,18 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     
     QModelIndex index = ui.treeView->currentIndex();
     ui.BackButton->setHidden(false);
+
+    
+    model2 = new QFileSystemModel(this);
+    UserName = x.GetUsername();
+    model2->setReadOnly(false);
+    QString qstr2 = QString::fromStdString(user.GetServerPath());
+    model2->setRootPath(qstr2);
+    ui.treeView_2->setModel(model2);
+
+    ui.treeView_2->setRootIndex(model2->index(qstr2));
+
+    QModelIndex index2 = ui.treeView_2->currentIndex();
     
 
     
