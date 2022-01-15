@@ -16,6 +16,7 @@
 #include<QCompleter>
 #include "User.h"
 #include <QFileDialog>
+#include <fstream>
 
 
 bool compare_files(const fs::path& filename1, const fs::path& filename2)
@@ -76,6 +77,8 @@ App::App(QWidget* parent)
   //  ui.folderName_2->setHidden(true);
   //  ui.AddLine->setHidden(true);
     ui.BackButton->setHidden(true);
+    ui.UserName->setHidden(true);
+    ui.LabelUserName->setHidden(true);
 }
 
 App::App(const User& x, QWidget* parent) : QMainWindow(parent)
@@ -108,6 +111,9 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     QModelIndex index = ui.treeView->currentIndex();
     ui.BackButton->setHidden(false);
     
+
+    ui.UserName->setHidden(true);
+    ui.LabelUserName->setHidden(true);
 }
 
 void App::on_add_clicked()
@@ -133,25 +139,9 @@ void App::on_add_clicked()
    // aux.AddFile2(file_name.toStdString());
 
     ui.BackButton->setHidden(false);
+    ui.UserName->setHidden(true);
+    ui.LabelUserName->setHidden(true);
 }
-
-
-//void App::on_addNew_clicked()
-//{
-//    on_addNew = true;
-//    QPalette palette;
-//    this->setWindowTitle("ADD");
-//    palette.setBrush(QPalette::Background, Qt::white);
-//
-//    ui.add->setHidden(false);
-//    ui.new_folder->setHidden(false);
-//    ui.lineEditaddnew->setHidden(false);
-//   
-//    ui.upload->setHidden(true);
-//    ui.rename->setHidden(true);
-//    ui.lineEdit->setHidden(true);
-//    ui.searchBtn->setHidden(true);
-//
 
 
 void App::on_deleteBtn_clicked()
@@ -172,9 +162,38 @@ void App::on_deleteBtn_clicked()
     fs::current_path(pathOrigin);
 
     ui.BackButton->setHidden(false);
+    ui.UserName->setHidden(true);
+    ui.LabelUserName->setHidden(true);
 }
 
+void App::on_delete_account_clicked()
+{
+    std::fstream g("conturi.txt", std::ios::app);
+    ButtonDeleteAccount = true;
+    QString username = ui.UserName->text();
 
+    std::string x = username.toStdString();
+    g.open("conturi.txt");
+    g.close();
+    bool verif_user = false;
+    User user(x);
+    verif_user = user.verify_if_user_exists(g);
+    if (verif_user == true)
+    {
+        QMessageBox msgBox;
+        delete_account(g, user);
+        msgBox.setText("this account will be deleted");
+        msgBox.exec();
+    }
+    else
+    {
+        QMessageBox msgBox;
+        msgBox.setText("this account does not exist");
+        msgBox.exec();
+    }
+
+    ui.BackButton->setHidden(false);
+}
 void App::on_searchBtn_clicked()
 {
    /* ui.folderName->setHidden(Search);

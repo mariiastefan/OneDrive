@@ -147,19 +147,6 @@ font: bold 15x;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="delete_account">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>390</y>
-      <width>191</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Delete account</string>
-    </property>
-   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

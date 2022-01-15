@@ -17,12 +17,14 @@ private slots:
 	void on_add_clicked();
 	void on_deleteBtn_clicked();
 	void on_searchBtn_clicked();
-	void on_Back_clicked();
+	//void on_Back_clicked();
 	//void on_treeView_clicked(QModelIndex index);
+	void on_delete_account_clicked();
 
 private:
 	Ui::App ui;
 	bool Search = false;
+	bool ButtonDeleteAccount = false;
 	QPushButton* newButton;
 	/*QFileSystemModel* dirModel;
 	QFileSystemModel* fileModel;*/
