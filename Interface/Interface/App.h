@@ -19,7 +19,7 @@ private slots:
 	void on_searchBtn_clicked();
 	//void on_Back_clicked();
 	//void on_treeView_clicked(QModelIndex index);
-	void on_delete_account_clicked();
+	void on_ButtonDeleteAccount_clicked();
 
 private:
 	Ui::App ui;

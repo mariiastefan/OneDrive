@@ -116,15 +116,11 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
 
 void App::on_add_clicked()
 {
-    //ui.folderName_2->setHidden(false);
-    //ui.AddLine->setHidden(false);
-    //ui.AddItemBtn->setHidden(false);
     QCompleter* cmpt;
     QFileSystemModel* mo;
     mo = new QFileSystemModel(this);
     cmpt = new QCompleter(mo, this);
     mo->setRootPath(QDir::rootPath());
-   // ui.AddLine->setCompleter(cmpt);
     QString filter = "All File (*.*) ;; Text File(*.txt) ;; XML File (*.xml*)";
     QString file_name = QFileDialog::getOpenFileName(this, "Open a file", "C://");
     QFile file(file_name);
@@ -134,7 +130,7 @@ void App::on_add_clicked()
     QTextStream in(&file);
     QString text = in.readAll();
     FolderUser aux(UserName);
-   // aux.AddFile2(file_name.toStdString());
+    aux.AddFile(file_name.toStdString());
 
     ui.BackButton->setHidden(false);
     
@@ -162,7 +158,15 @@ void App::on_deleteBtn_clicked()
     
 }
 
-void App::on_delete_account_clicked()
+void App::on_searchBtn_clicked()
+{
+   /* ui.folderName->setHidden(Search);
+    ui.lineEditaddnew->setHidden(Search);
+    if (Search == true) Search = false;
+    else Search = true;*/
+}
+
+void App::on_ButtonDeleteAccount_clicked()
 {
     std::fstream g("conturi.txt", std::ios::app);
     ButtonDeleteAccount = true;
@@ -175,12 +179,5 @@ void App::on_delete_account_clicked()
     msgBox.exec();
 
     ui.BackButton->setHidden(false);
-}
-void App::on_searchBtn_clicked()
-{
-   /* ui.folderName->setHidden(Search);
-    ui.lineEditaddnew->setHidden(Search);
-    if (Search == true) Search = false;
-    else Search = true;*/
 }
 
