@@ -77,8 +77,7 @@ App::App(QWidget* parent)
   //  ui.folderName_2->setHidden(true);
   //  ui.AddLine->setHidden(true);
     ui.BackButton->setHidden(true);
-    ui.UserName->setHidden(true);
-    ui.LabelUserName->setHidden(true);
+    
 }
 
 App::App(const User& x, QWidget* parent) : QMainWindow(parent)
@@ -112,8 +111,7 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     ui.BackButton->setHidden(false);
     
 
-    ui.UserName->setHidden(true);
-    ui.LabelUserName->setHidden(true);
+    
 }
 
 void App::on_add_clicked()
@@ -139,8 +137,7 @@ void App::on_add_clicked()
    // aux.AddFile2(file_name.toStdString());
 
     ui.BackButton->setHidden(false);
-    ui.UserName->setHidden(true);
-    ui.LabelUserName->setHidden(true);
+    
 }
 
 
@@ -162,35 +159,20 @@ void App::on_deleteBtn_clicked()
     fs::current_path(pathOrigin);
 
     ui.BackButton->setHidden(false);
-    ui.UserName->setHidden(true);
-    ui.LabelUserName->setHidden(true);
+    
 }
 
 void App::on_delete_account_clicked()
 {
     std::fstream g("conturi.txt", std::ios::app);
     ButtonDeleteAccount = true;
-    QString username = ui.UserName->text();
-
-    std::string x = username.toStdString();
     g.open("conturi.txt");
     g.close();
     bool verif_user = false;
-    User user(x);
-    verif_user = user.verify_if_user_exists(g);
-    if (verif_user == true)
-    {
-        QMessageBox msgBox;
-        delete_account(g, user);
-        msgBox.setText("this account will be deleted");
-        msgBox.exec();
-    }
-    else
-    {
-        QMessageBox msgBox;
-        msgBox.setText("this account does not exist");
-        msgBox.exec();
-    }
+    QMessageBox msgBox;
+    delete_account(g, User(UserName));
+    msgBox.setText("This account will be deleted");
+    msgBox.exec();
 
     ui.BackButton->setHidden(false);
 }
