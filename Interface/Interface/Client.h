@@ -56,55 +56,32 @@ public:
 		}
 	}
 
-	int downloadFromServer(const std::string& filename, const std::string& whereToSave)
+	void sendPathForSync(const std::string& path)
 	{
-		// Validate the parameters
-
-		TcpSocket socket;
-		socket.Connect("127.0.0.1", 8080);
-
-		std::array<char, 512> receiveBuffer2;
-		int received2;
-		socket.Receive(receiveBuffer2.data(), receiveBuffer2.size(), received2);
-		std::copy(receiveBuffer2.begin(), receiveBuffer2.begin() + received2, std::ostream_iterator<char>(std::cout, ""));
-		std::cout << std::endl;
-
-
-		std::array<char, 512> receiveBuffer3;
-		int received3;
-		socket.Receive(receiveBuffer3.data(), receiveBuffer3.size(), received3);
-		std::copy(receiveBuffer3.begin(), receiveBuffer3.begin() + received3, std::ostream_iterator<char>(std::cout, ""));
-		std::cout << std::endl;
-
-
-		bool result = socket.Send(filename.c_str(), filename.size());
+		bool result = m_socket.Send(path.c_str(), path.size());
 		if (result)
 		{
-			std::array<char, 512> receiveBuffer;
-			int received;
-			socket.Receive(receiveBuffer.data(), receiveBuffer.size(), received);
-			std::copy(receiveBuffer.begin(), receiveBuffer.begin() + received, std::ostream_iterator<char>(std::cout, ""));
-			std::cout << std::endl;
+			log("File Added Succesfully !");
 		}
 		else {
 			log("[CLIENT] Couldn't send the data to the server !");
-			return 1;
+			return;
 		}
+	}
 
-		bool result2 = socket.Send(whereToSave.c_str(), whereToSave.size());
-		if (result2)
+
+	void downloadFromServer(const std::string& filename)
+	{
+		// Validate the parameters
+		bool result = m_socket.Send(filename.c_str(), filename.size());
+		if (result)
 		{
-			std::array<char, 512> receiveBuffer2;
-			int received2;
-			socket.Receive(receiveBuffer2.data(), receiveBuffer2.size(), received2);
-			std::copy(receiveBuffer2.begin(), receiveBuffer2.begin() + received2, std::ostream_iterator<char>(std::cout, ""));
-			std::cout << std::endl;
+			log("Sent succeded ! Folder path");
 		}
 		else {
-			log("[CLIENT]Couldn't send the data to the server !");
-			return 1;
+			log("[CLIENT] Couldn't send the data to the server !");
+			return;
 		}
-		return 0;
 	}
 
 	//int uploadToServer(int argc, char* argv[])

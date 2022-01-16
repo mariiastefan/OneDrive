@@ -125,7 +125,6 @@ bool TcpSocket::Send(const void* data, int size)
 		result = send(m_socket, static_cast<const char*>(data), size, 0);
 		if (result < 0)
 		{
-			closesocket(m_socket);
 			std::cerr << "send failed: " << WSAGetLastError() << std::endl;
 			return false;
 		}
@@ -139,7 +138,6 @@ bool TcpSocket::Receive(void* data, int size, int& recieved)
 	recieved = recv(m_socket, static_cast<char*>(data), size, 0);
 	if (recieved < 0)
 	{
-		closesocket(m_socket);
 		std::cerr << "receive failed: " << WSAGetLastError() << std::endl;
 		return false;
 	}

@@ -58,7 +58,7 @@ void Interface::on_signIn_clicked()
 		msgBox.setText("corect !");
 		msgBox.exec();
 		hide();
-		homePage = new App(user, this);
+		homePage = new App(client, this);
 		homePage->show();
 	}
 	else {

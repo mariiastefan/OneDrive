@@ -86,18 +86,36 @@ bool checkToSeeIfUserIsUpdated(const fs::path a, const fs::path b)
 	return 1;
 }
 
+fs::path whichFileIsNotSynced(const fs::path a, const fs::path b)
+{
+	for (auto& p1 : fs::directory_iterator(a))
+	{
+		int ok = 0;
+		for (auto& p2 : fs::directory_iterator(b))
+		{
+			if (ok == 0)
+			{
+				if (compare_files(p1, p2) == 1)
+					ok = 1;
+			}
+		}
+		if (ok == 0)
+			return p1;
+	}
+}
+
 int main()
 {
 	log("[SERVER] Starting server...");
 	std::this_thread::sleep_for(2000ms);
 	TcpSocket listener;
 	listener.Listen(8080);
-
 	
 	
 	std::atomic_bool clientConnected = false;
 	std::string fileToBeSynced;
-	std::string serverFile = "../../TcpConnection/Server/UserFolder/ana";
+	fs::path serverFile = "../../TcpConnection/Server/UserFolder";
+	
 	/*std::thread watchingConnections([&listener, &client, &clientConnected, &running, &fileToBeSynced]() {
 		while (running)
 		{
@@ -153,10 +171,13 @@ int main()
 	}
 	log(fileToBeSynced);
 
+	fs::path a = fileToBeSynced;
+	serverFile += "/";
+	serverFile += a.filename();
 	/*running = true;
 	watchingConnections.join();*/
 	std::atomic_bool running = true;
-	std::thread syncTask([&clientConnected, &running, &fileToBeSynced, &serverFile]() {
+	std::thread syncTask([&clientConnected, &running, &fileToBeSynced, &serverFile, &client]() {
 		if (clientConnected)
 		{
 			while (running)
@@ -164,10 +185,43 @@ int main()
 				if (checkToSeeIfUserIsUpdated(fileToBeSynced, serverFile))
 				{
 					log("Nothing new in clients file !");
+					std::array<char, 512> receiveBuffer;
+					int received;
+					client.Receive(receiveBuffer.data(), receiveBuffer.size(), received);
+					if(received > 0)
+					{
+						std::copy(receiveBuffer.begin(),receiveBuffer.begin() + received, std::ostream_iterator<char>(std::cout, ""));
+						std::string fileToBeDownloaded;
+						for (int index = 0; index < received; index++)
+						{
+							fileToBeDownloaded += receiveBuffer[index];
+						}
+						fs::copy_options copyOptions;
+						copyOptions = fs::copy_options::skip_existing
+							| fs::copy_options::recursive
+							;
+						fs::path a = fileToBeDownloaded;
+						fs::copy(a, "C:/Users/Andrei/Desktop/OneDrive/proiect/TcpConnection/Client/UserFolder/ana", copyOptions);
+					}
 				}
 				else {
 					log("Something new in clients file ! Sending message ...");
-
+					fs::path syncNext = whichFileIsNotSynced(fileToBeSynced, serverFile);
+					fs::copy_options copyOptions;
+					if (syncNext.extension() == "")
+					{
+						copyOptions = fs::copy_options::skip_existing
+							| fs::copy_options::recursive
+							;
+					}
+					else {
+						copyOptions = fs::copy_options::update_existing
+							| fs::copy_options::recursive
+							;
+					}
+					log(syncNext);
+					
+					fs::copy(syncNext, serverFile, copyOptions);
 				}
 				std::this_thread::sleep_for(5000ms);
 			}

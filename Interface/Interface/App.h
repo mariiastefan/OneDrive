@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QFileSystemModel>
 #include "User.h"
+#include "Client.h"
 
 class App : public QMainWindow
 {
@@ -11,14 +12,14 @@ class App : public QMainWindow
 
 public:
 	App(QWidget* parent = Q_NULLPTR);
-	App(const User& x, QWidget* parent = Q_NULLPTR);
+	App(Client x, QWidget* parent = Q_NULLPTR);
 private slots:
 	void on_add_clicked();
 	void on_deleteBtn_clicked();
 	void on_searchBtn_clicked();
 	void on_ButtonDeleteAccount_clicked();
 	void on_downloadButton_clicked();
-	void on_treeView_doubleClicked(const QModelIndex & index);
+	/*void on_treeView_doubleClicked(const QModelIndex & index);*/
 
 private:
 	Ui::App ui;
@@ -28,4 +29,5 @@ private:
 	QFileSystemModel* model;
 	std::string username;
 	QFileSystemModel* model2;
+	Client m_client;
 };

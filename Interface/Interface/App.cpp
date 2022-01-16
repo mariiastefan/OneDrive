@@ -77,8 +77,9 @@ App::App(QWidget* parent)
     
 }
 
-App::App(const User& x, QWidget* parent) : QMainWindow(parent)
+App::App(Client x, QWidget* parent) : QMainWindow(parent)
 {
+    m_client = x;
     ui.setupUi(this);
     QPalette palette;
     palette.setBrush(QPalette::Background, Qt::white);
@@ -102,7 +103,7 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
 
     model2 = new QFileSystemModel(this);
     username = x.GetUsername();
-    model2->setReadOnly(false);
+    model2->setReadOnly(true);
     QString qstr2 = QString::fromStdString(user.GetServerPath());
     model2->setRootPath(qstr2);
     ui.treeView_2->setModel(model2);
@@ -122,11 +123,11 @@ void App::on_add_clicked()
     model = new QFileSystemModel(this);
     cmpt = new QCompleter(model, this);
     model->setRootPath(QDir::rootPath());
-    QString filter = "All File (*.*) ;; Text File(*.txt) ;; XML File (*.xml*)";
+    QString filter = "All File (*.*) ;; Text File(*.txt)";
     QString filename = QFileDialog::getOpenFileName(this, "Open a file", "C://");
     QFile file(filename);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
-        QMessageBox::warning(this, "title", "file not open");
+        return;
     }
     QTextStream in(&file);
     QString text = in.readAll();
@@ -148,12 +149,8 @@ void App::on_deleteBtn_clicked()
     pathClient += '/';
     pathClient += name;
     std::uintmax_t n1 = fs::remove(pathClient);
-    //aux.DeleteFile(UserName,name);
 
     fs::current_path(pathOrigin);
-
-   
-    
 }
 
 void App::on_searchBtn_clicked()
@@ -177,20 +174,22 @@ void App::on_ButtonDeleteAccount_clicked()
 
 void App::on_downloadButton_clicked()
 {
+
     User user(username);
     FolderUser folderuser(username);
-    Client client(username);
-    QModelIndex index = ui.treeView->currentIndex();
-    std::string name = model->fileName(index).toStdString();
+    Client a(m_client);
+    QModelIndex index = ui.treeView_2->currentIndex();
+    std::string name = model2->fileName(index).toStdString();
     std::string pathServer = "../../TcpConnection/Server/UserFolder";
     pathServer += '/';
     pathServer += username;
     pathServer += '/';
     pathServer += name;
-    client.downloadFromServer(pathServer, folderuser.GetPathAsString());
+    log(pathServer);
+    a.downloadFromServer(pathServer);
 }
 
-void App::on_treeView_doubleClicked(const QModelIndex & index)
-{
-    QDesktopServices::openUrl(QUrl::fromLocalFile(model->filePath(index)));
-}
+//void App::on_treeView_doubleClicked(const QModelIndex & index)
+//{
+//    QDesktopServices::openUrl(QUrl::fromLocalFile(model->filePath(index)));
+//}

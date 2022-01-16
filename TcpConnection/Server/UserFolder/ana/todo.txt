@@ -1,0 +1,7 @@
+1.cand user-ul se logheaza in app se creeaza un vector cu toate datele (DD/MM/YYYY) fisierelor incarcate de el
+si cand se apasa butonul de sync se verifica data fiecarui fisier din vector cu fisierul user ului si
+se actualizeaza fisierele mai vechi din server.
+
+copy_options::update_existing cand se sync-uieste
+copy_options::skip_existing cand se copiaza prima oara
+sadasdsadasdasdassds
