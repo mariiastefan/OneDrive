@@ -129,7 +129,6 @@ bool TcpSocket::Send(const void* data, int size)
 			return false;
 		}
 	}
-
 	return true;
 }
 

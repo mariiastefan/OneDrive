@@ -17,6 +17,8 @@ private slots:
 	void on_deleteBtn_clicked();
 	void on_searchBtn_clicked();
 	void on_ButtonDeleteAccount_clicked();
+	void on_downloadButton_clicked();
+	void on_treeView_doubleClicked(const QModelIndex & index);
 
 private:
 	Ui::App ui;

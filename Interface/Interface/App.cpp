@@ -18,6 +18,7 @@
 #include "User.h"
 #include <QFileDialog>
 #include <fstream>
+#include "Client.h"
 
 
 bool compare_files(const fs::path& filename1, const fs::path& filename2)
@@ -115,6 +116,7 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
 
 void App::on_add_clicked()
 {
+    FolderUser folderuser(username);
     QCompleter* cmpt;
     QFileSystemModel* model;
     model = new QFileSystemModel(this);
@@ -173,3 +175,22 @@ void App::on_ButtonDeleteAccount_clicked()
 
 }
 
+void App::on_downloadButton_clicked()
+{
+    User user(username);
+    FolderUser folderuser(username);
+    Client client(username);
+    QModelIndex index = ui.treeView->currentIndex();
+    std::string name = model->fileName(index).toStdString();
+    std::string pathServer = "../../TcpConnection/Server/UserFolder";
+    pathServer += '/';
+    pathServer += username;
+    pathServer += '/';
+    pathServer += name;
+    client.downloadFromServer(pathServer, folderuser.GetPath2());
+}
+
+void App::on_treeView_doubleClicked(const QModelIndex & index)
+{
+    QDesktopServices::openUrl(QUrl::fromLocalFile(model->filePath(index)));
+}

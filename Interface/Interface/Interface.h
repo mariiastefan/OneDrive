@@ -4,6 +4,7 @@
 #include "ui_Interface.h"
 #include "App.h"
 #include <QPushButton>
+#include "Client.h"
 
 class Interface : public QMainWindow
 {

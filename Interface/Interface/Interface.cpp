@@ -13,6 +13,8 @@
 #include "ui_App.h"
 #include <fstream>
 #include "Client.h"
+#include "FolderUser.h"
+#include "Logger.h"
 
 
 std::fstream g("conturi.txt", std::ios::app);
@@ -45,11 +47,16 @@ void Interface::on_signIn_clicked()
 	g.close();
 	bool verif_user = false;
 	User user(x);
-	verif_user = user.VerifyUserExistance(g);
+	FolderUser folderuser(x);
+	verif_user = user.verify_if_user_exists(g);
 	if (verif_user == true)
 	{
-		Client client;
-		client.connect();
+		log(folderuser.GetPath2());
+		Client client(user.GetUsername());
+		client.connectToServer(folderuser.GetPath2());
+		QMessageBox msgBox;
+		msgBox.setText("corect !");
+		msgBox.exec();
 		hide();
 		homePage = new App(user, this);
 		homePage->show();

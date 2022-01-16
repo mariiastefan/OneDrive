@@ -26,10 +26,7 @@ bool ShowFiles(fs::path path)
 int main(int argc, char* argv[]) 
 {
 	// Validate the parameters
-	if (argc != 2) {
-		std::cerr << "usage: " << argv[0] << " server-name" << std::endl;
-		return 1;
-	}
+
 
 	std::cout << "[CLIENT] Starting client..." << std::endl;
 

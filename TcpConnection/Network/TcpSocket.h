@@ -1,8 +1,10 @@
 #pragma once
 #include <cstdint>
 #include <string>
-
+#include <mutex>
 #include <basetsd.h>
+#include <WS2tcpip.h>
+
 
 class TcpSocket
 {
