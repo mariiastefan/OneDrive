@@ -169,7 +169,8 @@ void App::on_ButtonDeleteAccount_clicked()
     DeleteAccount(g, User(username));
     msgBox.setText("This account will be deleted");
     msgBox.exec();
-
+    FolderUser folderuser(username);
+    folderuser.DeleteFolder(username);
 }
 
 void App::on_downloadButton_clicked()
