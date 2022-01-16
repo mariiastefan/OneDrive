@@ -35,8 +35,8 @@ std::string User::GetUsername() const
 	return m_username;
 }
 
-void User::SetUsername(const std::string& username2) {
-	m_username = username2;
+void User::SetUsername(const std::string& username) {
+	m_username = username;
 }
 
 bool User::VerifyUserExistance(std::fstream& file)
@@ -82,10 +82,4 @@ void DeleteAccount(std::fstream& file, const User& obj)
 	file.close();
 	remove("conturi.txt");
 	rename("temp.txt", "conturi.txt");
-}
-bool User::FindUser(std::string name)
-{
-	if (std::find(m_user.begin(), m_user.end(), name) != m_user.end())
-		return true;
-	return false;
 }

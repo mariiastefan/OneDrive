@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1009</width>
+    <width>978</width>
     <height>606</height>
    </rect>
   </property>
@@ -427,19 +427,6 @@
     </size>
    </property>
   </widget>
-  <widget class="QTreeView" name="treeView">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>110</y>
-     <width>371</width>
-     <height>471</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(36, 21, 255);</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="deleteBtn">
    <property name="geometry">
     <rect>
@@ -558,6 +545,19 @@
    </property>
    <property name="text">
     <string>ALL FILES</string>
+   </property>
+  </widget>
+  <widget class="QTreeView" name="treeView">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>110</y>
+     <width>419</width>
+     <height>479</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(36, 21, 255);</string>
    </property>
   </widget>
  </widget>

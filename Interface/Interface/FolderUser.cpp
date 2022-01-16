@@ -11,10 +11,9 @@ FolderUser::FolderUser()
 {
 	m_nrItems = 0;
 }
-
 FolderUser::FolderUser(std::string userName)
 {
-	m_FolderName = userName;
+	m_foldername = userName;
 	m_nrItems = 0;
 
 	std::wstring pathOrigin = fs::current_path();
@@ -23,8 +22,8 @@ FolderUser::FolderUser(std::string userName)
 	fs::current_path(path1);
 	fs::create_directory(userName);
 	path1 += "/";
-	m_path = path1 + m_FolderName;
-	m_pathAsString = path1 + m_FolderName;
+	m_path = path1 + m_foldername;
+	m_pathAsString = path1 + m_foldername;
 	
 
 	fs::current_path(pathOrigin);
@@ -35,18 +34,18 @@ FolderUser::FolderUser(std::string userName)
 	fs::current_path(pathOrigin);
 	m_serverPath += path2;
 	m_serverPath += "/";
-	m_serverPath += m_FolderName;
+	m_serverPath += m_foldername;
 
 	m_date = fs::last_write_time(m_path);
 }
-FolderUser::FolderUser(std::string foldername, fs::path path, fs::file_time_type date, std::vector<std::string> filename) : m_FolderName{ foldername }, m_path{ path }, m_date{ date }, m_fileName{ filename }
+FolderUser::FolderUser(std::string foldername, fs::path path, fs::file_time_type date, std::vector<std::string> filename) : m_foldername{ foldername }, m_path{ path }, m_date{ date }, m_fileName{ filename }
 {
 	std::wstring pathOrigin = fs::current_path();
 	std::string path1 = "../../TcpConnection/Client/UserFolder";
 	fs::current_path(path1);
 	fs::create_directory(foldername);
 	path1 += "/";
-	m_path = path1 + m_FolderName;
+	m_path = path1 + m_foldername;
 
 	fs::current_path(pathOrigin);
 	std::string path2 = "../../TcpConnection/Server/UserFolder";
@@ -97,7 +96,7 @@ void FolderUser::DeleteFile()
 }
 std::string FolderUser::GetFolderName() const
 {
-	return m_FolderName;
+	return m_foldername;
 }
 int FolderUser::GetNrItems()const
 {
@@ -105,7 +104,7 @@ int FolderUser::GetNrItems()const
 }
 void FolderUser::SetFolderName(const std::string& foldername2)
 {
-	m_FolderName = foldername2;
+	m_foldername = foldername2;
 }
 
 
@@ -116,7 +115,7 @@ void FolderUser::SetNrItems()
 	std::wstring pathOrigin = fs::current_path();
 
 	pathClient += "/";
-	pathClient += m_FolderName;
+	pathClient += m_foldername;
 	fs::current_path(pathClient);
 
 	int m_nrItems_local = 0;
@@ -125,7 +124,7 @@ void FolderUser::SetNrItems()
 	fs::current_path(pathOrigin);
 
 	pathServer += "/";
-	pathServer += m_FolderName;
+	pathServer += m_foldername;
 	fs::current_path(pathServer);
 
 	int m_nrItems_server = 0;
@@ -195,7 +194,7 @@ void FolderUser::SetItemUser()
 	std::string path1 = "../../TcpConnection/Client/UserFolder";
 	std::wstring pathOrigin = fs::current_path();
 	path1 += "/";
-	path1 += m_FolderName;
+	path1 += m_foldername;
 	fs::current_path(path1);
 
 	for (auto const& dir_entry : fs::directory_iterator{ fs::current_path() })
@@ -210,12 +209,12 @@ void FolderUser::SetItemUser()
 	DisplayUserFiles();
 
 }
-void FolderUser::itemsList(const std::string & name)
+void FolderUser::ItemsList(const std::string & name)
 {
 	std::string path1 = "../../TcpConnection/Client/UserFolder";
 	std::wstring pathOrigin = fs::current_path();
 	path1 += "/";
-	path1 += m_FolderName;
+	path1 += m_foldername;
 	fs::current_path(path1);
 	std::ofstream out("ItemsList.txt");
 	time_t now = time(0);
@@ -238,7 +237,7 @@ fs::path FolderUser::GetPath()
 	return m_path;
 }
 
-std::string FolderUser::GetPath2()
+std::string FolderUser::GetPathAsString()
 {
 	return m_pathAsString;
 }

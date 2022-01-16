@@ -13,6 +13,7 @@
 #include <QTreeView>
 #include <QtCore>
 #include <QtGui>
+#include <QScrollBar>
 #include<QCompleter>
 #include "User.h"
 #include <QFileDialog>
@@ -42,7 +43,7 @@ bool checkToSeeIfUserIsUpdated(const User& x)
 {
     FolderUser folder(x.GetUsername());
     int ok = 0;
-    for (auto& p1 : fs::recursive_directory_iterator(folder.GetPath2()))
+    for (auto& p1 : fs::recursive_directory_iterator(folder.GetPathAsString()))
     {
         ok = 0;
         for (auto& p2 : fs::recursive_directory_iterator(folder.GetServerPath()) )
@@ -88,23 +89,24 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     model = new QFileSystemModel(this);
     username = x.GetUsername();
     model->setReadOnly(false);
-    QString qstr = QString::fromStdString(user.GetPath2());
+    QString qstr = QString::fromStdString(user.GetPathAsString());
     model->setRootPath(qstr);
     ui.treeView->setModel(model);
-    
+    ui.treeView->verticalScrollBar()->setEnabled(true);
+    ui.treeView->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     ui.treeView->setRootIndex(model->index(qstr));
    
     QModelIndex index = ui.treeView->currentIndex();
-    
+   
 
-    
     model2 = new QFileSystemModel(this);
     username = x.GetUsername();
     model2->setReadOnly(false);
     QString qstr2 = QString::fromStdString(user.GetServerPath());
     model2->setRootPath(qstr2);
     ui.treeView_2->setModel(model2);
-
+    ui.treeView_2->verticalScrollBar()->setEnabled(true);
+    ui.treeView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     ui.treeView_2->setRootIndex(model2->index(qstr2));
 
     QModelIndex index2 = ui.treeView_2->currentIndex();

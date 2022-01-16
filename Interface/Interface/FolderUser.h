@@ -16,7 +16,7 @@ private:
 	std::string m_serverPath;
 	std::string m_pathAsString;
 	fs::file_time_type m_date;
-	std::string m_FolderName;
+	std::string m_foldername;
 	int m_nrItems;
 public:
 	FolderUser();
@@ -41,11 +41,11 @@ public:
 	bool FindInFolder(const std::string &file);
 	std::string SplitFilename(const std::string &str);
 	void DisplayUserFiles();
-	void itemsList(const std::string &name);
+	void ItemsList(const std::string &name);
 
 	uintmax_t GetFolderSize();
 	fs::path GetPath();
-	std::string GetPath2();
+	std::string GetPathAsString();
 	std::string GetServerPath();
 	int GetNrItems()const;
 
