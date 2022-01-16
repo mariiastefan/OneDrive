@@ -177,7 +177,6 @@ void App::on_downloadButton_clicked()
 
     User user(username);
     FolderUser folderuser(username);
-    Client a(m_client);
     QModelIndex index = ui.treeView_2->currentIndex();
     std::string name = model2->fileName(index).toStdString();
     std::string pathServer = "../../TcpConnection/Server/UserFolder";
@@ -186,7 +185,7 @@ void App::on_downloadButton_clicked()
     pathServer += '/';
     pathServer += name;
     log(pathServer);
-    a.downloadFromServer(pathServer);
+    m_client.downloadFromServer(pathServer);
 }
 
 //void App::on_treeView_doubleClicked(const QModelIndex & index)
