@@ -73,8 +73,8 @@ font: bold 15x;</string>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>130</y>
+      <x>200</x>
+      <y>170</y>
       <width>275</width>
       <height>30</height>
      </rect>
@@ -95,9 +95,9 @@ font: bold 15x;</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>300</y>
-      <width>181</width>
+      <x>350</x>
+      <y>290</y>
+      <width>241</width>
       <height>20</height>
      </rect>
     </property>

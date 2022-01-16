@@ -11,7 +11,6 @@
 #include "User.h"
 #include "App.h"
 #include "ui_App.h"
-//#include "AppWindow.h"
 #include <fstream>
 #include "Client.h"
 
@@ -46,21 +45,18 @@ void Interface::on_signIn_clicked()
 	g.close();
 	bool verif_user = false;
 	User user(x);
-	verif_user = user.verify_if_user_exists(g);
+	verif_user = user.VerifyUserExistance(g);
 	if (verif_user == true)
 	{
 		Client client;
 		client.connect();
-		QMessageBox msgBox;
-		msgBox.setText("corect !");
-		msgBox.exec();
 		hide();
 		homePage = new App(user, this);
 		homePage->show();
 	}
 	else {
 		QMessageBox msgBox;
-		msgBox.setText("Username does not exist !");
+		msgBox.setText("Username does not exist!");
 		msgBox.exec();
 	}
 
@@ -72,7 +68,6 @@ void Interface::on_signUp_clicked()
 	QPixmap bg("login_bg.jpg");
 	QPalette palette;
 	QLabel confirm_pass;
-	//palette.setBrush(wdg->backgroundRole(), QBrush(QImage("logo1.jpg")));
 	this->setWindowTitle("Create OneDrive Account");
 	palette.setBrush(QPalette::Background, bg);
 
@@ -89,7 +84,7 @@ void Interface::on_Register_clicked()
 	bool verif_user = true;
 	const QString username = ui.lineEdit_username->text();
 	User user(username.toStdString());
-	verif_user = user.verify_if_user_exists(g);
+	verif_user = user.VerifyUserExistance(g);
 	if (verif_user == false)
 	{
 		g.open("conturi.txt", std::ios::app);

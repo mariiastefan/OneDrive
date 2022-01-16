@@ -111,8 +111,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\background.jpg" />
+    <Image Include="delete.png" />
+    <Image Include="file.png" />
     <Image Include="login_bg.jpg" />
     <Image Include="logo1.jpg" />
+    <Image Include="newfolder.png" />
+    <Image Include="remove-user.png" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h" />

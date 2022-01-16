@@ -1,27 +1,12 @@
 #include"user.h"
 #include <sstream>
 
-//std::istream& operator>>(std::istream& in, User& obj)
-//{
-//	std::cout << "Introduceti username: ";
-//	in >> obj.m_username;
-//
-//	while (!obj.verify_username())
-//	{
-//		std::cout << "Intoruceti un alt username care sa contina caractere doar mici, mari si cifre !";
-//		in >> obj.m_username;
-//	}
-//	std::cout << "Introduceti password: ";
-//	in >> obj.m_password;
-//	while (!obj.verify_password())
-//	{
-//		std::cout << "Intoruceti o alta parola care sa aiba lungimea mai mare ca 6 si sa contina doar litere mici, mari si cifre !";
-//		in >> obj.m_password;
-//	}
-//
-//	FolderUser newF(obj.m_username);
-//	return in;
-//}
+std::istream& operator>>(std::istream& in, User& obj)
+{
+	std::cout << "Introduceti username: ";
+	in >> obj.m_username;
+	return in;
+}
 
 std::ostream& operator<<(std::ostream& out, const User& obj)
 {
@@ -42,6 +27,9 @@ User::User(const User& obj)
 {
 	m_username = obj.m_username;
 }
+User::User(const std::string& username, const std::vector<std::string> user) : m_username{ username }, m_user{ user }
+{
+}
 std::string User::GetUsername() const
 {
 	return m_username;
@@ -51,12 +39,12 @@ void User::SetUsername(const std::string& username2) {
 	m_username = username2;
 }
 
-bool User::verify_if_user_exists(std::fstream& file)
+bool User::VerifyUserExistance(std::fstream& file)
 {
-	file.open("conturi.txt", std::ios::in); 
-	if (file.is_open()) {   
+	file.open("conturi.txt", std::ios::in);
+	if (file.is_open()) {
 		std::string line;
-		while (std::getline(file, line)) { 
+		while (std::getline(file, line)) {
 			if (line == m_username)
 			{
 				file.close();
@@ -68,8 +56,7 @@ bool User::verify_if_user_exists(std::fstream& file)
 	return false;
 }
 
-
-bool User::verify_username() {
+bool User::VerifyUsername() {
 	std::regex verify(R"([a-zA-Z]+\d*$)");
 	if (std::regex_match(m_username, verify))
 		return true;
@@ -78,9 +65,7 @@ bool User::verify_username() {
 		return false;
 	}
 }
-
-
-void delete_account(std::fstream& file, const User& obj)
+void DeleteAccount(std::fstream& file, const User& obj)
 {
 	std::string filename("conturi.txt");
 	std::ofstream out;
@@ -97,17 +82,10 @@ void delete_account(std::fstream& file, const User& obj)
 	file.close();
 	remove("conturi.txt");
 	rename("temp.txt", "conturi.txt");
-
-
-
 }
-bool User::findUser(std::string name)
+bool User::FindUser(std::string name)
 {
-	for (auto& us : m_user)
-	{
-		if (us == name)
-			return true;
-	}
+	if (std::find(m_user.begin(), m_user.end(), name) != m_user.end())
+		return true;
 	return false;
-
 }

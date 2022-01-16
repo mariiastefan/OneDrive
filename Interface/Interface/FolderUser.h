@@ -14,7 +14,7 @@ private:
 	std::vector<std::string>m_fileName;
 	fs::path m_path;
 	std::string m_serverPath;
-	std::string m_path2;
+	std::string m_pathAsString;
 	fs::file_time_type m_date;
 	std::string m_FolderName;
 	int m_nrItems;

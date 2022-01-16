@@ -24,7 +24,7 @@ FolderUser::FolderUser(std::string userName)
 	fs::create_directory(userName);
 	path1 += "/";
 	m_path = path1 + m_FolderName;
-	m_path2 = path1 + m_FolderName;
+	m_pathAsString = path1 + m_FolderName;
 	
 
 	fs::current_path(pathOrigin);
@@ -240,7 +240,7 @@ fs::path FolderUser::GetPath()
 
 std::string FolderUser::GetPath2()
 {
-	return m_path2;
+	return m_pathAsString;
 }
 
 void FolderUser::SetPath(fs::path& path)

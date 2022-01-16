@@ -14,10 +14,11 @@ public:
 	User();
 	User(const std::string& other_username);
 	User(const User& other);
-	bool verify_username();
+	User(const std::string& username, const std::vector<std::string>user);
+	bool VerifyUsername();
 	std::string GetUsername() const;
 	void SetUsername(const std::string& username2);
-	bool verify_if_user_exists(std::fstream& file);
-	friend void delete_account(std::fstream& file, const User& obj);
-	bool findUser(std::string name);
+	bool VerifyUserExistance(std::fstream& file);
+	friend void DeleteAccount(std::fstream& file, const User& obj);
+	bool FindUser(std::string name);
 };

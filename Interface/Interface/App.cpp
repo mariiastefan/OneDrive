@@ -72,7 +72,6 @@ App::App(QWidget* parent)
     this->setWindowIcon(QIcon("logo1.jpg"));
     this->setWindowTitle("OneDrive");
   
-    ui.BackButton->setHidden(true);
     
 }
 
@@ -85,23 +84,22 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
     this->setWindowIcon(QIcon("logo1.jpg"));
     this->setWindowTitle("OneDrive");
 
-
     FolderUser user(x.GetUsername());
     model = new QFileSystemModel(this);
-    UserName = x.GetUsername();
+    username = x.GetUsername();
     model->setReadOnly(false);
     QString qstr = QString::fromStdString(user.GetPath2());
     model->setRootPath(qstr);
     ui.treeView->setModel(model);
     
     ui.treeView->setRootIndex(model->index(qstr));
-    
+   
     QModelIndex index = ui.treeView->currentIndex();
-    ui.BackButton->setHidden(false);
+    
 
     
     model2 = new QFileSystemModel(this);
-    UserName = x.GetUsername();
+    username = x.GetUsername();
     model2->setReadOnly(false);
     QString qstr2 = QString::fromStdString(user.GetServerPath());
     model2->setRootPath(qstr2);
@@ -111,30 +109,25 @@ App::App(const User& x, QWidget* parent) : QMainWindow(parent)
 
     QModelIndex index2 = ui.treeView_2->currentIndex();
     
-
-    
 }
 
 void App::on_add_clicked()
 {
     QCompleter* cmpt;
-    QFileSystemModel* mo;
-    mo = new QFileSystemModel(this);
-    cmpt = new QCompleter(mo, this);
-    mo->setRootPath(QDir::rootPath());
+    QFileSystemModel* model;
+    model = new QFileSystemModel(this);
+    cmpt = new QCompleter(model, this);
+    model->setRootPath(QDir::rootPath());
     QString filter = "All File (*.*) ;; Text File(*.txt) ;; XML File (*.xml*)";
-    QString file_name = QFileDialog::getOpenFileName(this, "Open a file", "C://");
-    QFile file(file_name);
+    QString filename = QFileDialog::getOpenFileName(this, "Open a file", "C://");
+    QFile file(filename);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
         QMessageBox::warning(this, "title", "file not open");
     }
     QTextStream in(&file);
     QString text = in.readAll();
-    FolderUser aux(UserName);
-    aux.AddFile(file_name.toStdString());
-
-    ui.BackButton->setHidden(false);
-    
+    FolderUser aux(username);
+    aux.AddFile(filename.toStdString());
 }
 
 
@@ -143,11 +136,11 @@ void App::on_deleteBtn_clicked()
     std::wstring pathOrigin = fs::current_path();
 
     QModelIndex index = ui.treeView->currentIndex();
-    FolderUser aux(UserName);
+    FolderUser aux(username);
     std::string name = model->fileName(index).toStdString();
     std::string pathClient = "../../TcpConnection/Client/UserFolder";
     pathClient += '/';
-    pathClient += UserName;
+    pathClient += username;
     pathClient += '/';
     pathClient += name;
     std::uintmax_t n1 = fs::remove(pathClient);
@@ -155,16 +148,13 @@ void App::on_deleteBtn_clicked()
 
     fs::current_path(pathOrigin);
 
-    ui.BackButton->setHidden(false);
+   
     
 }
 
 void App::on_searchBtn_clicked()
 {
-   /* ui.folderName->setHidden(Search);
-    ui.lineEditaddnew->setHidden(Search);
-    if (Search == true) Search = false;
-    else Search = true;*/
+ 
 }
 
 void App::on_ButtonDeleteAccount_clicked()
@@ -173,12 +163,11 @@ void App::on_ButtonDeleteAccount_clicked()
     ButtonDeleteAccount = true;
     g.open("conturi.txt");
     g.close();
-    bool verif_user = false;
+    bool verifUser = false;
     QMessageBox msgBox;
-    delete_account(g, User(UserName));
+    DeleteAccount(g, User(username));
     msgBox.setText("This account will be deleted");
     msgBox.exec();
 
-    ui.BackButton->setHidden(false);
 }
 

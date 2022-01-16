@@ -66,6 +66,18 @@
     <Image Include="..\..\..\background.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="delete.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="file.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="newfolder.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="remove-user.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
