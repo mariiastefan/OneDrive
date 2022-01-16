@@ -48,12 +48,12 @@ void Interface::on_signIn_clicked()
 	bool verif_user = false;
 	User user(x);
 	FolderUser folderuser(x);
-	verif_user = user.verify_if_user_exists(g);
+	verif_user = user.VerifyUserExistance(g);
 	if (verif_user == true)
 	{
-		log(folderuser.GetPath2());
+		log(folderuser.GetPathAsString());
 		Client client(user.GetUsername());
-		client.connectToServer(folderuser.GetPath2());
+		client.connectToServer(folderuser.GetPathAsString());
 		QMessageBox msgBox;
 		msgBox.setText("corect !");
 		msgBox.exec();

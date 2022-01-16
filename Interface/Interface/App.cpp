@@ -187,7 +187,7 @@ void App::on_downloadButton_clicked()
     pathServer += username;
     pathServer += '/';
     pathServer += name;
-    client.downloadFromServer(pathServer, folderuser.GetPath2());
+    client.downloadFromServer(pathServer, folderuser.GetPathAsString());
 }
 
 void App::on_treeView_doubleClicked(const QModelIndex & index)
