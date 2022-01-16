@@ -188,7 +188,4 @@ void App::on_downloadButton_clicked()
     m_client.downloadFromServer(pathServer);
 }
 
-//void App::on_treeView_doubleClicked(const QModelIndex & index)
-//{
-//    QDesktopServices::openUrl(QUrl::fromLocalFile(model->filePath(index)));
-//}
+

@@ -54,9 +54,6 @@ void Interface::on_signIn_clicked()
 		log(folderuser.GetPathAsString());
 		Client client(user.GetUsername());
 		client.connectToServer(folderuser.GetPathAsString());
-		QMessageBox msgBox;
-		msgBox.setText("corect !");
-		msgBox.exec();
 		hide();
 		homePage = new App(client, this);
 		homePage->show();
